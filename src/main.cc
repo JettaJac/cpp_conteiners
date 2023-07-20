@@ -10,22 +10,23 @@ int main(){
 
     setlocale(LC_ALL, "ru");
 
-    s21::List<int> lst(2);
+    s21::List<double> lst3(0);
     // lst.push_back(5);
     // // lst.push_back(10);
     // s21::List<int> lst2;
     // lst.push_back(22);
-    s21::List<int> lst3;
-    lst3.push_back(11);
+    // s21::List<int> lst3;
+    // lst3.push_back(11);
     // ts.push_front(22);
-    cout << lst3.front() << endl;
+    // cout << lst3.front() << endl;
     // lst3.push_back(22);
-    list<int> ts(3);
+    // list<int> ts(3);
     // ts.push_front(22);
     // <int>ts(5);
-    cout << ts.front() << endl;
+    // cout << ts.front() << endl;
     // cout << lst[0] << endl;
-
+    // lst3.push_front(1.2);
+    // lst3.push_front(1.3);
     // for (size_t i = 0; i < lst.GetSize(); i++)
     // {
         
@@ -33,10 +34,14 @@ int main(){
     //     // cout >> lst->x >> endl;
     // }
 
+
+    lst3.pop_back();
+    cout << lst3.back() << endl;
+
     // cout << "show_Start" << endl;
-    // lst3.show();
-    cout << ts.max_size() << endl;
-    
+    lst3.show();
+    // cout << ts.max_size() << endl;
+    //  s21::List<int> s21_List = {1, 2, 3};
 
     // lst.insert (99, 1);
     // lst.removeAt(1);

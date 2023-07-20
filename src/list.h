@@ -19,19 +19,22 @@ class List {
     public:
         List();             // default constructor, creates empty list 
         List(size_type n);  // parameterized constructor, creates the list of size n
+        List(std::initializer_list<value_type> const &items);
+
         ~List();            // destructor
 
         
-        void clear();
-        void pop_front();
-        void pop_back();
+        void clear();  // clears the contents
 
-        void push_front(const_reference value);
+        void push_back(const_reference value); // adds an element to the end
+        void pop_back(); // removes the last element 
+        void push_front(const_reference value); // adds an element to the head
+        void pop_front(); // removes the first element
 
-        void push_front(T data);
+        // void push_front(T data);
 
 
-        void push_back(T data);
+        // void push_back(T data);
         size_type size() {return size_l;}; // returns the number of elements
         // size_type max_size();
         T& operator[](const int index);
@@ -97,6 +100,16 @@ List<T>::List(size_type n)
     
 }
 
+template <typename value_type>
+List<value_type>::List(std::initializer_list<value_type> const &items):List()
+{
+        for (auto element : items)
+        {
+            push_back(element);
+        }
+}
+
+
 template<typename T>
 List<T>::~List()
 {
@@ -126,12 +139,12 @@ void List<T>::pop_front()
 }
 
 template <typename T>
-void List<T>::push_back(value_type data)
+void List<T>::push_back(const_reference value)
 {
     // cout << "Create NODE" << endl;
-    Node<value_type> *current = new Node<value_type>(data);
+    Node<value_type> *current = new Node<value_type>(value);
     current->pNext = nullptr;
-    current->data = data;
+    current->data = value;
 
     if(head == nullptr){
         current->pNext = current->pPrev = nullptr;
@@ -160,10 +173,21 @@ void List<T>::push_back(value_type data)
 }
 
 template <typename T>
-void List<T>::push_front(T data)
+void List<T>::push_front(const_reference value)
 {
-    head = new Node<value_type>(data, head);
-    size_l++;
+    Node<value_type> *current = new Node<value_type>(value);
+    current->pNext = nullptr;
+    current->data = value;
+
+    if(head == nullptr){
+        current->pNext = current->pPrev = nullptr;
+        head = tail = current;
+    } else {
+        current->pNext = head;
+        head->pPrev = current;
+        head = current;
+    }
+
 }
 
 template <typename T>
@@ -194,8 +218,7 @@ void List<T>::removeAt(int index)
         for (int i = 0; i < size_l && i < index - 1; i++)
         {
             tmp = tmp->pNext;
-        }
-   
+        }   
   
     Node<value_type> *tmpDel = tmp;
     tmp->pNext = tmpDel->pNext;    
@@ -208,7 +231,7 @@ void List<T>::removeAt(int index)
 template <typename T>
 void List<T>::pop_back()
 {
-    removeAt(size_l - 1);
+    removeAt(size_l);
 }
 
 template <typename T>
