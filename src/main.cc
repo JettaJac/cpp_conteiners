@@ -9,53 +9,86 @@ int main(){
     using namespace std;
 
     setlocale(LC_ALL, "ru");
+    list<int> std_List{1, 2, 3, 4, 5, 6, 7};
+    list<int> std_copy(std_List);
+    std_copy = move(std_List);
 
-    s21::List<double> lst3(0);
-    // lst.push_back(5);
-    // // lst.push_back(10);
+    s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7};
+    list<int> s21_copy(10);
+    // std_copy = move(s21_List);
+    // std_List.push_back(5);
+    // // std_List.push_back(10);
     // s21::List<int> lst2;
-    // lst.push_back(22);
-    // s21::List<int> lst3;
-    // lst3.push_back(11);
-    // ts.push_front(22);
-    // cout << lst3.front() << endl;
-    // lst3.push_back(22);
-    // list<int> ts(3);
-    // ts.push_front(22);
-    // <int>ts(5);
-    // cout << ts.front() << endl;
+    // std_List.push_back(22);
+    // s21::List<int> s21_List;
+    // s21_List.push_back(11);
+    // std_List.push_front(22);
+    // cout << s21_List.front() << endl;
+    // s21_List.push_back(22);
+    // list<int> std_List(3);
+    // std_List.push_front(22);
+    // <int>std_List(5);
+    // cout << std_List.front() << endl;
     // cout << lst[0] << endl;
-    // lst3.push_front(1.2);
-    // lst3.push_front(1.3);
-    // for (size_t i = 0; i < lst.GetSize(); i++)
+    // s21_List.push_front(1.2);
+    // s21_List.push_front(1.3);
+    // for (size_t i = 0; i < std_List.Gestd_Listize(); i++)
     // {
         
     //     cout << lst[i] << endl;
     //     // cout >> lst->x >> endl;
     // }
 
+    // std_List.back();
+    // std_List.back();
+    // std_List.back();
+    // s21_List.pop_front();
+    // s21_List.pop_front(); 
 
-    lst3.pop_back();
-    cout << lst3.back() << endl;
+    // s21_List.pop_back();
+    // s21_List.pop_back();
+    // cout << s21_List.back() << endl;
+    // s21_List.pop_back();
+    // s21_List.pop_back();
+    // s21_List.pop_back();
+    // s21_List.pop_back();
 
+    // s21_List.pop_front();
+    // s21_List.pop_front();
+    // s21_List.pop_front();
+    // s21_List.pop_front();
+    // s21_List.pop_front();
+   
+
+    // cout << s21_List.size() << endl;
+    // cout << s21_List.back() << endl;
+    // cout << std_List.back() << endl;
+
+    // cout << s21_List.front() << endl;
+    // cout << std_List.front() << endl;
+    
     // cout << "show_Start" << endl;
-    lst3.show();
-    // cout << ts.max_size() << endl;
+    // s21_List.show();
+    // cout << "show_Start_3" << endl;
+    cout << "SIZE s21: " << s21_copy.size() << endl;
+    cout << "SIZE std: " << std_copy.size() << endl;
+    // s21_List.show();
+    // cout << std_List.max_size() << endl;
     //  s21::List<int> s21_List = {1, 2, 3};
 
-    // lst.insert (99, 1);
-    // lst.removeAt(1);
-    // lst.pop_back();
+    // std_List.insert (99, 1);
+    // std_List.removeAt(1);
+    // std_List.pop_back();
 
-    // cout<< "Элементов в списке" << lst.GetSize() << endl << "Забрали первый элемент" << endl << endl;
+    // cout<< "Элементов в списке" << std_List.Gestd_Listize() << endl << "Забрали первый элемент" << endl << endl;
     
     
-    //                                                                                                                                                                                                                                                                                                                                                              for (size_t i = 0; i < lst.GetSize(); i++)
-    // {
-    //     cout << lst[i] << endl;
-    // }
-    // cout<< "Элементов в списке" << lst.GetSize() << endl;
-    return 0;
+//                                                                                                                                                                                                                                                                                                                                                                  for (size_t i = 0; i < std_List.size(); i++)
+//     {
+//         cout << std_List[i] << endl;
+//     }
+//     cout<< "Элементов в списке" << std_List.size() << endl;
+//     return 0;
 }
 
 

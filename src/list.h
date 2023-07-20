@@ -17,11 +17,13 @@ class List {
     using size_type = std::size_t; // size_t defines the type of the container size (standard type is size_t)
 
     public:
-        List();             // default constructor, creates empty list 
-        List(size_type n);  // parameterized constructor, creates the list of size n
+        List();              // default constructor, creates empty list 
+        List(size_type n);   // parameterized constructor, creates the list of size n
         List(std::initializer_list<value_type> const &items);
-
-        ~List();            // destructor
+        List(const List &l); // copy constructor
+        List(List &&l);      // move constructor
+        ~List();             // destructor
+        // operator=(List &&l);  // assignment operator overload for moving object
 
         
         void clear();  // clears the contents
@@ -94,7 +96,7 @@ List<T>::List(size_type n)
     size_l = 0;
     // cout << "List_n" << endl;
     for(int i = 0; i < n; i++){
-        push_back(1);
+        push_back(0);
     }
     // cout << "Create list _N_" << endl;
     
@@ -109,6 +111,28 @@ List<value_type>::List(std::initializer_list<value_type> const &items):List()
         }
 }
 
+template <typename T>
+inline List<T>::List(const List &l)
+{
+    // List<value_type>::List(std::initializer_list<value_type> const &List):List()
+    List<T> s21_List(size_l);
+    for (auto element : l && l.tail->pPrev != nullptr )
+        {
+            push_back(element);
+        }
+
+}
+
+template <typename T>
+inline List<T>::List(List &&l)
+{
+    clear();
+    head = l.head;
+    tail = l.tail;
+
+
+    // return *this;
+}
 
 template<typename T>
 List<T>::~List()
@@ -117,6 +141,15 @@ List<T>::~List()
     clear();
     
 }
+
+// template <typename T>
+// inline List<T>::operator=(List &&l)
+// {
+//     clear();
+//     head = l.head;
+//     tail = l.tail;
+//     return *this;
+// }
 
 template <typename T>
 void List<T>::clear()
@@ -132,9 +165,9 @@ template <typename T>
 void List<T>::pop_front()
 {
     // cout << "Delete Node" << endl;
-    Node<value_type> *temp = head;
+    Node<value_type> *tmp = head;
     head = head->pNext;    
-    delete temp;
+    delete tmp;
     size_l--;
 }
 
@@ -214,24 +247,27 @@ void List<T>::removeAt(int index)
     if(index == 0){
         pop_front();
     } else {
-        Node<T> *tmp = head;
-        for (int i = 0; i < size_l && i < index - 1; i++)
+        Node<value_type> *tmp = head;
+        for (int i = 0; i < size_l && i < index; i++)
         {
             tmp = tmp->pNext;
+            
         }   
   
     Node<value_type> *tmpDel = tmp;
-    tmp->pNext = tmpDel->pNext;    
+    tmp->pNext = tmpDel->pPrev;    
+    tmp->pPrev = tmpDel->pNext; 
     delete tmpDel;
-    
-  }
-  size_l--;
+    size_l--;
+  }  
 }
 
 template <typename T>
 void List<T>::pop_back()
 {
-    removeAt(size_l);
+    removeAt(size_l - 1);
+    tail = tail->pPrev;
+
 }
 
 template <typename T>
@@ -248,11 +284,15 @@ bool List<T>::empty()
 template <typename T>
 void List<T>::show()
 {
+    cout << " | " << endl;
     Node <value_type> *tmp = head;
+    cout << " || " << endl;
     while(tmp != nullptr){
-        cout << tmp->data << " ";
+        cout << tmp->data << " x ";
+
         tmp = tmp->pNext;
     }
+    cout << "end " << endl;
     cout  << endl;
 }
 
@@ -317,4 +357,13 @@ T &List<T>::operator[](const int index)
 //     }
 //     cout<< "Элементов в списке" << lst.GetSize() << endl;
 //     return 0;
+// }
+
+
+
+// void print(std::list<std::string> const &list)
+// {
+//     for (auto const &i: list) {
+//         std::cout << i << std::endl;
+//     }
 // }
