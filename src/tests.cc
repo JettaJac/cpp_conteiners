@@ -218,17 +218,121 @@ TEST(List, Pop_front) {
 //         EXPECT_EQ(s21_List.front(), std_List.front());
 // }
 
-TEST(List, Copy) {
-  s21::List<double> s21_List {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7};
-  std::list<double> std_List {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7};
+TEST(List, Copy_list) {
+  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
       list<double> std_copy(std_List);
   s21::List<double> s21_copy(s21_List);
-  for (int i = 0;  i < s21_List.size(); i++)
-  {
-        s21_List.pop_front();
-        std_List.pop_front();
-        EXPECT_EQ(s21_List.front(), std_List.front());
+  EXPECT_EQ(s21_List.size(), 7);
+  EXPECT_EQ(s21_copy.size(), 7);
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(s21_copy.size(), std_copy.size());
+  for (int i = 0;  i < std_List.size(); i++)
+  {        
+        EXPECT_EQ(s21_copy.front(), std_copy.front());
+        s21_copy.pop_front();
+        std_copy.pop_front();
+        
   }
+}
+
+TEST(List, Copy_op) {
+  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_copy;
+  s21::List<double> s21_copy;
+  std_copy = std_List;  
+  s21_copy = s21_List;
+  
+  EXPECT_EQ(s21_List.size(), 7);
+  EXPECT_EQ(s21_copy.size(), 7);
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(s21_copy.size(), std_copy.size());
+  
+  for (int i = 0;  i < std_List.size(); i++)
+  {
+        EXPECT_EQ(s21_copy.front(), std_copy.front());
+        s21_copy.pop_front();
+        std_copy.pop_front();
+  }
+  s21_List.show();
+
+}
+
+TEST(List, Move_list) {
+  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+      list<double> std_copy  = std::move (std_List);
+  s21::List<double> s21_copy = move(s21_List);
+  EXPECT_EQ(s21_List.size(), 0);
+  EXPECT_EQ(s21_copy.size(), 7);
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(s21_copy.size(), std_copy.size());
+  // s21_copy.show();
+  for (int i = 0;  i < std_List.size(); i++)
+  {
+        EXPECT_EQ(s21_copy.front(), std_copy.front());
+        s21_copy.pop_front();
+        std_copy.pop_front();
+  }
+}
+
+TEST(List, Move_op) {
+  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_copy;
+  s21::List<double> s21_copy;
+  std_copy = std::move(std_List);  
+  s21_copy = move(s21_List);
+  EXPECT_EQ(s21_List.size(), 0);
+  EXPECT_EQ(s21_copy.size(), 7);
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(s21_copy.size(), std_copy.size());
+  // cout << std_List.size() << endl;
+  // cout << std_copy.size() << endl;
+  // cout << s21_List.size() << endl;
+  // cout << s21_copy.size() << endl;
+  for (int i = 0;  i < std_copy.size(); i++)
+  {
+      // cout << "hh" << endl;
+        EXPECT_EQ(s21_copy.front(), std_copy.front());
+        s21_copy.pop_front();
+        std_copy.pop_front();        
+  }
+}
+
+
+TEST(List, Swap) {
+  s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  s21::List<double> s21_List_2 {7.7, 6.6, 5.5, 4.4, 3.3};
+  std::list<double> std_List_2 {7.7, 6.6, 5.5, 4.4, 3.3};
+  // std::swap(std_List_1, std_List_2);  
+  std_List_1.swap(std_List_2);
+  s21_List_1.swap(s21_List_2);
+  EXPECT_EQ(s21_List_1.size(), std_List_1.size());
+  EXPECT_EQ(s21_List_2.size(), std_List_2.size());
+  for (int i = 0;  i < std_List_1.size(); i++)
+  {
+        EXPECT_EQ(s21_List_1.front(), std_List_1.front());
+        s21_List_1.pop_front();
+        std_List_1.pop_front();        
+  }
+  for (int i = 0;  i < std_List_2.size(); i++)
+  {
+        EXPECT_EQ(s21_List_2.front(), std_List_2.front());
+        s21_List_2.pop_front();
+        std_List_2.pop_front();        
+  }
+}
+
+
+TEST(List, Max_size) {
+  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  // EXPECT_EQ(s21_List.max_size(), std_List.max_size());
+  cout << std_List.max_size() << endl;
+  // cout << s21_List.max_size() << endl;
 }
 
 

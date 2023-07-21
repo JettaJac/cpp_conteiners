@@ -9,13 +9,32 @@ int main(){
     using namespace std;
 
     setlocale(LC_ALL, "ru");
-    list<int> std_List{1, 2, 3, 4, 5, 6, 7};
-    list<int> std_copy(std_List);
-    std_copy = move(std_List);
-
+    std::list<int> std_List = {1, 2, 3, 4, 5, 6, 7};
+    
+    // s21::List<int> s21_List2(-1);
+    // list<int> std_List2(-1);
+    // cout <<  std_List2.front() << endl;
+    // list<int> std_copy(std_List);
+    //      list<int> std_copy();
+    // s21::List<int> s21_copy();
+    // std_copy = move(std_List);
+    
     s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7};
-    list<int> s21_copy(10);
-    // std_copy = move(s21_List);
+    cout << "start function" << endl;
+    // s21::List<int> s21_copy(s21_List);
+    // s21::List<int> s21_copy(s21_List);
+    // std::list<int> std_copy = std::move(std_List);
+    // s21::List<int> s21_copy = move(s21_List);
+    std::list<int> std_copy;
+    s21::List<int> s21_copy;
+    // std_copy = std_List;  
+    // s21_copy = s21_List;
+    std_copy = std::move(std_List);  
+    s21_copy = move(s21_List);
+
+    cout << "finish function" << endl;
+    // s21::List<int>                                                                                                                                                =  move(s21_List);
+    // s21_List.clear();
     // std_List.push_back(5);
     // // std_List.push_back(10);
     // s21::List<int> lst2;
@@ -57,22 +76,51 @@ int main(){
     // s21_List.pop_front();
     // s21_List.pop_front();
     // s21_List.pop_front();
-    // s21_List.pop_front();
+    // s21_copy.pop_front();
+    // std_copy.pop_front();
    
 
     // cout << s21_List.size() << endl;
-    // cout << s21_List.back() << endl;
-    // cout << std_List.back() << endl;
+    // cout << s21_copy.back() << endl;
+    // cout << std_copy.back() << endl;
 
-    // cout << s21_List.front() << endl;
-    // cout << std_List.front() << endl;
+    // cout << s21_copy.front() << endl;
+    // cout << std_copy.front() << endl;
     
-    // cout << "show_Start" << endl;
-    // s21_List.show();
-    // cout << "show_Start_3" << endl;
+    cout << "show_Start_List" << endl;
+    s21_List.show();
+
+    cout << "std: show_Start_List_move" << endl;
+    for (const auto& element : std_List) {
+        
+        cout << element << " x ";
+    }
+
+    cout << "SIZE s21: " << s21_List.size() << endl;
+    cout << "SIZE std: " << std_List.size() << endl;
+
+    cout << "show_Start_copy_move" << endl;
+    s21_copy.show();
+    cout << "std: show_Start_copy_move" << endl;
+    for (const auto& element : std_copy) {
+        
+        cout << element << " x ";
+    }
     cout << "SIZE s21: " << s21_copy.size() << endl;
     cout << "SIZE std: " << std_copy.size() << endl;
+    
+    
+
     // s21_List.show();
+     
+// 
+    //  for (const auto& element : std_List) {
+    //     std::cout << element << " ";
+    // }
+    // std::cout << std::endl;
+
+
+
     // cout << std_List.max_size() << endl;
     //  s21::List<int> s21_List = {1, 2, 3};
 
@@ -89,6 +137,44 @@ int main(){
 //     }
 //     cout<< "Элементов в списке" << std_List.size() << endl;
 //     return 0;
+
+
+cout << "Finish_Main" << endl;
+cout << endl;
+
+
+
+
+
+    
+    // list<int> sourceList = {1, 2, 3, 4, 5};
+    
+    // list<int> destinationList;
+
+    // // Копируем элементы из sourceList в destinationList
+    // destinationList = sourceList;
+
+    // // Выводим скопированные элементы на экран
+    // for (const auto& element : destinationList) {
+        
+    //     cout << element << " ";
+    // }
+    
+    // cout << 
+    // endl;
+
+    return 0;
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

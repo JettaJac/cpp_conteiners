@@ -22,10 +22,10 @@ class Vector
     public:
         // member types
         using value_type = T;
-        using reference = T &;
-        using const_reference = const T &;
-        using iterator = T *;
-        using const_iterator = const T *;
+        using reference = T&;
+        using const_reference = const T&;
+        using iterator = T*;
+        using const_iterator = const T*;
         using size_type = size_t;
         // private method
     private:
