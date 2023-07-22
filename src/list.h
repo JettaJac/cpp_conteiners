@@ -33,7 +33,9 @@ class List {
         void push_front(const_reference value); // adds an element to the head
         void pop_front(); // removes the first element
         void swap(List& other);
-        // void push_front(T value);
+        void reverse();
+
+        void unique(); // removes consecutive duplicate elements
 
 
         // void push_back(T value);
@@ -70,7 +72,7 @@ class List {
                     // cout << "в классе node" << endl;
                 }
         };
-        int size_l;
+        size_t size_l;
         Node<value_type> *head;
         Node<value_type> *tail;
      private:
@@ -84,7 +86,7 @@ List<T>::List()
 
     // Node<value_type> *zero; // Заглужка,  0 элемент
     // head = zero;
-    // tail= zero;
+    // tail = zero;
 
     head = nullptr;
     tail= nullptr; 
@@ -254,10 +256,63 @@ void List<T>::pop_front()
 template <typename T>
 void List<T>::swap(List &other)
 {
-    Node<value_type> *current = new Node<value_type>(1);
-    current = other.head;
-    other.head = head;
-    // this->head = current.head;
+    // std::swap(head, l.head);
+    // std::swap(tail, l.tail);
+    // std::swap(size_l, l.size_l);
+
+    cout << "SWAP " << endl;
+    Node<value_type> *cur_head = new Node<value_type>(1);
+    Node<value_type> *cur_tail = new Node<value_type>(1);
+    cur_head = head;
+    cur_tail = tail;
+    size_t t = size_l;
+
+    head = other.head;
+    tail = other.tail;
+    size_l = other.size_l;
+
+    other.head = cur_head;
+    other.tail = cur_tail;
+    other.size_l = t;
+}
+
+template <typename T>
+inline void List<T>::reverse()
+{
+
+
+Node<T> *tmp = tail;
+for {
+// head = tmp.head./p   
+pNext = tmp.pPrev;
+pPrev = tmp.pNext;
+    
+    
+}
+// head = tmp.tail
+
+
+
+
+       // if(index == 0){
+    //     push_front(T value);
+    // } else {
+    //     Node<T> *tmp = head;
+    //     for (int i = 0; i < size_l && i < index - 1; i++)
+    //     {
+    //         tmp = tmp->pNext;
+    //     }
+    //     Node<T> *newNode = new Node<T>(value, tmp);
+    //     tmp->pNext = newNode;
+    //     //  tmp->pNext = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
+    // }
+    // size_l++;
+}
+
+template <typename T>
+inline void List<T>::unique()
+{
+
 }
 
 template <typename T>

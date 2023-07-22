@@ -9,8 +9,11 @@ int main(){
     using namespace std;
 
     setlocale(LC_ALL, "ru");
-    std::list<int> std_List = {1, 2, 3, 4, 5, 6, 7};
-    
+    std::list<int> std_List = {1, 7, 4, 5, 4, 6, 7};
+    std::list<int> std_List_2 = {5, 6, 8, 9};
+
+    s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7};
+    s21::List<int> s21_List_2{5, 6, 7, 8};
     // s21::List<int> s21_List2(-1);
     // list<int> std_List2(-1);
     // cout <<  std_List2.front() << endl;
@@ -19,7 +22,7 @@ int main(){
     // s21::List<int> s21_copy();
     // std_copy = move(std_List);
     
-    s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7};
+    
     cout << "start function" << endl;
     // s21::List<int> s21_copy(s21_List);
     // s21::List<int> s21_copy(s21_List);
@@ -29,8 +32,19 @@ int main(){
     s21::List<int> s21_copy;
     // std_copy = std_List;  
     // s21_copy = s21_List;
-    std_copy = std::move(std_List);  
-    s21_copy = move(s21_List);
+    // std_copy = std::move(std_List);  
+    // s21_copy = move(s21_List);
+    // std_List.swap(std_List_2);
+    // s21_List.swap(s21_List_2);
+
+    // std_List.merge(std_List_2);
+
+    // std_List.reverse();
+    std_List.unique();
+    s21_List.unique();
+
+    // std_List.sort();
+
 
     cout << "finish function" << endl;
     // s21::List<int>                                                                                                                                                =  move(s21_List);
@@ -95,23 +109,31 @@ int main(){
         
         cout << element << " x ";
     }
+    cout << endl;
 
     cout << "SIZE s21: " << s21_List.size() << endl;
     cout << "SIZE std: " << std_List.size() << endl;
+    cout << endl;
 
     cout << "show_Start_copy_move" << endl;
-    s21_copy.show();
+    s21_List_2.show();
+
     cout << "std: show_Start_copy_move" << endl;
-    for (const auto& element : std_copy) {
+    for (const auto& element : std_List_2) {
         
         cout << element << " x ";
     }
-    cout << "SIZE s21: " << s21_copy.size() << endl;
-    cout << "SIZE std: " << std_copy.size() << endl;
+    cout << endl;
+
+    // cout << "SIZE s21: " << s21_copy.size() << endl;
+    // cout << "SIZE std: " << std_copy.size() << endl;
+
+    cout << "SIZE s21: " << s21_List_2.size() << endl;
+    cout << "SIZE std: " << std_List_2.size() << endl;
     
     
 
-    // s21_List.show();
+ 
      
 // 
     //  for (const auto& element : std_List) {

@@ -234,6 +234,13 @@ TEST(List, Copy_list) {
         std_copy.pop_front();
         
   }
+  for (int i = 0;  i < std_copy.size(); i++)
+  {
+      // cout << "hh" << endl;
+        EXPECT_EQ(s21_copy.back(), std_copy.back());
+        s21_copy.pop_back();
+        std_copy.pop_back();        
+  } 
 }
 
 TEST(List, Copy_op) {
@@ -255,7 +262,15 @@ TEST(List, Copy_op) {
         s21_copy.pop_front();
         std_copy.pop_front();
   }
-  s21_List.show();
+
+  for (int i = 0;  i < std_copy.size(); i++)
+  {
+      // cout << "hh" << endl;
+        EXPECT_EQ(s21_copy.back(), std_copy.back());
+        s21_copy.pop_back();
+        std_copy.pop_back();        
+  }
+  // s21_List.show();
 
 }
 
@@ -275,6 +290,14 @@ TEST(List, Move_list) {
         s21_copy.pop_front();
         std_copy.pop_front();
   }
+
+  for (int i = 0;  i < std_copy.size(); i++)
+  {
+      // cout << "hh" << endl;
+        EXPECT_EQ(s21_copy.back(), std_copy.back());
+        s21_copy.pop_back();
+        std_copy.pop_back();        
+  }
 }
 
 TEST(List, Move_op) {
@@ -288,25 +311,34 @@ TEST(List, Move_op) {
   EXPECT_EQ(s21_copy.size(), 7);
   EXPECT_EQ(s21_List.size(), std_List.size());
   EXPECT_EQ(s21_copy.size(), std_copy.size());
+  // EXPECT_EQ(&s21_List.tail(), &std_List.tail());
+  // EXPECT_EQ(s21_copy.tail(), std_copy.tail());
   // cout << std_List.size() << endl;
   // cout << std_copy.size() << endl;
   // cout << s21_List.size() << endl;
   // cout << s21_copy.size() << endl;
   for (int i = 0;  i < std_copy.size(); i++)
   {
-      // cout << "hh" << endl;
         EXPECT_EQ(s21_copy.front(), std_copy.front());
         s21_copy.pop_front();
         std_copy.pop_front();        
   }
+
+  for (int i = 0;  i < std_copy.size(); i++)
+  {
+        EXPECT_EQ(s21_copy.back(), std_copy.back());
+        s21_copy.pop_back();
+        std_copy.pop_back();        
+  }
+
 }
 
 
 TEST(List, Swap) {
   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-  s21::List<double> s21_List_2 {7.7, 6.6, 5.5, 4.4, 3.3};
-  std::list<double> std_List_2 {7.7, 6.6, 5.5, 4.4, 3.3};
+  s21::List<double> s21_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
+  std::list<double> std_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
   // std::swap(std_List_1, std_List_2);  
   std_List_1.swap(std_List_2);
   s21_List_1.swap(s21_List_2);
@@ -320,11 +352,61 @@ TEST(List, Swap) {
   }
   for (int i = 0;  i < std_List_2.size(); i++)
   {
-        EXPECT_EQ(s21_List_2.front(), std_List_2.front());
-        s21_List_2.pop_front();
-        std_List_2.pop_front();        
+        EXPECT_EQ(s21_List_2.back(), std_List_2.back());
+        s21_List_2.pop_back();
+        std_List_2.pop_back();        
   }
 }
+
+// TEST(List, Unique) { // разбить на несколько тестов
+//   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.3, 1.5, 1.6, 7.7};
+//   std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.3, 1.5, 1.6, 7.7};
+//   s21::List<double> s21_List_2 {9.9, 8.8, 5.5, 4.4, 5.5};
+//   std::list<double> std_List_2 {9.9, 8.8, 5.5, 4.4, 5.5};
+//   s21::List<string> s21_List_3 {"str_1", "str_2", "str_3", "str_4", "str_5"};
+//   std::list<string> std_List_3 {"str_1", "str_2", "str_3", "str_4", "str_5"};
+//   s21::List<string> s21_List_4 {"str_1", "str_1", "str_3", "str_4", "str_3"};
+//   std::list<string> std_List_4 {"str_1", "str_1", "str_3", "str_4", "str_3"};
+//  //  swap(std_List_1, std_List_2);  
+//   std_List_1.unique();
+//   s21_List_1.unique();
+//   std_List_2.unique();
+//   s21_List_2.unique();
+//   std_List_3.unique();
+//   s21_List_3.unique();
+//   std_List_4.unique();
+//   s21_List_4.unique();
+//   EXPECT_EQ(s21_List_1.size(), std_List_1.size());
+//   EXPECT_EQ(s21_List_2.size(), std_List_2.size());
+//   EXPECT_EQ(s21_List_3.size(), std_List_3.size());
+//   EXPECT_EQ(s21_List_4.size(), std_List_4.size());
+
+//   for (int i = 0;  i < std_List_1.size(); i++)
+//   {
+//         EXPECT_EQ(s21_List_1.front(), std_List_1.front());
+//         s21_List_1.pop_front();
+//         std_List_1.pop_front();        
+
+//         EXPECT_EQ(s21_List_2.front(), std_List_2.front());
+//         s21_List_1.pop_front();
+//         std_List_1.pop_front();   
+
+//         EXPECT_EQ(s21_List_3.front(), std_List_3.front());
+//         s21_List_1.pop_front();
+//         std_List_1.pop_front();   
+
+//         EXPECT_EQ(s21_List_4.front(), std_List_4.front());
+//         s21_List_1.pop_front();
+//         std_List_1.pop_front();        
+//   }
+
+//   for (int i = 0;  i < std_List_2.size(); i++)
+//   {
+//         EXPECT_EQ(s21_List_2.back(), std_List_2.back());
+//         s21_List_2.pop_back();
+//         std_List_2.pop_back();        
+//   }
+// }
 
 
 TEST(List, Max_size) {
