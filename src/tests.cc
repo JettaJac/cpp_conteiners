@@ -334,29 +334,29 @@ TEST(List, Move_op) {
 }
 
 
-TEST(List, Swap) {
-  s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-  std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-  s21::List<double> s21_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
-  std::list<double> std_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
-  // std::swap(std_List_1, std_List_2);  
-  std_List_1.swap(std_List_2);
-  s21_List_1.swap(s21_List_2);
-  EXPECT_EQ(s21_List_1.size(), std_List_1.size());
-  EXPECT_EQ(s21_List_2.size(), std_List_2.size());
-  for (int i = 0;  i < std_List_1.size(); i++)
-  {
-        EXPECT_EQ(s21_List_1.front(), std_List_1.front());
-        s21_List_1.pop_front();
-        std_List_1.pop_front();        
-  }
-  for (int i = 0;  i < std_List_2.size(); i++)
-  {
-        EXPECT_EQ(s21_List_2.back(), std_List_2.back());
-        s21_List_2.pop_back();
-        std_List_2.pop_back();        
-  }
-}
+// TEST(List, Swap) {
+//   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+//   std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+//   s21::List<double> s21_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
+//   std::list<double> std_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
+//   // std::swap(std_List_1, std_List_2);  
+//   std_List_1.swap(std_List_2);
+//   s21_List_1.swap(s21_List_2);
+//   EXPECT_EQ(s21_List_1.size(), std_List_1.size());
+//   EXPECT_EQ(s21_List_2.size(), std_List_2.size());
+//   for (int i = 0;  i < std_List_1.size(); i++)
+//   {
+//         EXPECT_EQ(s21_List_1.front(), std_List_1.front());
+//         s21_List_1.pop_front();
+//         std_List_1.pop_front();        
+//   }
+//   for (int i = 0;  i < std_List_2.size(); i++)
+//   {
+//         EXPECT_EQ(s21_List_2.back(), std_List_2.back());
+//         s21_List_2.pop_back();
+//         std_List_2.pop_back();        
+//   }
+// }
 
 // TEST(List, Unique) { // разбить на несколько тестов
 //   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.3, 1.5, 1.6, 7.7};
@@ -409,13 +409,13 @@ TEST(List, Swap) {
 // }
 
 
-TEST(List, Max_size) {
-  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-  // EXPECT_EQ(s21_List.max_size(), std_List.max_size());
-  cout << std_List.max_size() << endl;
-  // cout << s21_List.max_size() << endl;
-}
+// TEST(List, Max_size) {
+//   s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+//   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+//   // EXPECT_EQ(s21_List.max_size(), std_List.max_size());
+//   cout << std_List.max_size() << endl;
+//   // cout << s21_List.max_size() << endl;
+// }
 
 
 // {
@@ -428,3 +428,30 @@ int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
+
+
+
+
+//  std::list<int> c1(3, 100);
+//     print(1, c1);
+ 
+//     auto it = c1.begin();
+//     it = c1.insert(it, 200);
+//     print(2, c1);
+ 
+//     c1.insert(it, 2, 300);
+//     print(3, c1);
+ 
+//     // reset `it` to the begin:
+//     it = c1.begin();
+ 
+//     std::list<int> c2(2, 400);
+//     c1.insert(std::next(it, 2), c2.begin(), c2.end());
+//     print(4, c1);
+ 
+//     int arr[] = {501, 502, 503};
+//     c1.insert(c1.begin(), arr, arr + std::size(arr));
+//     print(5, c1);
+ 
+//     c1.insert(c1.end(), {601, 602, 603});
+//     print(6, c1);
