@@ -94,33 +94,10 @@ TEST(List, Constructor_Initializer_List) {
   EXPECT_EQ(s21_List.empty(), false);
 }
 
-// TEST(Stack, Constructor_Copy) {
-//   s21::List<char> s21_stack_1 = {'f', 'o', 'x', 'y'};
-//   s21::List<char> s21_stack_2 = s21_stack_1;
 
-//   EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
 
-//   for (auto i = 0; i < 4; i++) {
-//     EXPECT_EQ(s21_stack_1.top(), s21_stack_2.top());
-//     EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
-//     s21_stack_1.pop(), s21_stack_2.pop();
-//   }
-// }
 
-// TEST(Stack, Constructor_Move) {
-//   s21::List<char> s21_stack_1 = {'f', 'o', 'x', 'y'};
-//   s21::List<char> s21_stack_2 = std::move(s21_stack_1);
-//   s21::List<char> s21_stack_3 = {'f', 'o', 'x', 'y'};
 
-//   EXPECT_EQ(s21_stack_2.size(), s21_stack_3.size());
-//   EXPECT_EQ(s21_stack_1.size(), size_t(0));
-//   EXPECT_EQ(s21_stack_1.empty(), true);
-//   for (auto i = 0; i < 4; i++) {
-//     EXPECT_EQ(s21_stack_3.top(), s21_stack_2.top());
-//     EXPECT_EQ(s21_stack_3.size(), s21_stack_2.size());
-//     s21_stack_3.pop(), s21_stack_2.pop();
-//   }
-// }
 
 
 TEST(List, Front_Back) {  // сделать такой же тест. но с вылетом исключения
@@ -243,6 +220,19 @@ TEST(List, Copy_list) {
   } 
 }
 
+TEST(Stack, Copy_char) {
+  s21::List<char> s21_stack_1 = {'f', 'o', 'x', 'y'};
+  s21::List<char> s21_stack_2 = s21_stack_1;
+
+  EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
+
+  for (auto i = 0; i < 4; i++) {
+    EXPECT_EQ(s21_stack_1.back(), s21_stack_2.back());
+    EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
+    s21_stack_1.pop_back(), s21_stack_2.pop_back();
+  }
+}
+
 TEST(List, Copy_op) {
   s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
@@ -297,6 +287,21 @@ TEST(List, Move_list) {
         EXPECT_EQ(s21_copy.back(), std_copy.back());
         s21_copy.pop_back();
         std_copy.pop_back();        
+  }
+}
+
+TEST(Stack, Move_char) {
+  s21::List<char> s21_stack_1 = {'f', 'o', 'x', 'y'};
+  s21::List<char> s21_stack_2 = std::move(s21_stack_1);
+  s21::List<char> s21_stack_3 = {'f', 'o', 'x', 'y'};
+
+  EXPECT_EQ(s21_stack_2.size(), s21_stack_3.size());
+  EXPECT_EQ(s21_stack_1.size(), size_t(0));
+  EXPECT_EQ(s21_stack_1.empty(), true);
+  for (auto i = 0; i < s21_stack_3.size(); i++) {
+    EXPECT_EQ(s21_stack_3.back(), s21_stack_2.back());
+    EXPECT_EQ(s21_stack_3.size(), s21_stack_2.size());
+    s21_stack_3.pop_back(), s21_stack_2.pop_back();
   }
 }
 
