@@ -94,12 +94,6 @@ TEST(List, Constructor_Initializer_List) {
   EXPECT_EQ(s21_List.empty(), false);
 }
 
-
-
-
-
-
-
 TEST(List, Front_Back) {  // сделать такой же тест. но с вылетом исключения
   s21::List<double> A;
        list<double> B;
@@ -364,8 +358,8 @@ TEST(List, Move_op) {
 // }
 
 // TEST(List, Unique) { // разбить на несколько тестов
-//   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.3, 1.5, 1.6, 7.7};
-//   std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.3, 1.5, 1.6, 7.7};
+//   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.3, 1.3, 1.6, 7.7};
+//   std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.3, 1.3, 1.6, 7.7};
 //   s21::List<double> s21_List_2 {9.9, 8.8, 5.5, 4.4, 5.5};
 //   std::list<double> std_List_2 {9.9, 8.8, 5.5, 4.4, 5.5};
 //   s21::List<string> s21_List_3 {"str_1", "str_2", "str_3", "str_4", "str_5"};
@@ -428,6 +422,141 @@ TEST(List, Move_op) {
 // std_List.pop_back();
 //         EXPECT_EQ(s21_List.back(), std_List.back()); 
 // }
+
+
+// ----------------iterators----------------
+// TEST(Stack, Iterator_Constr) {
+//   s21::List<char> s21_stack_1 = {'f', 'o', 'x', 'y'};
+//   std::list<char> std_stack_1 = {'f', 'o', 'x', 'y'};
+//   s21::List<char> s21_stack_2 = s21_stack_1;
+
+//   EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
+
+//   std_stack_1.begin();
+
+
+
+//   for (auto i = 0; i < 4; i++) {
+//     EXPECT_EQ(s21_stack_1.back(), s21_stack_2.back());
+//     EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
+//     s21_stack_1.pop_back(), s21_stack_2.pop_back();
+//   }
+// }
+
+// TEST(ListIteratorTest, Begin) {
+//   s21::List<int> list;
+//   list.push_back(1);
+//   list.push_back(2);
+//   list.push_back(3);
+//   s21::ListIterator<int> it = list.begin();
+//   EXPECT_EQ(*it, 1);
+// }
+
+// TEST(ListIteratorTest, End) {
+//   s21::List<int> list;
+//   list.push_back(1);
+//   list.push_back(2);
+//   list.push_back(3);
+//   s21::ListIterator<int> it = list.end();
+//   EXPECT_EQ(it, nullptr);
+// }
+
+// TEST(ListIteratorTest, Increment) {
+//   s21::List<int> list;
+//   list.push_back(1);
+//   list.push_back(2);
+//   list.push_back(3);
+//   s21::ListIterator<int> it = list.begin();
+//   EXPECT_EQ(*it, 1);
+//   ++it;
+//   EXPECT_EQ(*it, 2);
+//   ++it;
+//   EXPECT_EQ(*it, 3);
+//   ++it;
+//   EXPECT_EQ(it, nullptr);
+// }
+
+// TEST(ListIteratorTest, Decrement) {
+//   s21::List<int> list;
+//   list.push_back(1);
+//   list.push_back(2);
+//   list.push_back(3);
+//   s21::ListIterator<int> it = list.end();
+//   --it;
+//   EXPECT_EQ(*it, 3);
+//   --it;
+//   EXPECT_EQ(*it, 2);
+//   --it;
+//   EXPECT_EQ(*it, 1);
+//   --it;
+//   EXPECT_EQ(it, nullptr);
+// }
+
+// // TEST(ListIteratorTest, ArrowOperator) {
+// //   s21::List<std::string> list;
+// //   list.push_back("hello");
+// //   list.push_back("world");
+// //   s21::ListIterator<std::string> it = list.begin();
+// //   EXPECT_EQ(it->size(), 5);
+// //   ++it;
+// //   EXPECT_EQ(it->size(), 5);
+// // }
+
+// TEST(ListIteratorTest, Equality) {
+//   s21::List<int> list;
+//   list.push_back(1);
+//   list.push_back(2);
+//   list.push_back(3);
+//   s21::ListIterator<int> it1 = list.begin();
+//   s21::ListIterator<int> it2 = list.begin();
+//   EXPECT_EQ(it1, it2);
+//   ++it1;
+//   EXPECT_NE(it1, it2);
+//   ++it2;
+//   EXPECT_EQ(it1, it2);
+// }
+
+// TEST(ListIteratorTest, CopyConstructor) {
+//   s21::List<int> list;
+//   list.push_back(1);
+//   list.push_back(2);
+//   list.push_back(3);
+//   s21::ListIterator<int> it1 = list.begin();
+//   s21::ListIterator<int> it2(it1);
+//   EXPECT_EQ(it1, it2);
+//   ++it1;
+//   EXPECT_NE(it1, it2);
+//   ++it2;
+//   EXPECT_EQ(it1, it2);
+// }
+
+// TEST(ListIteratorTest, AssignmentOperator) {
+//   s21::List<int> list;
+//   list.push_back(1);
+//   list.push_back(2);
+//   list.push_back(3);
+//   s21::ListIterator<int> it1 = list.begin();
+//   s21::ListIterator<int> it2;
+//   it2 = it1;
+//   EXPECT_EQ(it1, it2);
+//   ++it1;
+//   EXPECT_NE(it1, it2);
+//   ++it2;
+//   EXPECT_EQ(it1, it2);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);

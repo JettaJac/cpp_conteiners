@@ -9,8 +9,9 @@ int main(){
     using namespace std;
 
     setlocale(LC_ALL, "ru");
-    std::list<int> std_List = {1, 2, 4, 5, 5, 6, 7};
+    const std::list<int> std_List = {1, 2, 4, 5, 5, 6, 7};
     std::list<int> std_List_2 = {5, 6, 8, 9};
+    auto it = std_List.cbegin();
 
     s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7};
     s21::List<int> s21_List_2{5, 6, 7, 8};

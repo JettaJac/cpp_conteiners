@@ -13,13 +13,13 @@ namespace s21{
 
 template<typename T> // возможно здесь вместо typename - class
 class List {
-
+    // class Node;
     //     template <typename T>
     // List<T>::List(size_type n) 
-
+// сделать private 
     using value_type = T;  // defines the type of an element (T is template parameter)   
 
-    template<typename value_type> //  возможно private
+    template<typename value_type> //  возможно private  // при возможности оставить только у листа   
     class Node 
     {
         public:
@@ -34,6 +34,7 @@ class List {
             }
     };
     
+    class ListIterator;
 
 
 
@@ -42,7 +43,7 @@ class List {
     // using value_type = T;  // defines the type of an element (T is template parameter)
     using reference = T&; // defines the type of the reference to an element
     using const_reference = const T&; // defines the type of the constant reference
-    // using iterator = ListIterator<T>;// internal class ListIterator<T> defines the type for iterating through the container
+    using iterator = ListIterator;// internal class ListIterator<T> defines the type for iterating through the container
     using size_type = std::size_t; // size_t defines the type of the container size (standard type is size_t)
     // using const_iterator = ListConstIterator<T>;
 
@@ -80,8 +81,8 @@ class List {
         const_reference front() const noexcept {return head->value;}; //access the first element
         const_reference back() const noexcept {return tail->value;};  // access the last element
 
-        // iterator begin();
-        // iterator end();
+        iterator begin();
+        iterator end();
         
         
         void insert(T value, int index);
@@ -301,41 +302,54 @@ class List {
     // template <typename T>
     // inline void List<T>::reverse()
     // {
-
+    //     // if (first_ != nullptr) {
 
     // Node<T> *tmp = tail;
-    // for {
-    // // head = tmp.head./p   
-    // pNext = tmp.pPrev;
+    // for (int i = 0; i < tmp.size_l; i++){
+    // head = tmp.head;
+    // this.pNext = tmp.pPrev;
     // pPrev = tmp.pNext;
+    // // tmp->pNext = new Node<T>(this-> , tmp);  
         
-        
+
+    // // tmp.
+
     // }
-    // // head = tmp.tail
+    // head = tmp.tail
 
 
 
 
-    //        // if(index == 0){
-    //     //     push_front(T value);
-    //     // } else {
-    //     //     Node<T> *tmp = head;
-    //     //     for (int i = 0; i < size_l && i < index - 1; i++)
-    //     //     {
-    //     //         tmp = tmp->pNext;
-    //     //     }
-    //     //     Node<T> *newNode = new Node<T>(value, tmp);
-    //     //     tmp->pNext = newNode;
-    //     //     //  tmp->pNext = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
-    //     // }
-    //     // size_l++;
+           // if(index == 0){
+        //     push_front(T value);
+        // } else {
+        //     Node<T> *tmp = head;
+        //     for (int i = 0; i < size_l && i < index - 1; i++)
+        //     {
+        //         tmp = tmp->pNext;
+        //     }
+        //     Node<T> *newNode = new Node<T>(value, tmp);
+        //     tmp->pNext = newNode;
+        //     //  tmp->pNext = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
+        // }
+        // size_l++;
     // }
 
-    template <typename T>
-    inline void List<T>::unique()
-    {
+    // template <typename T>
+    // inline void List<T>::unique()
+    // {
+    //     List<T> tmp (this);
+    //     clear;
+    //      Node<T> *node_cur = head;
+    //      Node<T> *node_prev = pPrev;
+    //     for(int i = 0; i < size_l && i < size_l; i++){
+    //         if( value == node_prev){
 
-    }
+    //         }
+
+    //     }
+
+    // }
 
     template <typename T>
     void List<T>::push_back(const_reference value)
@@ -403,6 +417,18 @@ class List {
     //     return iterator();
     // }
 
+    // template <typename T>
+    // inline List<T>::iterator List<T>::begin()
+    // {
+    //     // return iterator();
+    //     return ListIterator<T>::this->begin();
+
+    //       // ListIterator<T> it (head);
+    //     // return  it;
+    // }
+
+
+
     template <typename T>
     void List<T>::insert(T value, int index)
     {
@@ -450,12 +476,7 @@ class List {
 
     }
 
-    // template <typename T>
-    // inline List<T>::iterator List<T>::begin()
-    // {
-    //     // return iterator();
-    //     return ListIterator<T>::this->begin();
-    // }
+
 
     // template <typename T>
     // inline List<T>::iterator List<T>::end()
@@ -523,26 +544,29 @@ class List {
 
         using value_type = T;
         using Node = typename List<T>::template Node<value_type>;
+        using reference = T&; // defines the type of the reference to an element
+        using const_reference = const T&;
 
         public:
             ListIterator();
             ListIterator(int i);  // перемешение на i элемент
-            // ListIterator(ListIterator const &iterNode_);   // Конструктор копирования
+            ListIterator(ListIterator const &iterNode_);   // Конструктор копирования
             // ListIterator(ListIterator &&iterNode_);
-            // ListIterator(Node *current) : iterNode_(current) {};
-            ~ListIterator(); // Деструктор
+            ListIterator(Node *current) : iterNode_(current) {};
+            // ~ListIterator(); // Деструктор
             // ~ListIterator(int);
-            ListIterator begin(); // Переходим на первый элемент
-            ListIterator operator++() {return iterNode_->pNext;}; // префексная форма
+            // ListIterator begin(); // Переходим на первый элемент не надо
+            ListIterator operator++() {return iterNode_->pNext;} // префексная форма
             ListIterator operator++(int); // постфиксная форма
-            ListIterator operator--() {return iterNode_->pPrev;}; // префексная форма
+            ListIterator operator--() {return iterNode_->pPrev;} // префексная форма
             ListIterator operator--(int); // постфиксная форма
-            ListIterator operator*() {return iterNode_->value;};
-            // bool operator==(Node &other) const {return iterNode_->value == other.value};
+            /*ListIterator**/reference operator*() {return iterNode_->value;}
+            bool operator==(const Node &other) const {return iterNode_->value == other.value;} // проверяем указатели а не ноды
             // bool operator!=(Node &other) const {return iterNode_->value != other.value};
-            ListIterator operator->() {return iterNode_;};
+            ListIterator operator->() {return iterNode_;}
 
-            
+            // iterator1 == iterator2
+            // iterator1.operator==(const iterator2) const
             // template <class T> ListIterator<T> &ListIterator<T>::operator+=(size_t num) 
             // ListIterator<T> &ListIterator<T>::operator=(const ListIterator &other)
         //         bool ListIterator<T>::operator==(
@@ -589,7 +613,7 @@ class List {
                 // }
 
         
-            template <typename value_type>
+            // template <typename value_type>
             // /*inline*/~ListIterator()
             // {   
             //     int y = 0;
@@ -598,14 +622,14 @@ class List {
             // }
             // ~ListIterator(){};
             // template <typename value_type>
-            ListIterator begin()
-            {
-                ListIterator  tmp(this); // не будет работать
-                while(tmp->pPrev){
-                    tmp = tmp->pPrev;
-                }
-                 return tmp;
-            }
+            // ListIterator begin()
+            // {
+            //     ListIterator  tmp(this); // не будет работать
+            //     while(tmp->pPrev){
+            //         tmp = tmp->pPrev;
+            //     }
+            //      return tmp;
+            // }
 
             template <typename value_type>
             inline ListIterator operator++(int)
@@ -623,9 +647,16 @@ class List {
                 return tmp;
             }
 
-        private:
+            // template <typename T>
+            // inline ListIterator<T>::ListIterator(ListIterator const &iterNode_)
+            // {
+            //     iterNode_ = iterNode_->pPrev; 
+            // }
+
+            private:
             Node  *iterNode_;
             friend class List<T>;
+
     };
 
 
