@@ -34,11 +34,137 @@ class List {
             }
     };
     
-    class ListIterator;
+    
 
 
 
     public:
+    // class ListIterator;
+
+
+    // template<typename  value_type>
+    class ListIterator{
+
+        using value_type = T;
+        using Node = typename List<T>::template Node<value_type>;
+        using reference = T&; // defines the type of the reference to an element
+        using const_reference = const T&;
+
+        public:
+            ListIterator();
+            ListIterator(int i);  // перемешение на i элемент
+            ListIterator(ListIterator const &iterNode_);   // Конструктор копирования
+            // ListIterator(ListIterator &&iterNode_);
+            // ListIterator(Node* node);
+            ListIterator(Node *current) : iterNode_(current) {};
+            // ~ListIterator(); // Деструктор
+            // ~ListIterator(int);
+            // ListIterator begin(); // Переходим на первый элемент не надо
+            ListIterator operator++() {return iterNode_->pNext;} // префексная форма
+            ListIterator operator++(int); // постфиксная форма
+            ListIterator operator--() {return iterNode_->pPrev;} // префексная форма
+            ListIterator operator--(int); // постфиксная форма
+            /*ListIterator**/reference operator*() {return iterNode_->value;}
+            bool operator==(const Node &other) const {return iterNode_->value == other.value;} // проверяем указатели а не ноды
+            // bool operator!=(Node &other) const {return iterNode_->value != other.value};
+            ListIterator operator->() {return iterNode_;}
+
+            // iterator1 == iterator2
+            // iterator1.operator==(const iterator2) const
+            // template <class T> ListIterator<T> &ListIterator<T>::operator+=(size_t num) 
+            // ListIterator<T> &ListIterator<T>::operator=(const ListIterator &other)
+        //         bool ListIterator<T>::operator==(
+        // const typename ListIterator<T>::const_iterator &other)
+        // template <class T> ListNode<T> *ListIterator<T>::getPtr()
+
+
+            
+            // template<typename T>
+            template <typename value_type>
+            ListIterator()  // Iterator(Node* node) : current(node) {}  нужен ли конструктор копирование и перемещение
+
+            {
+                iterNode_ = nullptr;
+            }
+
+            template <typename value_type>
+            inline ListIterator(int i)
+            {   
+                ListIterator  tmp(this);
+                for(int z = 0; z != i; z++){
+                    tmp = tmp->pNext;
+                }
+                //  return *tmp;
+                
+            }
+
+            // template <typename value_type>
+            // inline ListIterator(ListIterator const &iterNode_)
+            // {
+                
+
+            //     // ~this;
+            //     this = iterNode_;
+            // }
+
+            //             ListIterator<int>::iterNode_ tmp_o (5);
+            // ListIterator<int>::iterNode_ tmp (tmp_o );
+
+
+                // inline ~ListIterator()
+                // {
+                //     int g = 7;
+                // }
+
+        
+            // template <typename value_type>
+            // /*inline*/~ListIterator()
+            // {   
+            //     int y = 0;
+            //     // delete iterNode_;
+            //     // iterNode_ = nullptr; //  проверть
+            // }
+            // ~ListIterator(){};
+            // template <typename value_type>
+            // ListIterator begin()
+            // {
+            //     ListIterator  tmp(this); // не будет работать
+            //     while(tmp->pPrev){
+            //         tmp = tmp->pPrev;
+            //     }
+            //      return tmp;
+            // }
+
+            template <typename value_type>
+            inline ListIterator operator++(int)
+            {   
+                ListIterator  tmp (*this);
+                iterNode_ = iterNode_->pNext;  //почему не через .
+                return tmp;
+            }
+
+            template <typename value_type>
+            inline ListIterator operator--(int)
+            {
+                ListIterator  tmp (*this);
+                iterNode_ = iterNode_->pPrev;  //почему не через .
+                return tmp;
+            }
+
+            // template <typename T>
+            // inline ListIterator<T>::ListIterator(ListIterator const &iterNode_)
+            // {
+            //     iterNode_ = iterNode_->pPrev; 
+            // }
+
+            private:
+            Node  *iterNode_;
+            friend class List<T>;
+
+    };
+
+
+
      // member type
     // using value_type = T;  // defines the type of an element (T is template parameter)
     using reference = T&; // defines the type of the reference to an element
@@ -85,7 +211,7 @@ class List {
         iterator end();
         
         
-        void insert(T value, int index);
+        void insert(T value, int index); // inserts element into concrete pos and returns the iterator that points to the new element
         void removeAt(int index);
         
         bool empty();  // checks whether the container is empty
@@ -417,17 +543,28 @@ class List {
     //     return iterator();
     // }
 
+    template <typename T>
+    inline typename List<T>::iterator List<T>::begin()
+    {
+        // ListIterator it (head);
+        return typename List<T>::iterator(head);
+        // return ListIterator<T>::this->begin();
+
+            // iterator begin() const noexcept { return iterator(fake_node_->pNext_); }
+        // return  it;
+    }
+
+    template <typename T>
+    inline typename List<T>::iterator List<T>::end()
+    {
+        return typename List<T>::iterator(tail);
+    }
+
     // template <typename T>
-    // inline List<T>::iterator List<T>::begin()
+    // inline iterator List<T>::begin()
     // {
-    //     // return iterator();
-    //     return ListIterator<T>::this->begin();
-
-    //       // ListIterator<T> it (head);
-    //     // return  it;
+    //     return iterator();
     // }
-
-
 
     template <typename T>
     void List<T>::insert(T value, int index)
@@ -539,125 +676,7 @@ class List {
 
 // };
 
-    template<typename  T>
-    class ListIterator{
-
-        using value_type = T;
-        using Node = typename List<T>::template Node<value_type>;
-        using reference = T&; // defines the type of the reference to an element
-        using const_reference = const T&;
-
-        public:
-            ListIterator();
-            ListIterator(int i);  // перемешение на i элемент
-            ListIterator(ListIterator const &iterNode_);   // Конструктор копирования
-            // ListIterator(ListIterator &&iterNode_);
-            ListIterator(Node *current) : iterNode_(current) {};
-            // ~ListIterator(); // Деструктор
-            // ~ListIterator(int);
-            // ListIterator begin(); // Переходим на первый элемент не надо
-            ListIterator operator++() {return iterNode_->pNext;} // префексная форма
-            ListIterator operator++(int); // постфиксная форма
-            ListIterator operator--() {return iterNode_->pPrev;} // префексная форма
-            ListIterator operator--(int); // постфиксная форма
-            /*ListIterator**/reference operator*() {return iterNode_->value;}
-            bool operator==(const Node &other) const {return iterNode_->value == other.value;} // проверяем указатели а не ноды
-            // bool operator!=(Node &other) const {return iterNode_->value != other.value};
-            ListIterator operator->() {return iterNode_;}
-
-            // iterator1 == iterator2
-            // iterator1.operator==(const iterator2) const
-            // template <class T> ListIterator<T> &ListIterator<T>::operator+=(size_t num) 
-            // ListIterator<T> &ListIterator<T>::operator=(const ListIterator &other)
-        //         bool ListIterator<T>::operator==(
-        // const typename ListIterator<T>::const_iterator &other)
-        // template <class T> ListNode<T> *ListIterator<T>::getPtr()
-
-
-            
-            // template<typename T>
-            template <typename value_type>
-            ListIterator()  // Iterator(Node* node) : current(node) {}  нужен ли конструктор копирование и перемещение
-
-            {
-                iterNode_ = nullptr;
-            }
-
-            template <typename value_type>
-            inline ListIterator(int i)
-            {   
-                ListIterator  tmp(this);
-                for(int z = 0; z != i; z++){
-                    tmp = tmp->pNext;
-                }
-                //  return *tmp;
-                
-            }
-
-            // template <typename value_type>
-            // inline ListIterator(ListIterator const &iterNode_)
-            // {
-                
-
-            //     // ~this;
-            //     this = iterNode_;
-            // }
-
-            //             ListIterator<int>::iterNode_ tmp_o (5);
-            // ListIterator<int>::iterNode_ tmp (tmp_o );
-
-
-                // inline ~ListIterator()
-                // {
-                //     int g = 7;
-                // }
-
-        
-            // template <typename value_type>
-            // /*inline*/~ListIterator()
-            // {   
-            //     int y = 0;
-            //     // delete iterNode_;
-            //     // iterNode_ = nullptr; //  проверть
-            // }
-            // ~ListIterator(){};
-            // template <typename value_type>
-            // ListIterator begin()
-            // {
-            //     ListIterator  tmp(this); // не будет работать
-            //     while(tmp->pPrev){
-            //         tmp = tmp->pPrev;
-            //     }
-            //      return tmp;
-            // }
-
-            template <typename value_type>
-            inline ListIterator operator++(int)
-            {   
-                ListIterator  tmp (*this);
-                iterNode_ = iterNode_->pNext;  //почему не через .
-                return tmp;
-            }
-
-            template <typename value_type>
-            inline ListIterator operator--(int)
-            {
-                ListIterator  tmp (*this);
-                iterNode_ = iterNode_->pPrev;  //почему не через .
-                return tmp;
-            }
-
-            // template <typename T>
-            // inline ListIterator<T>::ListIterator(ListIterator const &iterNode_)
-            // {
-            //     iterNode_ = iterNode_->pPrev; 
-            // }
-
-            private:
-            Node  *iterNode_;
-            friend class List<T>;
-
-    };
+   
 
 
     // template<class T>template<typename T>

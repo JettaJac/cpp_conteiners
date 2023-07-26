@@ -38,14 +38,19 @@ int main(){
     // std_List.swap(std_List_2);
     // s21_List.swap(s21_List_2);
 
-    std_List.merge(std_List_2);
+    // std_List.merge(std_List_2);
 
     // std_List.reverse();
     // std_List.unique();
     // s21_List.unique();
 
     // std_List.sort();
+    s21::List<int>::ListIterator i  = s21_List.begin();
+//    s21::List<int>::ListIterator *it  = 
+//    typename s21::List<int>::ListIterator *i = s21_List.begin();
 
+    // auto i = s21_List.begin();
+    cout << "ttttt_" << *i << endl;
 
     cout << "finish function" << endl;
     // s21::List<int>                                                                                                                                                =  move(s21_List);

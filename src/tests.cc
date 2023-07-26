@@ -444,13 +444,49 @@ TEST(List, Move_op) {
 // }
 
 // TEST(ListIteratorTest, Begin) {
-//   s21::List<int> list;
-//   list.push_back(1);
-//   list.push_back(2);
-//   list.push_back(3);
-//   s21::ListIterator<int> it = list.begin();
+//   s21::List<int> s21_List;
+//   s21_List.push_back(1);
+//   s21_List.push_back(2);
+//   s21_List.push_back(3);
+//   s21::List<int>::ListIterator *it = s21_List.begin();
 //   EXPECT_EQ(*it, 1);
 // }
+
+TEST(ListIteratorTest, Begin) { // Переименновать тест
+  s21::List<int> s21_List;
+  std::list<int> std_List;
+  s21_List.push_back(1);
+  s21_List.push_back(2);
+  s21_List.push_back(3);
+
+  std_List.push_back(1);
+  std_List.push_back(2);
+  std_List.push_back(3);
+
+  // auto it = s21_List.begin();
+  // s21::List<int>::ListIterator *it = s21_List.begin();
+  EXPECT_EQ(*s21_List.begin(), *std_List.begin());
+
+  // EXPECT_EQ(1, 1);
+}
+
+TEST(ListIteratorTest, End) { // Переименновать тест
+  s21::List<int> s21_List;
+  std::list<int> std_List;
+  s21_List.push_back(1);
+  s21_List.push_back(2);
+  s21_List.push_back(3);
+
+  std_List.push_back(1);
+  std_List.push_back(2);
+  std_List.push_back(3);
+
+  // auto it = s21_List.end();
+  // s21::List<int>::ListIterator *it = s21_List.end();
+  EXPECT_EQ(*s21_List.end(), *std_List.end());
+
+  // EXPECT_EQ(1, 1);
+}
 
 // TEST(ListIteratorTest, End) {
 //   s21::List<int> list;
