@@ -454,11 +454,12 @@ TEST(List, Move_op) {
 
 TEST(ListIteratorTest, Begin) { // Переименновать тест
   s21::List<int> s21_List;
-  std::list<int> std_List;
+  
   s21_List.push_back(1);
   s21_List.push_back(2);
   s21_List.push_back(3);
 
+  std::list<int> std_List;
   std_List.push_back(1);
   std_List.push_back(2);
   std_List.push_back(3);
@@ -482,20 +483,11 @@ TEST(ListIteratorTest, End) { // Переименновать тест
   std_List.push_back(3);
 
   // auto it = s21_List.end();
-  // s21::List<int>::ListIterator *it = s21_List.end();
-  EXPECT_EQ(*s21_List.end(), *std_List.end());
+  s21::List<int>::ListIterator it = s21_List.end();
+  EXPECT_EQ(*it, *std_List.end());
 
   // EXPECT_EQ(1, 1);
 }
-
-// TEST(ListIteratorTest, End) {
-//   s21::List<int> list;
-//   list.push_back(1);
-//   list.push_back(2);
-//   list.push_back(3);
-//   s21::ListIterator<int> it = list.end();
-//   EXPECT_EQ(it, nullptr);
-// }
 
 // TEST(ListIteratorTest, Increment) {
 //   s21::List<int> list;
@@ -552,19 +544,53 @@ TEST(ListIteratorTest, End) { // Переименновать тест
 //   EXPECT_EQ(it1, it2);
 // }
 
-// TEST(ListIteratorTest, CopyConstructor) {
-//   s21::List<int> list;
-//   list.push_back(1);
-//   list.push_back(2);
-//   list.push_back(3);
-//   s21::ListIterator<int> it1 = list.begin();
-//   s21::ListIterator<int> it2(it1);
-//   EXPECT_EQ(it1, it2);
-//   ++it1;
-//   EXPECT_NE(it1, it2);
-//   ++it2;
-//   EXPECT_EQ(it1, it2);
-// }
+TEST(ListIteratorTest, CopyConstructor) {
+  // s21::List<int> s21_List;
+  // s21_List.push_back(1);
+  // s21_List.push_back(2);
+  // s21_List.push_back(3);
+  // s21::List<int>::iterator s21_it1 = s21_List.begin();
+  // s21::List<int>::ListIterator s21_it2(s21_it1);
+  // EXPECT_EQ(s21_it1, s21_it2);
+
+  std::list<int> std_List;
+  std_List.push_back(1);
+  std_List.push_back(2);
+  std_List.push_back(3);
+  std::list<int>::iterator std_it1 = std_List.begin();
+  std::list<int>::iterator std_it2(std_it1);
+  EXPECT_EQ(std_it1, std_it2);
+  EXPECT_EQ(1, *std_it2);
+  ++std_it1;
+  EXPECT_NE(std_it1, std_it2); // тут NE
+  EXPECT_EQ(1, *std_it2);
+  EXPECT_EQ(*std_it1, 2);
+  ++std_it2;
+  EXPECT_EQ(std_it1, std_it2);
+  EXPECT_EQ(2, *std_it2);
+}
+
+TEST(ListIteratorTest, Decrement) {
+  s21::List<int> s21_List;
+  s21_List.push_back(1);
+  s21_List.push_back(2);
+  s21_List.push_back(3);
+  s21::List<int>::iterator s21_it = s21_List.begin();
+
+  std::list<int> std_List;
+  std_List.push_back(1);
+  std_List.push_back(2);
+  std_List.push_back(3);
+  std::list<int>::iterator std_it = std_List.begin();
+
+  EXPECT_EQ(*s21_it, 1);
+  ++s21_it;
+  // EXPECT_EQ(*s21_it, 2);
+  ++s21_it;
+  // *s21_it--;
+  EXPECT_EQ(*s21_it, 2);
+}
+
 
 // TEST(ListIteratorTest, AssignmentOperator) {
 //   s21::List<int> list;
