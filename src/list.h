@@ -299,7 +299,7 @@ class List {
 
 
         // void push_back(T value);
-        size_type size() {return size_l_;}; // returns the number of elements
+        size_type size() {return size_;}; // returns the number of elements
         // size_type max_size(allocator.max_size());
         T& operator[](const int index);
 
@@ -322,7 +322,7 @@ class List {
         
 
      private:
-        size_t size_l_;
+        size_t size_;
         Node/*<value_type> */*head_;
         Node/*<value_type>*/ *tail_;
         Node/*<value_type>*/ *zero_;
@@ -332,14 +332,14 @@ class List {
     List<T>::List()
     {
         // cout << "Create list " << this << endl;
-        size_l_ = 0;
+        size_ = 0;
 
         // Node/*<value_type>*/ *zero = new Node/*<value_type>*/(0);// Заглужка,  0 элемент
 
-        zero_ = new Node(0, nullptr, 
-        nullptr);
-        head_= zero_;
-        tail_ = zero_;
+        zero_ = new Node(value_type (), nullptr, nullptr);
+        //  zero_->pNext_ = zero_->pPrev_ = nullptr;
+        head_= tail_ = zero_;
+        // tail_ = zero_;
 
         // head_= nullptr;
         // tail_= nullptr; 
@@ -348,12 +348,15 @@ class List {
     template <typename T>
     List<T>::List(size_type n) 
     {   cout << "List_n" << endl;
+        cout << " gggg " << &zero_ << endl;
+        zero_ = new Node(value_type (), nullptr, nullptr);
         head_= zero_;
         tail_ = zero_; 
-        size_l_ = 0;
+        size_ = 0;
         
         for(size_type i = 0; i < n; i++){
-            push_back(0);
+             cout << "List_" << i << endl;
+            push_back(value_type ());
         }
         // cout << "Create list _N_" << endl;
         
@@ -382,11 +385,11 @@ class List {
         Node/*<value_type>*/ *current = l.head_;
         // new Node/*<value_type>*/(*head_);
         // current->pNext_ = nullptr;
-        for(int i = 0; i < l.size_l_; i++)
+        for(int i = 0; i < l.size_; i++)
         {
             push_back(current->value_);
             current = current->pNext_;
-            // tmp->size_l_ = 7;
+            // tmp->size_ = 7;
         }
         
 
@@ -411,7 +414,7 @@ class List {
     }
 
     template <typename T>
-    List<T>::List(List &&l) : List()
+    List<T>::List(List &&l) /*: List()*/ : head_(l.head_), tail_(l.tail_), size_(l.size_)// : fake_node_(l.fake_node_), size_(l.size_) {
     {   
         cout << "Move function" << endl; 
     
@@ -420,18 +423,24 @@ class List {
         // swap(this, l);
 
         //   clear();
-        head_= l.head_;
-        tail_ = l.tail_;
-        size_l_ = l.size_l_;
-        l.head_= l.zero_;
+        // head_= l.head_;
+        // tail_ = l.tail_;
+        size_ = l.size_;
+
+        // l.clear();
+        l.head_= l.zero_; // А не будет ли утчки?
         l.tail_ = l.zero_;
-        l.size_l_ = 0;
+        l.size_ = 0;
+        // cout << tail_ << " =!!= "<< zero_ << endl;
+        
     }
 
     template<typename T>
     List<T>::~List()
     {
-        // cout << "Delete list " << this << endl;
+        cout << "Delete list " << this << endl;
+        // cout << "Delete list " << zero_ << endl;
+        // cout << "Delete list " << zero_->pPrev_ << endl;
         clear();
         // !!!!!!!!!!!! удалить ZERO
         // delete zero;
@@ -441,20 +450,20 @@ class List {
     template <typename T>
     inline List<T> List<T>::operator=(List const &l)
     {
-        cout << "Operator Copy " << this << endl;
+        // cout << "Operator Copy " << this << endl;
         // cout <<  " h "<< endl;
         clear();
-        cout <<  " h "<< endl;
+        // cout <<  " h "<< endl;
         // List<T> tmp();
         Node/*<value_type> */*current = l.head_;
         // new Node/*<value_type>*/(*head_);
         // current->pNext_ = nullptr;
         // head_= l.head_;
-        for(int i = 0; i < l.size_l_; i++)
+        for(int i = 0; i < l.size_; i++)
         {
             push_back(current->value_);
             current = current->pNext_;
-            // tmp->size_l_ = 7;        
+            // tmp->size_ = 7;        
         }
         // cout <<  " y " << endl;
 
@@ -476,12 +485,12 @@ class List {
         clear();
         head_= l.head_;
         tail_ = l.tail_;
-        size_l_ = l.size_l_;
+        size_ = l.size_;
         l.head_= NULL;
         l.tail_ = NULL;
-        l.size_l_ = 0;
+        l.size_ = 0;
         // move(l);
-        // cout << "SIZE_2: " << size_l_ << endl;
+        // cout << "SIZE_2: " << size_ << endl;
         return *this;
     }
 
@@ -489,23 +498,28 @@ class List {
     void List<T>::clear()
     {
         // cout << "Clear list" << endl;
-        // cout << "SIZE: " << size_l_ << endl;
-        while (size_l_)
+        // cout << "SIZE: " << size_ << endl;
+        while (size_)
         {
+            // cout << "SIZE: " << size_ << endl;
             // cout << "1" << endl;
             pop_front();
         }
-        cout << "Clear list finish " << this << endl; 
+        // cout << "Clear list finish " << this << endl; 
     }
 
     template <typename T>
     void List<T>::pop_front()
     {
-        // cout << "Delete Node" << endl;
+        cout << "Delete Node" << endl;
         Node/*<value_type>*/ *tmp = head_;
         head_= head_->pNext_;    
+        cout << "Delete Node _" << size_ << endl;
+        cout << head_ << " == "<< zero_ << endl;
+        cout << tail_ << " == "<< zero_ << endl;
         delete tmp;
-        size_l_--;
+        cout << tail_ << " =!= "<< zero_ << endl;
+        size_--;
     }
 
     template <typename T>
@@ -513,22 +527,22 @@ class List {
     {
         // std::swap(head, l.head_);
         // std::swap(tail_, l.tail_);
-        // std::swap(size_l_, l.size_l_);
+        // std::swap(size_, l.size_);
 
         cout << "SWAP " << endl;
         Node/*<value_type> */*cur_head_= new Node/*<value_type>*/(1);
         Node/*<value_type>*/ *cur_tail_ = new Node/*<value_type>*/(1);
         cur_head_= head_;
         cur_tail_ = tail_;
-        size_t t = size_l_;
+        size_t t = size_;
 
         head_= other.head_;
         tail_ = other.tail_;
-        size_l_ = other.size_l_;
+        size_ = other.size_;
 
         other.head_= cur_head_;
         other.tail_ = cur_tail_;
-        other.size_l_ = t;
+        other.size_ = t;
     }
 
     // template <typename T>
@@ -537,7 +551,7 @@ class List {
     //     // if (first_ != nullptr) {
 
     // Node<T> *tmp = tail_;
-    // for (int i = 0; i < tmp.size_l_; i++){
+    // for (int i = 0; i < tmp.size_; i++){
     // head_= tmp.head_;
     // this.pNext_ = tmp.pPrev_;
     // pPrev_ = tmp.pNext_;
@@ -556,7 +570,7 @@ class List {
         //     push_front(T value);
         // } else {
         //     Node<T> *tmp = head_;
-        //     for (int i = 0; i < size_l_ && i < index - 1; i++)
+        //     for (int i = 0; i < size_ && i < index - 1; i++)
         //     {
         //         tmp = tmp->pNext_;
         //     }
@@ -564,7 +578,7 @@ class List {
         //     tmp->pNext_ = newNode;
         //     //  tmp->pNext_ = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
         // }
-        // size_l_++;
+        // size_++;
     // }
 
     // template <typename T>
@@ -574,7 +588,7 @@ class List {
     //     clear;
     //      Node<T> *node_cur = head_;
     //      Node<T> *node_prev = pPrev_;
-    //     for(int i = 0; i < size_l_ && i < size_l_; i++){
+    //     for(int i = 0; i < size_ && i < size_; i++){
     //         if( value == node_prev){
 
     //         }
@@ -586,17 +600,28 @@ class List {
     template <typename T>
     void List<T>::push_back(const_reference value_)
     {
-        // cout << "Create NODE" << endl;
-        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value_);
+        cout << "Create NODE" << endl;
+        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value_); // добавить аргументы
         current->pNext_ = zero_;
-        current->value_ = value_;
+        current->value_ = value_;  
+        cout << "Value_ " << current->value_   << endl;
 
-        if(head_== zero_){ // сюда теоретически не должен заходить
-            current->pNext_ = current->pPrev_ = zero_;
-            zero_->pNext_ = zero_->pPrev_ = current; // добавила
+        if(head_== zero_){ // сюда теоретически не должен заходить / заходит
+        // cout << "Value_ " << current->value_   << endl;
+        // cout << "Create NODE_1" << endl;
+        zero_->pNext_ = zero_->pPrev_ = current; // добавила
+        // cout << "Value_ " << current->value_   << endl;
+        current->pNext_ = current->pPrev_ = zero_;
+        // cout << "Value_ " << current->value_   << endl;
+            
+           
+            // cout << "oo "  /* << zero_->pNext_<<  zero_->pPrev_ */ << zero_<< endl;
+        
+           
+            
             head_= tail_ = current;
-            cout << "Create NODE_1" << endl;
-
+            
+        // cout << "Create NODE_4" << endl;
         } else {
             // cout << "Create NODE_2+" << endl;
             current->pPrev_ = tail_;
@@ -604,7 +629,7 @@ class List {
             tail_->pNext_ = current;
             tail_ = current;
         }
-        
+        // cout << "Create NODE_3" << endl;
         // if(head_== nullptr){
         //     head_= new Node<T>(value);
         // } else {
@@ -615,14 +640,14 @@ class List {
         //     }
         //     current = new Node<T>(value);
         // }
-        size_l_++;
+        size_++;
     }
 
     template <typename T>
     void List<T>::push_front(const_reference value_)
     {
         Node/*<value_type>*/ *current = new Node/*<value_type>*/(value_);
-        current->pPrev_ = zero_;
+        // current->pPrev_ = zero_;
         current->value_ = value_;
 
         if(head_ == zero_){
@@ -680,7 +705,7 @@ class List {
         //     push_front(T value);
         // } else {
         //     Node<T> *tmp = head_;
-        //     for (int i = 0; i < size_l_ && i < index - 1; i++)
+        //     for (int i = 0; i < size_ && i < index - 1; i++)
         //     {
         //         tmp = tmp->pNext_;
         //     }
@@ -688,7 +713,7 @@ class List {
         //     tmp->pNext_ = newNode;
         //     //  tmp->pNext_ = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
         // }
-        // size_l_++;
+        // size_++;
     }
 
     template <typename T>
@@ -698,7 +723,7 @@ class List {
             pop_front();
         } else {
             Node/*<value_type>*/ *tmp = head_;
-            for (int i = 0; i < size_l_ && i < index; i++)
+            for (int i = 0; i < size_ && i < index; i++)
             {
                 tmp = tmp->pNext_;
                 
@@ -708,14 +733,14 @@ class List {
         tmp->pNext_ = tmpDel->pPrev_;    
         tmp->pPrev_ = tmpDel->pNext_; 
         delete tmpDel;
-        size_l_--;
+        size_--;
     }  
     }
 
     template <typename T>
     void List<T>::pop_back()
     {
-        removeAt(size_l_ - 1);
+        removeAt(size_ - 1);
         tail_ = tail_->pPrev_;
 
     }
@@ -745,12 +770,12 @@ class List {
         // cout << " | " << endl;
         Node /*<value_type> */*tmp = head_;
         cout << " || " << endl;
-        while(tmp != zero_){
+        for(int i = 0; i < size_; i++){ // for
             cout << tmp->value_ << " x ";
-
+            // i++;
             tmp = tmp->pNext_;
         }
-        // cout << "end " << endl;
+        cout << "end " << endl;
         cout  << endl;
     }
 
