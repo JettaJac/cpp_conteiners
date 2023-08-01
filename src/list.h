@@ -32,9 +32,7 @@ class List {
                 this->pPrev_ = pPrev_;
                 // cout << "в классе node" << endl;
             }
-    };
-    
-    
+    };      
 
 
 
@@ -62,32 +60,83 @@ class List {
             // ~ListIterator(); // Деструктор
             // ~ListIterator(int);
             // ListIterator begin(); // Переходим на первый элемент не надо
-            ListIterator operator++() {
+
+
+            ListIterator operator++() { // сделать ссылкой
                 
                 // return iterNode_->pNext_;
-                ListIterator it;
-                if (iterNode_->pNext_){
-                ListIterator it = iterNode_->pNext_;
-                iterNode_ = iterNode_->pNext_;
-                // cout << "OPERATOR++ " << endl;
-                }
-
+                // ListIterator it;
+                
+                    ListIterator it = iterNode_->pNext_;
+                    iterNode_ = iterNode_->pNext_;
+                // if (iterNode_ = zero_){
+                //    it = iterNode_->pPrev_;
+                // }
+                //  cout << "OPERATOR++ "<< *it << endl;
                 return it;
                 
                 
                 
                 }; // префексная форма
+
+
             ListIterator operator++(int){ // кинуть исключения
                 //  cout << "OPERATOR++ " << endl;
-                 ListIterator it = iterNode_;
+                ListIterator it = iterNode_;
+                // ListIterator tmp = iterNode_->pPrev_;
                 //  if (iterNode_->pNext_){ // равен заглушки
-                    iterNode_ = iterNode_->pNext_;
-                    cout << "OPERATOR++ " << endl;
+                // ListIterator tmp  = it;
+                    // cout << "OPERATOR++ " << endl;
+                //    cout << "TMP " << *it << endl;
+                //    cout << "IT " << *it << endl;
+                iterNode_ = iterNode_->pNext_;
+                // if (*it == 3) {
+                // //    iterNode_ = iterNode_->pPrev_;
+                //     cout << "IFF " << *it << endl;
+                //     it = tmp;
+                //     cout << "IFF " << *it << endl;
+                // }
+
+                
+                // cout << "OPERATOR_++ "<< *it << endl;
+
+                // cout << endl;
                 //  }
                 return it;
+
+
+
+// return *(IterPointer_ + index);
+
+
+
+
             } // постфиксная форма
-            // ListIterator operator--() {return iterNode_->pPrev_;}; // префексная форма
-            // ListIterator operator--(int); // постфиксная форма
+            ListIterator operator--() { 
+                // cout << iterNode_->pPrev_ << " > "  << endl;
+                ListIterator it = iterNode_->pPrev_;
+                    iterNode_ = iterNode_->pPrev_;
+                // if (iterNode_ = zero_){
+                //    it = iterNode_->pPrev_;
+                // }
+                 cout << "OPERATOR++ "<< *it << endl;
+                return it;
+                
+                
+               /* return iterNode_->pPrev_;*/ }; // префексная форма
+
+            ListIterator operator--(int)
+            {
+                ListIterator it = iterNode_;
+                iterNode_ = iterNode_->pPrev_;
+                return it;
+
+                // ListIterator temp = *this;
+                // --(*this);
+                // return temp;
+
+            }; // постфиксная форма
+
             // ListIterator operator--(int i); //тестовая
             /*ListIterator**/reference operator*() {return iterNode_->value_;}
             // bool operator==(const Node &other) const {return iterNode_->value_ == other.value_;} // проверяем указатели а не ноды
@@ -343,6 +392,13 @@ class List {
 
         // head_= nullptr;
         // tail_= nullptr; 
+
+        // zero_->pNext_ = head_;
+        // zero_->pPrev_ = tail_;
+
+    // tail_ = new Node(value_type ());
+    // head_= tail_;
+
     }
 
     template <typename T>
@@ -443,7 +499,7 @@ class List {
         // cout << "Delete list " << zero_->pPrev_ << endl;
         clear();
         // !!!!!!!!!!!! удалить ZERO
-        // delete zero;
+        // delete zero_;
         // cout << "Delete list_finish " << this << endl;
     }
 
@@ -511,14 +567,14 @@ class List {
     template <typename T>
     void List<T>::pop_front()
     {
-        cout << "Delete Node" << endl;
+        // cout << "Delete Node" << endl;
         Node/*<value_type>*/ *tmp = head_;
         head_= head_->pNext_;    
-        cout << "Delete Node _" << size_ << endl;
-        cout << head_ << " == "<< zero_ << endl;
-        cout << tail_ << " == "<< zero_ << endl;
+        // cout << "Delete Node _" << size_ << endl;
+        // cout << head_ << " == "<< zero_ << endl;
+        // cout << tail_ << " == "<< zero_ << endl;
         delete tmp;
-        cout << tail_ << " =!= "<< zero_ << endl;
+        // cout << tail_ << " =!= "<< zero_ << endl;
         size_--;
     }
 
@@ -600,11 +656,11 @@ class List {
     template <typename T>
     void List<T>::push_back(const_reference value_)
     {
-        cout << "Create NODE" << endl;
+        // cout << "Create NODE" << endl;
         Node/*<value_type>*/ *current = new Node/*<value_type>*/(value_); // добавить аргументы
         current->pNext_ = zero_;
-        current->value_ = value_;  
-        cout << "Value_ " << current->value_   << endl;
+        current->value_ = value_;
+        // cout << "Value_ " << current->value_   << endl;
 
         if(head_== zero_){ // сюда теоретически не должен заходить / заходит
         // cout << "Value_ " << current->value_   << endl;
@@ -628,6 +684,15 @@ class List {
             //  cout << "Create NODE_2+_4" << endl;
             tail_->pNext_ = current;
             tail_ = current;
+            // zero_->value_ = 
+
+            //  current->pPrev_ = tail_;
+            // //  cout << "Create NODE_2+_4" << endl;
+            // tail_->pNext_ = current;
+            // // tail_ = current;
+            zero_->value_ = current->value_;
+
+
         }
         // cout << "Create NODE_3" << endl;
         // if(head_== nullptr){
@@ -644,11 +709,12 @@ class List {
     }
 
     template <typename T>
-    void List<T>::push_front(const_reference value_)
+    void List<T>::push_front(const_reference value)
     {
-        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value_);
+        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value);
         // current->pPrev_ = zero_;
-        current->value_ = value_;
+        current->value_ = value;
+        // zero_->value_ = value; // так то не надо
 
         if(head_ == zero_){
             current->pNext_ = current->pPrev_ = zero_;
@@ -658,6 +724,7 @@ class List {
             head_->pPrev_ = current;
             head_ = current;
         }
+        size_++;
 
     }
 
@@ -689,7 +756,8 @@ class List {
     template <typename T>
     inline typename List<T>::iterator List<T>::end()
     {
-        return typename List<T>::iterator(tail_);
+        // return typename List<T>::iterator(tail_);
+        return typename List<T>::iterator(zero_);
     }
 
     // template <typename T>
@@ -775,8 +843,10 @@ class List {
             // i++;
             tmp = tmp->pNext_;
         }
-        cout << "end " << endl;
+        
+        cout << " end" << endl;
         cout  << endl;
+        cout << "SIZE " << size()  << endl;
     }
 
     // template <typename T>

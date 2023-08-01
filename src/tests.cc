@@ -597,51 +597,57 @@ TEST(ListIteratorTest, Increment) { // сделать исключение
   ++std_it;
   ++s21_it;
   ++std_it;
+  ++s21_it;
+  ++std_it;
   EXPECT_EQ(*s21_it, *std_it);
   s21_it++;
   std_it++;
-  // s21_it++;
+  s21_it++;
+  std_it++;
+  s21_it++;
   std_it++;
   EXPECT_EQ(*s21_it, *std_it);
-  // ++s21_it;  //  не работает
-  // ++std_it;
-  // ++s21_it;
-  // ++std_it;
-  // EXPECT_EQ(1, *std_it);
+  ++s21_it;  //  не работает
+  ++std_it;
+  ++s21_it;
+  ++std_it;
+  ++s21_it;
+  ++std_it;
+  EXPECT_EQ(*s21_it, *std_it);
 }
 
-// // TEST(ListIteratorTest, Decrement) { // сделать исключение
-// //   s21::List<int> s21_List;
-// //   s21_List.push_back(1);
-// //   s21_List.push_back(2);
-// //   s21_List.push_back(3);
-// //   s21_List.push_back(4);
-// //   s21::List<int>::iterator s21_it = s21_List.begin();
+TEST(ListIteratorTest, Decrement) { // сделать исключение
+  s21::List<int> s21_List;
+  s21_List.push_back(1);
+  s21_List.push_back(2);
+  s21_List.push_back(3);
+  s21_List.push_back(4);
+  s21::List<int>::iterator s21_it = s21_List.begin();
 
-// //   std::list<int> std_List;
-// //   std_List.push_back(1);
-// //   std_List.push_back(2);
-// //   std_List.push_back(3);
-// //   std_List.push_back(4);
-// //   std::list<int>::iterator std_it = std_List.begin();
+  std::list<int> std_List;
+  std_List.push_back(1);
+  std_List.push_back(2);
+  std_List.push_back(3);
+  std_List.push_back(4);
+  std::list<int>::iterator std_it = std_List.begin();
 
-// //   EXPECT_EQ(*s21_it, *std_it);
-// //   --s21_it;
-// //   --std_it;
-// //   --s21_it;
-// //   --std_it;
-// //   EXPECT_EQ(*s21_it, *std_it);
-// //   s21_it--;
-// //   std_it--;
-// //   s21_it--;
-// //   std_it--;
-// //   EXPECT_EQ(*s21_it, *std_it);
-// //   // --s21_it;
-// //   // --std_it;
-// //   // --s21_it;
-// //   // --std_it;
-// //   // EXPECT_EQ(1, *std_it);
-// // }
+  EXPECT_EQ(*s21_it, *std_it);
+  --s21_it;
+  --std_it;
+  // --s21_it;
+  // --std_it;
+  EXPECT_EQ(*s21_it, *std_it);
+  // s21_it--;
+  // std_it--;
+  // s21_it--;
+  // std_it--;
+  EXPECT_EQ(*s21_it, *std_it);
+  // --s21_it;
+  // --std_it;
+  // --s21_it;
+  // --std_it;
+  // EXPECT_EQ(1, *std_it);
+}
 
 
 // // TEST(ListIteratorTest, AssignmentOperator) {
