@@ -605,21 +605,21 @@ TEST(ListIteratorTest, Increment) { // сделать исключение
   std_List.push_back(3);
   std_List.push_back(4);
 
-  s21::List<int>::iterator s21_it = s21_List.begin();
-  std::list<int>::iterator std_it = std_List.begin();
+  s21::List<int>::iterator s21_it_1 = s21_List.begin();
+  std::list<int>::iterator std_it_1 = std_List.begin();
   for (int i = 0; i < s21_List.size() + 10; i++){
-        // cout << *s21_it2<< " / " ;      
-        EXPECT_EQ(*s21_it, *std_it);
-        ++s21_it;
-        ++std_it;
+        // cout << *s21_it_12<< " / " ;      
+        EXPECT_EQ(*s21_it_1, *std_it_1);
+        ++s21_it_1;
+        ++std_it_1;
   }
-  s21::List<int>::iterator s21_it = s21_List.end();
-  std::list<int>::iterator std_it = std_List.end();
+  s21::List<int>::iterator s21_it_2 = s21_List.end();
+  std::list<int>::iterator std_it_2 = std_List.end();
   for (int i = 0; i < s21_List.size() + 10; i++){
-        // cout << *s21_it2<< " / " ;      
-        EXPECT_EQ(*s21_it, *std_it);
-        s21_it++;
-        std_it++;
+        // cout << *s21_it_22<< " / " ;      
+        EXPECT_EQ(*s21_it_2, *std_it_2);
+        s21_it_2++;
+        std_it_2++;
   }
 }
 
