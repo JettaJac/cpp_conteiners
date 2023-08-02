@@ -27,7 +27,7 @@ class List {
             Node *pPrev_;
             T value_;
             Node(T value = T(), Node *pPrev_ = nullptr, Node *pNext_ = nullptr) { // возможно добавить pPrev  и переписать pushопираясь на это
-                this->value_ = value_;
+                this->value_ = value;
                 this->pNext_ = pNext_;
                 this->pPrev_ = pPrev_;
                 // cout << "в классе node" << endl;
@@ -51,7 +51,7 @@ class List {
         using const_reference = const T&;
 
         public:
-            ListIterator() {iterNode_ = nullptr;}
+            ListIterator() {iterNode_ = nullptr;} // было nullptr
             // ListIterator(int i);  // перемешение на i элемент
             // ListIterator(ListIterator const &iterNode_) {this = iterNode_;};   // Конструктор копирования
             // ListIterator(ListIterator &&iterNode_);
@@ -119,7 +119,7 @@ class List {
                 // if (iterNode_ = zero_){
                 //    it = iterNode_->pPrev_;
                 // }
-                 cout << "OPERATOR++ "<< *it << endl;
+                //  cout << "OPERATOR++ "<< *it << endl;
                 return it;
                 
                 
@@ -381,20 +381,22 @@ class List {
     List<T>::List()
     {
         // cout << "Create list " << this << endl;
-        size_ = 0;
+       
 
         // Node/*<value_type>*/ *zero = new Node/*<value_type>*/(0);// Заглужка,  0 элемент
 
         zero_ = new Node(value_type (), nullptr, nullptr);
+        // zero_ = new Node(value_type (), zero_, zero_);
         //  zero_->pNext_ = zero_->pPrev_ = nullptr;
         head_= tail_ = zero_;
+        size_ = 0;
         // tail_ = zero_;
 
         // head_= nullptr;
         // tail_= nullptr; 
 
-        // zero_->pNext_ = head_;
-        // zero_->pPrev_ = tail_;
+        zero_->pNext_ = head_;
+        zero_->pPrev_ = tail_;
 
     // tail_ = new Node(value_type ());
     // head_= tail_;
@@ -405,11 +407,14 @@ class List {
     List<T>::List(size_type n) 
     {   cout << "List_n" << endl;
         cout << " gggg " << &zero_ << endl;
-        zero_ = new Node(value_type (), nullptr, nullptr);
-        head_= zero_;
-        tail_ = zero_; 
+        zero_ = new Node(value_type (), zero_, zero_); // возможно не zero_, а nullptr
+        cout << "ZERO_" << zero_->value_ << endl;
+        head_= tail_ = zero_;
+        // tail_ = zero_; 
         size_ = 0;
-        
+
+        // Может сделать на базе основного конструктора
+
         for(size_type i = 0; i < n; i++){
              cout << "List_" << i << endl;
             push_back(value_type ());
@@ -421,11 +426,11 @@ class List {
     template <typename value_type>
     List<value_type>::List(std::initializer_list<value_type> const &items)              : List()
     {       
-            cout << "Initiaz" << endl;
-            for (auto element : items)
-            {
-                push_back(element);
-            }
+        cout << "Initiaz" << endl;
+        for (auto element : items)
+        {
+            push_back(element);
+        }
             
     }
 
@@ -654,15 +659,16 @@ class List {
     // }
 
     template <typename T>
-    void List<T>::push_back(const_reference value_)
+    void List<T>::push_back(const_reference value)
     {
         // cout << "Create NODE" << endl;
-        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value_); // добавить аргументы
-        current->pNext_ = zero_;
-        current->value_ = value_;
+        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value, zero_, zero_);
+        // Node/*<value_type>*/ *current = new Node/*<value_type>*/(value, zero_, zero_); // добавить аргументы
+        // current->pNext_ = zero_; // надо
+        // current->value_ = value;
         // cout << "Value_ " << current->value_   << endl;
 
-        if(head_== zero_){ // сюда теоретически не должен заходить / заходит
+        if(head_ == zero_){ // сюда теоретически не должен заходить / заходит
         // cout << "Value_ " << current->value_   << endl;
         // cout << "Create NODE_1" << endl;
         zero_->pNext_ = zero_->pPrev_ = current; // добавила
@@ -690,7 +696,10 @@ class List {
             // //  cout << "Create NODE_2+_4" << endl;
             // tail_->pNext_ = current;
             // // tail_ = current;
-            zero_->value_ = current->value_;
+            // zero_->value_ = current->value_;
+            // iterator  it = begin();
+            // cout << "IT _ " << *it << endl;
+            zero_->value_ = size_ + 1;
 
 
         }
@@ -711,12 +720,13 @@ class List {
     template <typename T>
     void List<T>::push_front(const_reference value)
     {
-        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value);
-        // current->pPrev_ = zero_;
-        current->value_ = value;
+        Node/*<value_type>*/ *current = new Node/*<value_type>*/(value, zero_, zero_);
+        // current->pPrev_ = zero_; // надо
+        // current->value_ = value;
         // zero_->value_ = value; // так то не надо
 
         if(head_ == zero_){
+            zero_->pNext_ = zero_->pPrev_ = current; // добавила
             current->pNext_ = current->pPrev_ = zero_;
             head_ = tail_ = current;
         } else {

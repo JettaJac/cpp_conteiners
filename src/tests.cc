@@ -543,6 +543,17 @@ TEST(ListIteratorTest, End) { // Переименновать тест +add
 // //   EXPECT_EQ(it1, it2);
 // // }
 
+// TEST(ListIteratorTest, Constructor){ нужен ли такой тест
+//   s21::List<int> s21_List;
+//   s21_List.push_back(11);
+//   std::list<int> std_List;
+//   std_List.push_back(11);
+//   s21::List<int>::iterator s21_it;
+//   std::list<int>::iterator std_it;
+//   EXPECT_EQ(*s21_it, *std_it);
+// }
+
+
 TEST(ListIteratorTest, CopyConstructor) {  //trow создаем 0, пытаемся сдвинуться
   s21::List<int> s21_List;
   s21_List.push_back(1);
@@ -577,43 +588,39 @@ EXPECT_EQ(*std_it1, *std_it2);
 
 
 }
+
+
+
+
 TEST(ListIteratorTest, Increment) { // сделать исключение
   s21::List<int> s21_List;
   s21_List.push_back(1);
   s21_List.push_back(2);
   s21_List.push_back(3);
   s21_List.push_back(4);
-  s21::List<int>::iterator s21_it = s21_List.begin();
 
   std::list<int> std_List;
   std_List.push_back(1);
   std_List.push_back(2);
   std_List.push_back(3);
   std_List.push_back(4);
-  std::list<int>::iterator std_it = std_List.begin();
 
-  EXPECT_EQ(*s21_it, *std_it);
-  ++s21_it;
-  ++std_it;
-  ++s21_it;
-  ++std_it;
-  ++s21_it;
-  ++std_it;
-  EXPECT_EQ(*s21_it, *std_it);
-  s21_it++;
-  std_it++;
-  s21_it++;
-  std_it++;
-  s21_it++;
-  std_it++;
-  EXPECT_EQ(*s21_it, *std_it);
-  ++s21_it;  //  не работает
-  ++std_it;
-  ++s21_it;
-  ++std_it;
-  ++s21_it;
-  ++std_it;
-  EXPECT_EQ(*s21_it, *std_it);
+  s21::List<int>::iterator s21_it = s21_List.begin();
+  std::list<int>::iterator std_it = std_List.begin();
+  for (int i = 0; i < s21_List.size() + 10; i++){
+        // cout << *s21_it2<< " / " ;      
+        EXPECT_EQ(*s21_it, *std_it);
+        ++s21_it;
+        ++std_it;
+  }
+  s21::List<int>::iterator s21_it = s21_List.end();
+  std::list<int>::iterator std_it = std_List.end();
+  for (int i = 0; i < s21_List.size() + 10; i++){
+        // cout << *s21_it2<< " / " ;      
+        EXPECT_EQ(*s21_it, *std_it);
+        s21_it++;
+        std_it++;
+  }
 }
 
 TEST(ListIteratorTest, Decrement) { // сделать исключение

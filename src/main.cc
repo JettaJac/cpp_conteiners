@@ -10,12 +10,14 @@ int main(){
 
     setlocale(LC_ALL, "ru");
     // const std::list<int> std_List = {1, 2, 4, 5, 5, 6, 7};
+    
     // std::list<int> std_List_2 = {5, 6, 8, 9};
     // auto it = std_List.cbegin();
     // s21::List<int> s21_List(5);
 
 // s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-//   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+// std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+
 
 
 //       list<double> std_copy  = std::move (std_List);
@@ -44,38 +46,75 @@ int main(){
     // Increment
 
 
-    s21::List<int> s21_List;
-//     // s21_List.push_back(1);
-//     // s21_List.push_back(2);
-//     // s21_List.push_back(3);
-//     //  s21_List.push_back(4);
-    s21_List.push_front(1);
-    s21_List.push_front(2);
-    s21_List.push_front(3);
-    s21_List.push_front(4);
+    s21::List<int> s21_List(1);
+    s21_List.push_back(6);
+    s21_List.push_back(7);
+    s21_List.push_back(9);
+    //  s21_List.push_back(4);
+
+    // s21_List.push_front(3);
+    // s21_List.push_front(2);
+    // s21_List.push_front(1);
+    
+    
+    // s21_List.push_front(4);
+    // s21::List<int>::iterator s21_it1 = s21_List.end();
     s21::List<int>::iterator s21_it1 = s21_List.begin();
     // s21::List<int>::ListIterator s21_it2(s21_it1);
 
-    std::list<int> std_List;
-    std_List.push_back(1);
-    std_List.push_back(2);
-    std_List.push_back(3);
-    std_List.push_back(4);
-    std::list<int>::iterator std_it1 = std_List.end();
+    // s21::List<double>::iterator s21_it1 = s21_List.end();
+
+
+    std::list<int> std_List(1);
+    //  std_List.push_front(1);
+    std_List.push_back(6);
+    std_List.push_back(7);
+    std_List.push_back(9);
+
+    // std_List.push_front(3);
+    // std_List.push_front(2);
+    // std_List.push_front(1);
+
+    // std_List.push_back(4);
+ 
     // std::list<int>::iterator std_it2(std_it1);
 
+    // std::list<double>::iterator std_it1 = std_List.end();
 
-    s21::List<int>::iterator s21_it2 = s21_List.begin();
+    // std::list<int>::iterator std_it1 = std_List.end();
+    std::list<int>::iterator std_it1 = std_List.begin();
     
-    for (int i = 0; i < s21_List.size()/*+10*/; i++){
+    for (int i = 0; i < s21_List.size() + 5; i++){
         // cout << *s21_it2<< " / " ;
         cout << *s21_it1 << " * " ;
-        s21_it1++;
+        --s21_it1;
+    }
+    cout << endl;
+    
+    for (int i = 0; i < std_List.size() + 5; i++){
+        // cout << *std_it2<< " / " ;
+        cout << *std_it1 << " * " ;
+        --std_it1;
     }
     cout << endl;
 
-    cout << " std_Iterators :" << *std_it1 << " and " << *s21_it1 << endl;
-    // cout << " s21_Iterators :" << *s21_it1 << " and " << *s21_it2 << endl;
+
+    // for (int i = s21_List.size(); i > 0; i--){
+    //     // cout << *s21_it2<< " / " ;
+    //     cout << *s21_it1 << " * " ;
+    //     s21_it1--;
+    // }
+    // cout << endl;
+    
+    // for (int i = 0 ; i < std_List.size()+5; i++){
+    //     // cout << *std_it2<< " / " ;
+    //     cout << *std_it1 << " * " ;
+    //     std_it1--;
+    // }
+    cout << endl;
+
+    cout << " std_Iterators_s: " << *std_it1 << " and " << *s21_it1 << endl;
+    // cout << " s21_Iterators: " << *s21_it1 << " and " << *s21_it2 << endl;
     // s21_it1--;
     // s21_it1--;
     // // s21_it1--;
@@ -95,21 +134,44 @@ int main(){
     // std_it1--;
 
 
+    // std_it1--;
+    // --std_it1;
+    // // --std_it1;
+    // // // --std_it1;
+    // // // // --std_it1;
+    // // // // // --std_it1;
+
+
+    // // // // // --s21_it1;
+    // // // // --s21_it1;
+    // // // --s21_it1;
+    // // --s21_it1;
+    // --s21_it1;
+
+
+
     std_it1--;
-    // --std_it1;
-    // --std_it1;
-    // --std_it1;
+    std_it1--;
+    // std_it1--;
+    // // std_it1--;
+    // // // std_it1--;
+    // // // // std_it1--;
+    // // // // // std_it1--;
+    // // // // // // std_it1--;
 
 
+    // // // // // // s21_it1--;
+    // // // // // s21_it1--;
+    // // // // s21_it1--;
+    // // // s21_it1--;
+    // // s21_it1--;
     // s21_it1--;
-    // --s21_it1;
-    // --s21_it1;
-    // --s21_it1;
-    // --s21_it1;
+    s21_it1--;
+    s21_it1--;
 
     // cout << " std_Iterators :" << *std_it1 << endl;
-    cout << " std_Iterators2 :" << *std_it1 << " and " << *s21_it1 << endl;
-    // cout << " s21_Iterators :" << *s21_it1 << " and " << *s21_it2 << endl;
+    cout << " std_Iterators_f: " << *std_it1 << " and " << *s21_it1 << endl;
+    // cout << " s21_Iterators: " << *s21_it1 << " and " << *s21_it2 << endl;
 
 
 //     // 
