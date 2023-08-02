@@ -42,136 +42,143 @@ int main(){
     // cout << "END " << *s21_List.end() << endl;
     // cout << "END " << *std_List.end() << endl;
 
+// ______________________
+    // // Increment
 
-    // Increment
 
+    // s21::List<int> s21_List(1);
+    // s21_List.push_back(6);
+    // s21_List.push_back(7);
+    // s21_List.push_back(9);
+    //  s21_List.push_back(12);
 
-    s21::List<int> s21_List(1);
-    s21_List.push_back(6);
-    s21_List.push_back(7);
-    s21_List.push_back(9);
-    //  s21_List.push_back(4);
-
-    // s21_List.push_front(3);
-    // s21_List.push_front(2);
-    // s21_List.push_front(1);
+    // // s21_List.push_front(30);
+    // // s21_List.push_front(20);
+    // // s21_List.push_front(10);
     
     
-    // s21_List.push_front(4);
+    // // s21_List.push_front(4);
     // s21::List<int>::iterator s21_it1 = s21_List.end();
-    s21::List<int>::iterator s21_it1 = s21_List.begin();
-    // s21::List<int>::ListIterator s21_it2(s21_it1);
+    // // s21::List<int>::iterator s21_it1 = s21_List.begin();
+    // // s21::List<int>::ListIterator s21_it2(s21_it1);
 
-    // s21::List<double>::iterator s21_it1 = s21_List.end();
+    // // s21::List<double>::iterator s21_it1 = s21_List.end();
 
 
-    std::list<int> std_List(1);
-    //  std_List.push_front(1);
-    std_List.push_back(6);
-    std_List.push_back(7);
-    std_List.push_back(9);
+    // std::list<int> std_List(1);
+    // //  std_List.push_front(1);
+    // std_List.push_back(6);
+    // std_List.push_back(7);
+    // std_List.push_back(9);
+    // std_List.push_back(12);
 
-    // std_List.push_front(3);
-    // std_List.push_front(2);
-    // std_List.push_front(1);
+    // // std_List.push_front(30);
+    // // std_List.push_front(20);
+    // // std_List.push_front(10);
 
-    // std_List.push_back(4);
+    // // std_List.push_back(4);
  
-    // std::list<int>::iterator std_it2(std_it1);
+    // // std::list<int>::iterator std_it2(std_it1);
 
-    // std::list<double>::iterator std_it1 = std_List.end();
+    // // std::list<double>::iterator std_it1 = std_List.end();
 
     // std::list<int>::iterator std_it1 = std_List.end();
-    std::list<int>::iterator std_it1 = std_List.begin();
-    
-    for (int i = 0; i < s21_List.size() + 5; i++){
-        // cout << *s21_it2<< " / " ;
-        cout << *s21_it1 << " * " ;
-        --s21_it1;
-    }
-    cout << endl;
-    
-    for (int i = 0; i < std_List.size() + 5; i++){
-        // cout << *std_it2<< " / " ;
-        cout << *std_it1 << " * " ;
-        --std_it1;
-    }
-    cout << endl;
+    // // std::list<int>::iterator std_it1 = std_List.begin();
 
-
-    // for (int i = s21_List.size(); i > 0; i--){
-    //     // cout << *s21_it2<< " / " ;
-    //     cout << *s21_it1 << " * " ;
-    //     s21_it1--;
-    // }
-    // cout << endl;
+    // cout << " std_Iterators_s0 : " << *std_it1 << " and " << *s21_it1 << endl;
     
-    // for (int i = 0 ; i < std_List.size()+5; i++){
+
+    
+    // for (int i = 0; i < std_List.size()+3; i++){
     //     // cout << *std_it2<< " / " ;
     //     cout << *std_it1 << " * " ;
-    //     std_it1--;
+    //     --std_it1;
     // }
-    cout << endl;
+    // cout << endl;
 
-    cout << " std_Iterators_s: " << *std_it1 << " and " << *s21_it1 << endl;
-    // cout << " s21_Iterators: " << *s21_it1 << " and " << *s21_it2 << endl;
-    // s21_it1--;
-    // s21_it1--;
-    // // s21_it1--;
-    // // s21_it1--;
-    // // s21_it1--;
+    // for (int i = 0; i < s21_List.size()+3; i++){
+    //     // cout << *s21_it2<< " / " ;
+    //     cout << *s21_it1 << " * " ;
+    //     --s21_it1;
+    // }
+    // cout << endl;
+
+
+    // // for (int i = s21_List.size(); i > 0; i--){
+    // //     // cout << *s21_it2<< " / " ;
+    // //     cout << *s21_it1 << " * " ;
+    // //     s21_it1--;
+    // // }
+    // // cout << endl;
+    
+    // // for (int i = 0 ; i < std_List.size()+5; i++){
+    // //     // cout << *std_it2<< " / " ;
+    // //     cout << *std_it1 << " * " ;
+    // //     std_it1--;
+    // // }
+    // cout << endl;
+
+    // cout << " std_Iterators_s: " << *std_it1 << " and " << *s21_it1 << endl;
+    // // cout << " s21_Iterators: " << *s21_it1 << " and " << *s21_it2 << endl;
     // // s21_it1--;
     // // s21_it1--;
     // // // s21_it1--;
+    // // // s21_it1--;
+    // // // s21_it1--;
+    // // // s21_it1--;
+    // // // s21_it1--;
+    // // // // s21_it1--;
 
+    // // // // std_it1--;
+    // // // std_it1--;
+    // // // std_it1--;
+    // // // std_it1--;
+    // // // std_it1--;
     // // // std_it1--;
     // // std_it1--;
     // // std_it1--;
-    // // std_it1--;
-    // // std_it1--;
-    // // std_it1--;
-    // std_it1--;
-    // std_it1--;
 
 
-    // std_it1--;
-    // --std_it1;
+    // // std_it1--;
     // // --std_it1;
     // // // --std_it1;
     // // // // --std_it1;
     // // // // // --std_it1;
+    // // // // // // --std_it1;
 
 
+    // // // // // // --s21_it1;
     // // // // // --s21_it1;
     // // // // --s21_it1;
     // // // --s21_it1;
     // // --s21_it1;
-    // --s21_it1;
 
 
 
-    std_it1--;
-    std_it1--;
+    // std_it1--;
     // std_it1--;
     // // std_it1--;
     // // // std_it1--;
     // // // // std_it1--;
     // // // // // std_it1--;
     // // // // // // std_it1--;
+    // // // // // // // std_it1--;
 
 
+    // // // // // // // s21_it1--;
     // // // // // // s21_it1--;
     // // // // // s21_it1--;
     // // // // s21_it1--;
     // // // s21_it1--;
     // // s21_it1--;
     // s21_it1--;
-    s21_it1--;
-    s21_it1--;
+    // s21_it1--;
 
-    // cout << " std_Iterators :" << *std_it1 << endl;
-    cout << " std_Iterators_f: " << *std_it1 << " and " << *s21_it1 << endl;
-    // cout << " s21_Iterators: " << *s21_it1 << " and " << *s21_it2 << endl;
+    // // cout << " std_Iterators :" << *std_it1 << endl;
+    // cout << " std_Iterators_f: " << *std_it1 << " and " << *s21_it1 << endl;
+    // // cout << " s21_Iterators: " << *s21_it1 << " and " << *s21_it2 << endl;
+// _____________________________
+
 
 
 //     // 
@@ -272,12 +279,12 @@ int main(){
     cout << "show_Start_List" << endl;
     s21_List.show();
 
-    // cout << "std: show_Start_List_move" << endl;
-    // for (const auto& element : std_List) {
+    cout << "std: show_Start_List_move" << endl;
+    for (const auto& element : std_List) {
         
-    //     cout << element << " x ";
-    // }
-    // cout << endl;
+        cout << element << " x ";
+    }
+    cout << endl;
 
     // cout << "SIZE s21: " << s21_List.size() << endl;
     // cout << "SIZE std: " << std_List.size() << endl;

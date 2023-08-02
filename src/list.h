@@ -115,7 +115,10 @@ class List {
             ListIterator operator--() { 
                 // cout << iterNode_->pPrev_ << " > "  << endl;
                 ListIterator it = iterNode_->pPrev_;
+                // ListIterator it = iterNode_->pNext_;
                     iterNode_ = iterNode_->pPrev_;
+                    // iterNode_ = iterNode_->pPrev_;
+                    // iterNode_ = iterNode_->pPrev_;
                 // if (iterNode_ = zero_){
                 //    it = iterNode_->pPrev_;
                 // }
@@ -406,9 +409,9 @@ class List {
     template <typename T>
     List<T>::List(size_type n) 
     {   cout << "List_n" << endl;
-        cout << " gggg " << &zero_ << endl;
+        // cout << " gggg " << &zero_ << endl;
         zero_ = new Node(value_type (), zero_, zero_); // возможно не zero_, а nullptr
-        cout << "ZERO_" << zero_->value_ << endl;
+        // cout << "ZERO_" << zero_->value_ << endl;
         head_= tail_ = zero_;
         // tail_ = zero_; 
         size_ = 0;
@@ -452,26 +455,6 @@ class List {
             current = current->pNext_;
             // tmp->size_ = 7;
         }
-        
-
-        // for (auto element : l && l != nullptr_t);
-        //     {
-        //         push_back(element);
-        //     }
-    // return tmp;
-
-    // template <typename value_type>
-    // List<value_type>& List<value_type>::operator=(const List& l) {
-    //   clear();
-    //   iterator currentPtr = l.begin();
-    //   while (currentPtr != l.end()) {
-    //     this->push_back(currentPtr.getIterPointer()->data);
-    //     currentPtr++;
-    //   }
-    //   return *this;
-    // }
-
-
     }
 
     template <typename T>
@@ -499,7 +482,7 @@ class List {
     template<typename T>
     List<T>::~List()
     {
-        cout << "Delete list " << this << endl;
+        // cout << "Delete list " << this << endl;
         // cout << "Delete list " << zero_ << endl;
         // cout << "Delete list " << zero_->pPrev_ << endl;
         clear();
@@ -690,6 +673,10 @@ class List {
             //  cout << "Create NODE_2+_4" << endl;
             tail_->pNext_ = current;
             tail_ = current;
+
+            // current->pNext_ = zero_;
+            zero_->pPrev_ = tail_;
+
             // zero_->value_ = 
 
             //  current->pPrev_ = tail_;
@@ -733,6 +720,8 @@ class List {
             current->pNext_ = head_;
             head_->pPrev_ = current;
             head_ = current;
+            zero_->pNext_ = head_;
+            zero_->value_ = size_ + 1;
         }
         size_++;
 

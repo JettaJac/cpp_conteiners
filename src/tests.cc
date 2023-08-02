@@ -594,16 +594,21 @@ EXPECT_EQ(*std_it1, *std_it2);
 
 TEST(ListIteratorTest, Increment) { // сделать исключение
   s21::List<int> s21_List;
-  s21_List.push_back(1);
-  s21_List.push_back(2);
-  s21_List.push_back(3);
-  s21_List.push_back(4);
+  s21_List.push_front(4);
+  s21_List.push_front(3);
+  s21_List.push_front(2);
+  s21_List.push_front(1);
+
+  // s21_List.push_back(1);
+  // s21_List.push_back(2);
+  // s21_List.push_back(3);
+  // s21_List.push_back(4);
 
   std::list<int> std_List;
-  std_List.push_back(1);
-  std_List.push_back(2);
-  std_List.push_back(3);
-  std_List.push_back(4);
+  std_List.push_front(4);
+  std_List.push_front(3);
+  std_List.push_front(2);
+  std_List.push_front(1);
 
   s21::List<int>::iterator s21_it_1 = s21_List.begin();
   std::list<int>::iterator std_it_1 = std_List.begin();
@@ -613,6 +618,7 @@ TEST(ListIteratorTest, Increment) { // сделать исключение
         ++s21_it_1;
         ++std_it_1;
   }
+
   s21::List<int>::iterator s21_it_2 = s21_List.end();
   std::list<int>::iterator std_it_2 = std_List.end();
   for (int i = 0; i < s21_List.size() + 10; i++){
@@ -623,37 +629,41 @@ TEST(ListIteratorTest, Increment) { // сделать исключение
   }
 }
 
-TEST(ListIteratorTest, Decrement) { // сделать исключение
+TEST(ListIteratorTest, Decrement) { // сделать исключение нет проверки на исключение
   s21::List<int> s21_List;
-  s21_List.push_back(1);
-  s21_List.push_back(2);
-  s21_List.push_back(3);
-  s21_List.push_back(4);
-  s21::List<int>::iterator s21_it = s21_List.begin();
+  s21_List.push_front(4);
+  s21_List.push_front(3);
+  s21_List.push_front(2);
+  s21_List.push_front(1);
+
+  // s21_List.push_back(1);
+  // s21_List.push_back(2);
+  // s21_List.push_back(3);
+  // s21_List.push_back(4);
 
   std::list<int> std_List;
   std_List.push_back(1);
   std_List.push_back(2);
   std_List.push_back(3);
   std_List.push_back(4);
-  std::list<int>::iterator std_it = std_List.begin();
+ 
+  s21::List<int>::iterator s21_it_1 = s21_List.begin();
+  std::list<int>::iterator std_it_1 = std_List.begin();
+  for (int i = 0; i < s21_List.size() + 10; i++){
+        // cout << *s21_it_12<< " / " ;      
+        EXPECT_EQ(*s21_it_1, *std_it_1);
+        --s21_it_1;
+        --std_it_1;
+  }
 
-  EXPECT_EQ(*s21_it, *std_it);
-  --s21_it;
-  --std_it;
-  // --s21_it;
-  // --std_it;
-  EXPECT_EQ(*s21_it, *std_it);
-  // s21_it--;
-  // std_it--;
-  // s21_it--;
-  // std_it--;
-  EXPECT_EQ(*s21_it, *std_it);
-  // --s21_it;
-  // --std_it;
-  // --s21_it;
-  // --std_it;
-  // EXPECT_EQ(1, *std_it);
+  s21::List<int>::iterator s21_it_2 = s21_List.end();
+  std::list<int>::iterator std_it_2 = std_List.end();
+  for (int i = 0; i < s21_List.size() + 10; i++){
+        // cout << *s21_it_22<< " / " ;      
+        EXPECT_EQ(*s21_it_2, *std_it_2);
+        s21_it_2--;
+        std_it_2--;
+  }
 }
 
 
