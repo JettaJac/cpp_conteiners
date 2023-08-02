@@ -15,8 +15,8 @@ int main(){
     // auto it = std_List.cbegin();
     // s21::List<int> s21_List(5);
 
-// s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-// std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
 
 
@@ -182,7 +182,7 @@ int main(){
 
 
 //     // 
-//     // std::list<int> std_List;
+    // std::list<int> std_List;
 //     // cout << "std_List.back() " << endl; 
 //     // cout << std_List.back() << endl; 
 //     // cout << *std_List.begin() << endl; 
@@ -202,11 +202,12 @@ int main(){
 
 //     // std_List.merge(std_List_2);
 
-//     // std_List.reverse();
+    std_List.reverse();
+    s21_List.reverse();
 //     // std_List.unique();
 //     // s21_List.unique();
 
-//     // std_List.sort();
+    // std_List.sort();
 //     // s21::List<int>::ListIterator it21  = s21_List.begin();
 //     // // ++i;
 //     // it21++;

@@ -363,6 +363,35 @@ TEST(List, Swap) { // Перепроверить тесты
   }
 }
 
+TEST(List, Reverse) {
+  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std_List.reverse();
+  s21_List.reverse();
+  
+  // for (int i = 0;  i < std_List.size(); i++)
+  // {        
+  //       EXPECT_EQ(s21_List.front(), std_List.front());
+  //       s21_List.pop_front();
+  //       std_List.pop_front();        
+  // }
+  // for (int i = 0;  i < std_List.size(); i++)
+  // {
+  //       EXPECT_EQ(s21_List.back(), std_List.back());
+  //       s21_List.pop_back();
+  //       std_List.pop_back();        
+  // } 
+
+s21::List<double>::iterator s21_it = s21_List.begin();
+std::list<double>::iterator std_it = std_List.begin();
+  for (int i = 0; i < s21_List.size(); i++){
+        // cout << *s21_it_12<< " / " ;      
+        EXPECT_EQ(*s21_it, *std_it);
+        s21_it++;
+        std_it++;
+  }
+}
+
 // TEST(List, Unique) { // разбить на несколько тестов
 //   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.3, 1.3, 1.6, 7.7};
 //   std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.3, 1.3, 1.6, 7.7};

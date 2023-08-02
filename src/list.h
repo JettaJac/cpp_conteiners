@@ -62,7 +62,7 @@ class List {
             // ListIterator begin(); // Переходим на первый элемент не надо
 
 
-            ListIterator operator++() { // сделать ссылкой
+            ListIterator &operator++() { // сделать ссылкой
                 
                 // return iterNode_->pNext_;
                 // ListIterator it;
@@ -73,7 +73,7 @@ class List {
                 //    it = iterNode_->pPrev_;
                 // }
                 //  cout << "OPERATOR++ "<< *it << endl;
-                return it;
+                return *this;
                 
                 
                 
@@ -592,25 +592,40 @@ class List {
     // template <typename T>
     // inline void List<T>::reverse()
     // {
-    //     // if (first_ != nullptr) {
 
-    // Node<T> *tmp = tail_;
-    // for (int i = 0; i < tmp.size_; i++){
-    // head_= tmp.head_;
-    // this.pNext_ = tmp.pPrev_;
-    // pPrev_ = tmp.pNext_;
-    // // tmp->pNext_ = new Node<T>(this-> , tmp);  
-        
-
-    // // tmp.
 
     // }
-    // head_= tmp.tail_
+
+    template <typename T>
+    inline void List<T>::reverse()
+    {
+
+        // Попробовать сделать через итераторы, без доп листа
+        // if (first_ != nullptr) {
+    // show();        
+    List <T> tmp_l (*this);
+    // tmp.show();  
+    // clear();
+    // show(); 
+    Node /*<value_type> */*tmp = tmp_l.head_;
+    clear();
+    for (int i = 0; i < 7; i++){
+        // head_= tmp.head_;
+        // this.pNext_ = tmp.pPrev_;
+        // pPrev_ = tmp.pNext_;
+    // tmp->pNext_ = new Node<T>(this-> , tmp);  
+        // cout << "Value_ "  << endl;
+        push_front(tmp->value_);
+        tmp = tmp->pNext_;
+    // tmp.
+
+    }
+    // head_= tmp.tail_;
 
 
 
 
-           // if(index == 0){
+        //    if(index == 0){
         //     push_front(T value);
         // } else {
         //     Node<T> *tmp = head_;
@@ -623,7 +638,7 @@ class List {
         //     //  tmp->pNext_ = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
         // }
         // size_++;
-    // }
+    }
 
     // template <typename T>
     // inline void List<T>::unique()
