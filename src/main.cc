@@ -1,4 +1,4 @@
-#include "List.h"
+#include "list.h"
 #include <List>
 
 int main(){
@@ -9,29 +9,29 @@ int main(){
     using namespace std;
 
     setlocale(LC_ALL, "ru");
-    // const std::list<int> std_List = {1, 2, 4, 5, 5, 6, 7};
+    // const std::list<double> std_List = {1, 2, 4, 5, 5, 6, 7};
     
-    // std::list<int> std_List_2 = {5, 6, 8, 9};
+    // std::list<double> std_List_2 = {5, 6, 8, 9};
     // auto it = std_List.cbegin();
-    // s21::List<int> s21_List(5);
+    // s21::List<double> s21_List(5);
 
-s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+s21::List<double> s21_List {1.1, 2.2, 2.2, 1.4, 1.5, 1.6, 7.7};
+std::list<double> std_List {1.1, 2.2, 2.2, 1.4, 1.5, 1.6, 7.7};
 
 
 
 //       list<double> std_copy  = std::move (std_List);
     // s21::List<double> s21_copy = move(s21_List);
     // s21_copy.show();
-    // s21::List<int> s21_List;
-    // s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7};
-    // s21::List<int> s21_List_2{5, 6, 7, 8};
-    // s21::List<int> s21_List2(-1);
-    // list<int> std_List2(-1);
+    // s21::List<double> s21_List;
+    // s21::List<double> s21_List{1, 2, 3, 4, 5, 6, 7};
+    // s21::List<double> s21_List_2{5, 6, 7, 8};
+    // s21::List<double> s21_List2(-1);
+    // list<double> std_List2(-1);
     // cout <<  std_List2.front() << endl;
-    // list<int> std_copy(std_List);
-    //      list<int> std_copy();
-    // s21::List<int> s21_copy();
+    // list<double> std_copy(std_List);
+    //      list<double> std_copy();
+    // s21::List<double> s21_copy();
     // std_copy = move(std_List);
     
     
@@ -46,7 +46,7 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
     // // Increment
 
 
-    // s21::List<int> s21_List(1);
+    // s21::List<double> s21_List(1);
     // s21_List.push_back(6);
     // s21_List.push_back(7);
     // s21_List.push_back(9);
@@ -58,14 +58,14 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
     
     
     // // s21_List.push_front(4);
-    // s21::List<int>::iterator s21_it1 = s21_List.end();
-    // // s21::List<int>::iterator s21_it1 = s21_List.begin();
-    // // s21::List<int>::ListIterator s21_it2(s21_it1);
+    // s21::List<double>::iterator s21_it1 = s21_List.end();
+    s21::List<double>::iterator s21_it1 = s21_List.begin();
+    // // s21::List<double>::ListIterator s21_it2(s21_it1);
 
     // // s21::List<double>::iterator s21_it1 = s21_List.end();
 
 
-    // std::list<int> std_List(1);
+    // std::list<double> std_List(1);
     // //  std_List.push_front(1);
     // std_List.push_back(6);
     // std_List.push_back(7);
@@ -78,25 +78,25 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
     // // std_List.push_back(4);
  
-    // // std::list<int>::iterator std_it2(std_it1);
+    // // std::list<double>::iterator std_it2(std_it1);
 
     // // std::list<double>::iterator std_it1 = std_List.end();
 
-    // std::list<int>::iterator std_it1 = std_List.end();
-    // // std::list<int>::iterator std_it1 = std_List.begin();
+    // std::list<double>::iterator std_it1 = std_List.end();
+    std::list<double>::iterator std_it1 = std_List.begin();
 
     // cout << " std_Iterators_s0 : " << *std_it1 << " and " << *s21_it1 << endl;
     
 
     
-    // for (int i = 0; i < std_List.size()+3; i++){
+    // for (double i = 0; i < std_List.size()+3; i++){
     //     // cout << *std_it2<< " / " ;
     //     cout << *std_it1 << " * " ;
     //     --std_it1;
     // }
     // cout << endl;
 
-    // for (int i = 0; i < s21_List.size()+3; i++){
+    // for (double i = 0; i < s21_List.size()+3; i++){
     //     // cout << *s21_it2<< " / " ;
     //     cout << *s21_it1 << " * " ;
     //     --s21_it1;
@@ -104,14 +104,14 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
     // cout << endl;
 
 
-    // // for (int i = s21_List.size(); i > 0; i--){
+    // // for (double i = s21_List.size(); i > 0; i--){
     // //     // cout << *s21_it2<< " / " ;
     // //     cout << *s21_it1 << " * " ;
     // //     s21_it1--;
     // // }
     // // cout << endl;
     
-    // // for (int i = 0 ; i < std_List.size()+5; i++){
+    // // for (double i = 0 ; i < std_List.size()+5; i++){
     // //     // cout << *std_it2<< " / " ;
     // //     cout << *std_it1 << " * " ;
     // //     std_it1--;
@@ -182,17 +182,17 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
 
 //     // 
-    // std::list<int> std_List;
+    // std::list<double> std_List;
 //     // cout << "std_List.back() " << endl; 
 //     // cout << std_List.back() << endl; 
 //     // cout << *std_List.begin() << endl; 
 
-//     // s21::List<int> s21_copy(s21_List);
-//     // s21::List<int> s21_copy(s21_List);
-//     // std::list<int> std_copy = std::move(std_List);
-//     // s21::List<int> s21_copy = move(s21_List);
-//     // std::list<int> std_copy;
-//     // s21::List<int> s21_copy;
+//     // s21::List<double> s21_copy(s21_List);
+//     // s21::List<double> s21_copy(s21_List);
+//     // std::list<double> std_copy = std::move(std_List);
+//     // s21::List<double> s21_copy = move(s21_List);
+//     // std::list<double> std_copy;
+//     // s21::List<double> s21_copy;
 //     // std_copy = std_List;  
 //     // s21_copy = s21_List;
 //     // std_copy = std::move(std_List);  
@@ -204,34 +204,42 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
     std_List.reverse();
     s21_List.reverse();
-//     // std_List.unique();
-//     // s21_List.unique();
+    // std_List.unique();
+    // s21_List.unique();
 
+    // std_List.erase(std_it1);
+    // s21_List.erase(s21_it1);
+
+    // cout << "Erase_ " << *std_it << " and " << *s21_it << endl;
+
+
+    // s21_List.sort();
     // std_List.sort();
-//     // s21::List<int>::ListIterator it21  = s21_List.begin();
+
+//     // s21::List<double>::ListIterator it21  = s21_List.begin();
 //     // // ++i;
 //     // it21++;
-// //    s21::List<int>::ListIterator *it  = 
-// //    typename s21::List<int>::ListIterator *i = s21_List.begin();
+// //    s21::List<double>::ListIterator *it  = 
+// //    typename s21::List<double>::ListIterator *i = s21_List.begin();
 
 //     // auto i = s21_List.begin();
 //     // cout << "ttttt_" << *it21 << endl;
 
 //     cout << "finish function" << endl;
-//     // s21::List<int>                                                                                                                                                =  move(s21_List);
+//     // s21::List<double>                                                                                                                                                =  move(s21_List);
 //     // s21_List.clear();
 //     // std_List.push_back(5);
 //     // s21_List.push_back(10);
-//     // s21::List<int> lst2;
+//     // s21::List<double> lst2;
 //     // std_List.push_back(22);
-//     // s21::List<int> s21_List;
+//     // s21::List<double> s21_List;
 //     // s21_List.push_back(11);
 //     // std_List.push_front(22);
 //     // cout << s21_List.front() << endl;
 //     // s21_List.push_back(22);
-//     // list<int> std_List(3);
+//     // list<double> std_List(3);
 //     // std_List.push_front(22);
-//     // <int>std_List(5);
+//     // <double>std_List(5);
 //     // cout << std_List.front() << endl;
 //     // cout << lst[0] << endl;
 //     // s21_List.push_front(1.2);
@@ -272,7 +280,7 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 //     // cout << s21_copy.front() << endl;
 //     // cout << std_copy.front() << endl;
 
-//     // s21::List<int> s21_List;
+//     // s21::List<double> s21_List;
 
 //     // s21_List.push_back(1);
 //     // s21_List.push_back(2);
@@ -320,7 +328,7 @@ std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
 
     // cout << std_List.max_size() << endl;
-    //  s21::List<int> s21_List = {1, 2, 3};
+    //  s21::List<double> s21_List = {1, 2, 3};
 
     // std_List.insert (99, 1);
     // std_List.removeAt(1);
@@ -345,9 +353,9 @@ cout << endl;
 
 
     
-    // list<int> sourceList = {1, 2, 3, 4, 5};
+    // list<double> sourceList = {1, 2, 3, 4, 5};
     
-    // list<int> destinationList;
+    // list<double> destinationList;
 
     // // Копируем элементы из sourceList в destinationList
     // destinationList = sourceList;

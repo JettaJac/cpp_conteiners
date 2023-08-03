@@ -142,8 +142,8 @@ class List {
 
             // ListIterator operator--(int i); //тестовая
             /*ListIterator**/reference operator*() {return iterNode_->value_;}
-            // bool operator==(const Node &other) const {return iterNode_->value_ == other.value_;} // проверяем указатели а не ноды
-            // bool operator!=(Node &other) const {return iterNode_->value_ != other.value_};
+            // bool operator==(const (ListIterator &other)) const {return iterNode_ == other.iterNode_;}; // проверяем указатели а не ноды
+            bool operator!=(ListIterator &other) const {return iterNode_ != other.iterNode_;};
             // ListIterator operator->() {return iterNode_;}
 
             // iterator1 == iterator2
@@ -308,6 +308,8 @@ class List {
             //     iterNode_ = iterNode_->pPrev_; 
             // }
 
+            // bool operator
+
             private:
             Node  *iterNode_;
             friend class List<T>;
@@ -333,27 +335,6 @@ class List {
         ~List();             // destructor
         List<T> operator=(List const &l);  // assignment operator overload for moving object
         List<T> operator=(List &&l); 
-        
-        void clear();  // clears the contents
-
-        void push_back(const_reference value_); // adds an element to the end
-        void pop_back(); // removes the last element 
-
-        
-        
-
-        void push_front(const_reference value_); // adds an element to the head
-        void pop_front(); // removes the first element
-        void swap(List& other);
-        void reverse();
-
-        void unique(); // removes consecutive duplicate elements
-
-
-        // void push_back(T value);
-        size_type size() {return size_;}; // returns the number of elements
-        // size_type max_size(allocator.max_size());
-        T& operator[](const int index);
 
         const_reference front() const noexcept {return head_->value_;}; //access the first element
         const_reference back() const noexcept {return tail_->value_;};  // access the last element
@@ -361,11 +342,38 @@ class List {
         iterator begin();
         iterator end();
         
+        bool empty();  // checks whether the container is empty
+        size_type size() {return size_;}; // returns the number of elements
+        size_type max_size();
+
+        void clear();  // clears the contents
+        iterator insert(iterator pos, const_reference value); // inserts element into concrete pos and returns the iterator that points to the new element
+        void erase(iterator pos); // erases element at pos
+
+        void push_back(const_reference value_); // adds an element to the end
+        void pop_back(); // removes the last element 
+        void push_front(const_reference value_); // adds an element to the head
+        void pop_front(); // removes the first element
+        void swap(List& other);
         
-        void insert(T value, int index); // inserts element into concrete pos and returns the iterator that points to the new element
+        void reverse(); // reverses the order of the elements
+
+        void unique(); // removes consecutive duplicate elements
+        void sort();  // sorts the elements
+
+
+        // void push_back(T value);
+      
+        // size_type max_size(allocator.max_size());
+        T& operator[](const int index);
+
+  
+        
+        
+        // void insert(T value, int index); // inserts element into concrete pos and returns the iterator that points to the new element
         void removeAt(int index);
         
-        bool empty();  // checks whether the container is empty
+   
 
         void  show();            
 
@@ -552,6 +560,43 @@ class List {
         // cout << "Clear list finish " << this << endl; 
     }
 
+    // template <typename T>
+    // inline iterator List<T>::insert(iterator pos, const_reference value)
+    // {
+        
+
+
+
+
+
+
+    //         // if(index == 0){
+    //     //     push_front(T value);
+    //     // } else {
+    //     //     Node<T> *tmp = head_;
+    //     //     for (int i = 0; i < size_ && i < index - 1; i++)
+    //     //     {
+    //     //         tmp = tmp->pNext_;
+    //     //     }
+    //     //     Node<T> *newNode = new Node<T>(value, tmp);
+    //     //     tmp->pNext_ = newNode;
+    //     //     //  tmp->pNext_ = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
+    //     // }
+    //     // size_++;
+
+    //     return iterator();
+    // }
+
+    template <typename T>
+    inline void List<T>::erase(iterator pos)
+    {
+        cout << "Delete POS" << endl;
+        iterator it = begin();
+        if( it == pos) {
+            // delete iterNode_;
+        }
+    }
+
     template <typename T>
     void List<T>::pop_front()
     {
@@ -598,28 +643,42 @@ class List {
 
     template <typename T>
     inline void List<T>::reverse()
-    {
+    { int n = 0;
+        for ( ListIterator it = begin(); n < 3 /*it != end()*/; it++, n++){
+            std::swap(it.iterNode_->pNext_ , it.iterNode_->pPrev_);
+            // it.ptr_->pNext_
+            // it.iterNode->pNext_ = 5;
+        }
+        std::swap(zero_->pNext_ , zero_->pPrev_);
 
         // Попробовать сделать через итераторы, без доп листа
+
+
+
+
         // if (first_ != nullptr) {
     // show();        
-    List <T> tmp_l (*this);
-    // tmp.show();  
-    // clear();
-    // show(); 
-    Node /*<value_type> */*tmp = tmp_l.head_;
-    clear();
-    for (int i = 0; i < 7; i++){
-        // head_= tmp.head_;
-        // this.pNext_ = tmp.pPrev_;
-        // pPrev_ = tmp.pNext_;
-    // tmp->pNext_ = new Node<T>(this-> , tmp);  
-        // cout << "Value_ "  << endl;
-        push_front(tmp->value_);
-        tmp = tmp->pNext_;
-    // tmp.
 
-    }
+
+
+
+    // List <T> tmp_l (*this);
+    // // tmp.show();  
+    // // clear();
+    // // show(); 
+    // Node /*<value_type> */*tmp = tmp_l.head_;
+    // clear();
+    // for (int i = 0; i < 7; i++){
+    //     // head_= tmp.head_;
+    //     // this.pNext_ = tmp.pPrev_;
+    //     // pPrev_ = tmp.pNext_;
+    // // tmp->pNext_ = new Node<T>(this-> , tmp);  
+    //     // cout << "Value_ "  << endl;
+    //     push_front(tmp->value_);
+    //     tmp = tmp->pNext_;
+    // // tmp.
+
+    // }
     // head_= tmp.tail_;
 
 
@@ -640,21 +699,50 @@ class List {
         // size_++;
     }
 
+
+
     // template <typename T>
     // inline void List<T>::unique()
     // {
-    //     List<T> tmp (this);
-    //     clear;
-    //      Node<T> *node_cur = head_;
-    //      Node<T> *node_prev = pPrev_;
-    //     for(int i = 0; i < size_ && i < size_; i++){
-    //         if( value == node_prev){
+    //     cout << "Unique" << endl;
 
-    //         }
+    //     // iterator it = begin();
+    //     // Node *prev;
+    //     // for (int i = 0; i < size(); i++){
+            
+    //     //     // cout << *s21_it_12<< " / " ;      
+    //     //     if (prev == *it){
+    //     //         it++;
+    //     //     }
 
-    //     }
+    //     //     prev = *it;
+    //     //     it++;
+    //     // }
+
+
+    // //     List<T> tmp (this);
+    // //     clear;
+    // //      Node<T> *node_cur = head_;
+    // //      Node<T> *node_prev = pPrev_;
+    // //     for(int i = 0; i < size_ && i < size_; i++){
+    // //         if( value == node_prev){
+
+    // // }
+
+    //     // }
 
     // }
+
+
+    // template <typename T>
+    // inline void List<T>::sort()
+    // {
+    //     reverse();
+        
+    // }
+
+
+
 
     template <typename T>
     void List<T>::push_back(const_reference value)
@@ -777,26 +865,26 @@ class List {
     // template <typename T>
     // inline iterator List<T>::begin()
     // {
-    //     return iterator();
+    //     return iterator(); 
     // }
 
-    template <typename T>
-    void List<T>::insert(T value, int index)
-    {
-        // if(index == 0){
-        //     push_front(T value);
-        // } else {
-        //     Node<T> *tmp = head_;
-        //     for (int i = 0; i < size_ && i < index - 1; i++)
-        //     {
-        //         tmp = tmp->pNext_;
-        //     }
-        //     Node<T> *newNode = new Node<T>(value, tmp);
-        //     tmp->pNext_ = newNode;
-        //     //  tmp->pNext_ = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
-        // }
-        // size_++;
-    }
+    // template <typename T>
+    // void List<T>::insert(T value, int index)
+    // {
+    //     // if(index == 0){
+    //     //     push_front(T value);
+    //     // } else {
+    //     //     Node<T> *tmp = head_;
+    //     //     for (int i = 0; i < size_ && i < index - 1; i++)
+    //     //     {
+    //     //         tmp = tmp->pNext_;
+    //     //     }
+    //     //     Node<T> *newNode = new Node<T>(value, tmp);
+    //     //     tmp->pNext_ = newNode;
+    //     //     //  tmp->pNext_ = new Node<T>(value, tmp);  Альтернативы предыдушим 2м строякам
+    //     // }
+    //     // size_++;
+    // }
 
     template <typename T>
     void List<T>::removeAt(int index)
@@ -851,7 +939,7 @@ class List {
     {
         // cout << " | " << endl;
         Node /*<value_type> */*tmp = head_;
-        cout << " || " << endl;
+        // cout << " || " << endl;
         for(int i = 0; i < size_; i++){ // for
             cout << tmp->value_ << " x ";
             // i++;

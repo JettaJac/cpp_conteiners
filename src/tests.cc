@@ -389,7 +389,9 @@ std::list<double>::iterator std_it = std_List.begin();
         EXPECT_EQ(*s21_it, *std_it);
         s21_it++;
         std_it++;
-  }
+        }
+  // EXPECT_EQ(std_List.begin(), s21_List.begin());
+  // EXPECT_EQ(std_List.end(), s21_List.end());       
 }
 
 // TEST(List, Unique) { // разбить на несколько тестов

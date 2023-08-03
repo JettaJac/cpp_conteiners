@@ -56,7 +56,7 @@ clean:
 
 
 gcov_report:
-	$(CCF) -o $(NAME) $(SRCS) tests_t.cc $(GCOV_FLAGS) $(CHECK_FLAGS)
+	$(CCF) -o $(NAME) $(SRCS) tests.cc $(GCOV_FLAGS) $(CHECK_FLAGS)
 	./$(NAME)
 	lcov -t "gcov_report" -o tests.info -c -d .
 	genhtml -o $(REPORT_NAME) tests.info
@@ -67,4 +67,4 @@ gcov_report:
 check: 
 	clang-format  -n *.cc *.h
 	clang-format  -i *.cc *.h
-   
+ 
