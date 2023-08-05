@@ -15,8 +15,8 @@ int main(){
     // auto it = std_List.cbegin();
     // s21::List<double> s21_List(5);
 
-s21::List<double> s21_List {1.1, 2.2, 2.2, 1.4, 1.5, 1.6, 7.7};
-std::list<double> std_List {1.1, 2.2, 2.2, 1.4, 1.5, 1.6, 7.7};
+s21::List<double> s21_List {1.1, 1.2, 2.2, 1.4, 1.5, 1.6, 1.7};
+std::list<double> std_List {1.1, 1.2, 2.2, 1.4, 1.5, 1.6, 1.7};
 
 
 
@@ -58,13 +58,16 @@ std::list<double> std_List {1.1, 2.2, 2.2, 1.4, 1.5, 1.6, 7.7};
     
     
     // // s21_List.push_front(4);
-    // s21::List<double>::iterator s21_it1 = s21_List.end();
     s21::List<double>::iterator s21_it1 = s21_List.begin();
+    // s21::List<double>::iterator s21_it1 = s21_List.end();
+    s21::List<double>::iterator s21_it2 = s21_List.begin();
     // // s21::List<double>::ListIterator s21_it2(s21_it1);
 
     // // s21::List<double>::iterator s21_it1 = s21_List.end();
 
-
+    // s21_it1++;
+    // s21_it1++;
+    // s21_it1++;
     // std::list<double> std_List(1);
     // //  std_List.push_front(1);
     // std_List.push_back(6);
@@ -202,13 +205,47 @@ std::list<double> std_List {1.1, 2.2, 2.2, 1.4, 1.5, 1.6, 7.7};
 
 //     // std_List.merge(std_List_2);
 
-    std_List.reverse();
-    s21_List.reverse();
+    // std_List.reverse();
+    // s21_List.reverse();
     // std_List.unique();
     // s21_List.unique();
-
-    // std_List.erase(std_it1);
-    // s21_List.erase(s21_it1);
+    // s21_it1++;
+    // std_it1++;
+    // s21_it1++;
+    // std_it1++;
+    // s21_it1++;
+    // std_it1++;
+    // s21_it1++;
+    // std_it1++;
+    //  s21_it1++;
+    // std_it1++;
+    //  s21_it1++;
+    // std_it1++;
+    
+    // s21_it1++;
+    // std_it1++;
+    // for (int i = 0; i < 3; i++){
+    //     cout << "Erase_0 " << *std_it1 << " and " << *s21_it1 << endl;
+    //     // std_List.erase(std_it1);
+    //     // s21_List.erase(s21_it1);
+        
+        
+    // // for(s21::List<double>::iterator it = s21_List.begin(); it != s21_List.end(); it++){
+    //     // cout << *s21_it_12<< " / " ;      
+    //     // EXPECT_EQ(*s21_it, *std_it);/
+         
+        // s21_it1++;
+        // std_it1++;
+        // std_it1++;
+        // s21_it1++;
+    //     cout << "Erase_1 " << *std_it1 << " and " << *s21_it1 << endl;
+    // }
+    s21_List.insert(--s21_it1, 21);
+    std_List.insert(--std_it1, 21);
+    // cout << "Erase_f " << *std_it1 << " and " << *s21_it1 << " Size " << s21_List.size() << endl;
+    // if (s21_it1 != s21_it2){
+    //     cout << "Erase_ " << *std_it1 << " and " << *s21_it2 << endl;
+    // }
 
     // cout << "Erase_ " << *std_it << " and " << *s21_it << endl;
 
