@@ -3,8 +3,10 @@
 
 #include <iostream>
 // #include <string>
+#include <memory>
 using namespace std;
 // #define size_type size_t
+
 
 
 namespace s21{
@@ -328,7 +330,9 @@ class List {
     using const_reference = const T&; // defines the type of the constant reference
     using iterator = ListIterator;// internal class ListIterator<T> defines the type for iterating through the container
     using size_type = std::size_t; // size_t defines the type of the container size (standard type is size_t)
-    // using const_iterator = ListConstIterator<T>;
+    using const_iterator = /*ListConstIterator<T>*/ListIterator;
+    using allocator = class std::allocator<T>;
+    using allocator_node = typename std::allocator_traits<allocator>::rebind_alloc<Node>;
 
     public:
         List();     // List() : head(nullptr), tail_(nullptr) {}          // default constructor, creates empty list 
@@ -347,8 +351,9 @@ class List {
         iterator end();
         
         bool empty();  // checks whether the container is empty
-        size_type size() {return size_;}; // returns the number of elements
-        size_type max_size();
+        size_type size() const noexcept {return size_;}; // returns the number of elements
+        // size_type max_size() const noexcept {return size_/*alloc_n.max_size()*/;};
+        size_type max_size() const noexcept {return size_;}; 
 
         void clear();  // clears the contents
         iterator insert(iterator pos, const_reference value); // inserts element into concrete pos and returns the iterator that points to the new element
@@ -360,6 +365,7 @@ class List {
         void push_front(const_reference value_); // adds an element to the head
         void pop_front(); // removes the first element
         void swap(List& other);
+        void splice(const_iterator pos, List& other); // возможно надо сделать перегрузку
         
         void reverse(); // reverses the order of the elements
 
@@ -391,6 +397,7 @@ class List {
         Node/*<value_type> */*head_;
         Node/*<value_type>*/ *tail_;
         Node/*<value_type>*/ *zero_;
+        allocator_node alloc_n;
     };
 
     template<typename T>
@@ -442,7 +449,7 @@ class List {
     template <typename value_type>
     List<value_type>::List(std::initializer_list<value_type> const &items)              : List()
     {       
-        cout << "Initiaz" << endl;
+        // cout << "Initiaz_l" << endl;
         for (auto element : items)
         {
             push_back(element);
@@ -610,7 +617,14 @@ class List {
         // cout << it.iterNode_->pPrev_->value_ << endl;
         // cout << it.iterNode_->pPrev_->pNext_->value_ << endl;
         // cout << endl;
-        if (pos == begin()) {
+        if(head_ == zero_){ // сюда теоретически не должен заходить / заходит
+        // cout << "Value_ " << current->value_   << endl;
+        // cout << "Create NODE_1" << endl;
+        zero_->pNext_ = zero_->pPrev_ = current; // добавила
+        // cout << "Value_ " << current->value_   << endl;
+        current->pNext_ = current->pPrev_ = zero_;
+        }
+        else if (pos == begin()) {
             head_ = current;
 
         } else if (pos == end()) {
@@ -769,6 +783,18 @@ class List {
         other.size_ = t;
     }
 
+    template <typename T>
+    inline void List<T>::splice(const_iterator pos, List &other)
+    {
+        iterator it1 = --end();
+        // не обрабатывает, если передаешь begin
+        for(iterator it2 = pos; it2 != other.end(); it1++, it2++){
+           Node *current = new Node (it2.iterNode_->value_, it1.iterNode_->pPrev_, it1.iterNode_);
+        }
+
+
+    }
+
     // template <typename T>
     // inline void List<T>::reverse()
     // {
@@ -778,16 +804,17 @@ class List {
 
     template <typename T>
     inline void List<T>::reverse()
-    { int n = 0;
-        for (auto it = begin(); n < size_/*it != end()*/; it++, n++){
-            cout << "IT " << *it /* " Next " << it.iterNode_->pNext_ << " Prev " << it.iterNode_->pPrev_ */<< endl;
-            std::swap(it.iterNode_->pNext_ , it.iterNode_->pPrev_);
-            // it.ptr_->pNext_
-            // it.iterNode->pNext_ = 5;
-        }
-        std::swap(zero_->pNext_ , zero_->pPrev_);
+    { 
+        
+        // for (auto it = begin(); it != end(); it++){
+        //     cout << "IT " << *it /* " Next " << it.iterNode_->pNext_ << " Prev " << it.iterNode_->pPrev_ */<< endl;
+        //     std::swap(it.iterNode_->pNext_ , it.iterNode_->pPrev_);
+        //     // it.ptr_->pNext_
+        //     // it.iterNode_->pNext_ = 5;
+        // }
+        // std::swap(zero_->pNext_ , zero_->pPrev_);
 
-        // Попробовать сделать через итераторы, без доп листа
+        //// Попробовать сделать через итераторы, без доп листа
 
 
 
@@ -797,25 +824,28 @@ class List {
 
 
 
-
-    // List <T> tmp_l (*this);
-    // // tmp.show();  
-    // // clear();
-    // // show(); 
-    // Node /*<value_type> */*tmp = tmp_l.head_;
+// ______________
+    List <T> tmp_l (*this);
+    // tmp.show();  
     // clear();
-    // for (int i = 0; i < 7; i++){
-    //     // head_= tmp.head_;
-    //     // this.pNext_ = tmp.pPrev_;
-    //     // pPrev_ = tmp.pNext_;
-    // // tmp->pNext_ = new Node<T>(this-> , tmp);  
-    //     // cout << "Value_ "  << endl;
-    //     push_front(tmp->value_);
-    //     tmp = tmp->pNext_;
-    // // tmp.
+    // show(); 
+    Node /*<value_type> */*tmp = tmp_l.head_;
+    clear();
+    for (int i = 0; i < tmp_l.size_; i++){
+        // head_= tmp.head_;
+        // this.pNext_ = tmp.pPrev_;
+        // pPrev_ = tmp.pNext_;
+    // tmp->pNext_ = new Node<T>(this-> , tmp);  
+        // cout << "Value_ "  << endl;
+        push_front(tmp->value_);
+        tmp = tmp->pNext_;
+    // tmp.
 
-    // }
-    // head_= tmp.tail_;
+    }
+
+// __________
+
+    // head_= tmp->tail_;
 
 
 
@@ -840,20 +870,24 @@ class List {
     template <typename T>
     inline void List<T>::unique()
     {
-        cout << "Unique" << endl;
+        // cout << "Unique" << endl;
 
         iterator it = begin();
-        Node *prev;
-        for (int i = 0; i < size(); i++){
-            
+        Node *prev = it.iterNode_->pPrev_;
+        // cout<< "Test " << prev->value_ << endl;
+        for (; it != end(); it++){
+            // cout<< "Test " << prev->value_ << " and " << *it << endl;
+            // cout << "  !!!    " << endl;
             // cout << *s21_it_12<< " / " ;      
             if (prev->value_ == *it){
+                // cout << "Unique==" << endl;
                 erase (it);
                 // it++;
             }
 
-            // prev = *it;/
-            it++;
+            // prev = *it;
+            prev->value_ = *it;
+            // it++;
         }
 
 
@@ -871,12 +905,30 @@ class List {
     }
 
 
-    // template <typename T>
-    // inline void List<T>::sort()
-    // {
-    //     reverse();
-        
-    // }
+    template <typename T>
+    inline void List<T>::sort()
+    {   
+        if (!this->empty()) {
+
+        // iterator it = begin();
+        // Node * tmp = it.iterNode_;
+        for (iterator it1 = begin(); it1 != end(); it1++){
+            for (iterator it2 = begin(); it2 != --end(); it2++){  
+                // cout << " and " <<  endl;
+                // cout << it2.iterNode_->value_ << " and " << it2.iterNode_->pNext_->value_ << endl;
+                if(it2.iterNode_->value_ > it2.iterNode_-> pNext_->value_){
+                    std::swap(it2.iterNode_->value_, it2.iterNode_->pNext_->value_);
+                    // it2.iterNode_->pPrev->pNext_
+                    // cout << it2.iterNode_->value_ << " and " << it2.iterNode_->pNext_->value_ << endl;
+                }
+            // it2++;
+            
+            }
+        }
+
+        // reverse();
+        }
+    }
 
     // template <typename T>
     // void List<T>::push_node(iterator pos, const_reference value_)
@@ -913,7 +965,7 @@ class List {
     {
 
 
-        // insert(end(), value);
+        // insert(--iterator(tail_), value);
 
         // cout << "Create NODE" << endl;
         Node/*<value_type>*/ *current = new Node/*<value_type>*/(value, zero_, zero_);
@@ -1096,6 +1148,14 @@ class List {
     {   
         return head_ == zero_;
     }
+
+    // template <typename T>
+    // inline size_type List<T>::max_size()
+    // {
+
+
+    //     return size_type();
+    // }
 
     // template <typename T>
     // inline void List<T>::Show()
