@@ -21,8 +21,8 @@ int main(){
 // std::list<double> std_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
 s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-//   std_List.sort();
-//   s21_List.sort();
+  std_List.sort();
+  s21_List.sort();
   
 // cout  << *s21_List.end() << endl;
 
@@ -91,6 +91,7 @@ s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
     
     // // s21_List.push_front(4);
     // s21::List<double>::iterator s21_it1 = s21_List.begin();
+    s21::List<double>::const_iterator s21_it1 = s21_List.cbegin();
     // s21::List<double>::iterator s21_it1 = s21_List.end();
     // s21::List<double>::iterator s21_it2 = s21_List.begin();
     // // s21::List<double>::ListIterator s21_it2(s21_it1);
@@ -119,8 +120,8 @@ s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
     // std::list<double>::iterator std_it1 = std_List.end();
     std::list<double>::iterator std_it1 = std_List.begin();
-    std::list<double>::iterator std_it2 = std_List_2.begin();
-    // s21::List<double>::iterator s21_it2 = s21_List_2.begin();
+    std::list<double>::const_iterator std_it2 = std_List_2.cbegin();
+    s21::List<double>::const_iterator s21_it2 = s21_List_2.cbegin();
     // cout << " std_Iterators_s0 : " << *std_it1 << " and " << *s21_it1 << endl;
     
 
@@ -238,10 +239,10 @@ s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
     // std_List.merge(std_List_2);
     // s21_it1++;
-    std_it2++;
-    std_it2++;
-    // s21_List.splice(s21_it1, s21_List_2);
-    std_List_2.splice(std_it2, std_List);
+    // std_it2++;
+    // std_it2++;
+    s21_List.splice(s21_it1, s21_List_2);
+    std_List.splice(std_it1, std_List_2);
     // s21_List.sort();
     // std_List.sort();
     // std_List.reverse();
@@ -364,7 +365,7 @@ s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
     s21_List.show();
 
     cout << "std: show_Start_List_move" << endl;
-    for (const auto& element : std_List_2) {
+    for (const auto& element : std_List) {
         
         cout << element << " x ";
     }
@@ -402,7 +403,8 @@ s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
 
 
-    // cout << std_List.max_size() << endl;
+    cout << "std_" << std_List.max_size() << endl;
+    cout << "s21_" << s21_List.max_size() << endl;
     //  s21::List<double> s21_List = {1, 2, 3};
 
     // std_List.insert (99, 1);

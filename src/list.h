@@ -1,5 +1,5 @@
-// #ifndef SRC_S21_CONTAINERS_OOP_H_
-// #define SRC_S21_CONTAINERS_OOP_H_
+#ifndef SRC_S21_CONTAINERS_OOP_H_
+#define SRC_S21_CONTAINERS_OOP_H_
 
 #include <iostream>
 // #include <string>
@@ -46,64 +46,44 @@ class List {
     class ListIterator{
 
         using value_type = T;
-        using alue_type = T;
+        using size_type = size_t;
         // using Node = typename List<T>::template Node/*<value_type>*/;
         // using Node = typename List<T>::template Node/*<value_type>*/;
         using reference = T&; // defines the type of the reference to an element
         using const_reference = const T&;
 
         public:
-            ListIterator() {iterNode_ = nullptr;} // было nullptr
-            // ListIterator(int i);  // перемешение на i элемент
-            // ListIterator(ListIterator const &iterNode_) {this = iterNode_;};   // Конструктор копирования
-            // ListIterator(ListIterator &&iterNode_);
-            // ListIterator(Node* node);
+            ListIterator() {iterNode_ = nullptr;} // было nullptrможет сделать  zero_
+            // ListIterator(int i){
+            //     iterator it = 
+            // }; 
+            ListIterator(ListIterator const &other) : iterNode_(other.iterNode_){};   // Конструктор копирования
+            ListIterator(ListIterator &&other){ 
+                if (*this != other) {
+                    iterNode_ = other.iterNode_;
+                    other.iterNode_ = nullptr;
+                }};
             ListIterator(Node *current) : iterNode_(current) {};
             // ~ListIterator(); // Деструктор
             // ~ListIterator(int);
-            // ListIterator begin(); // Переходим на первый элемент не надо
-
+            // ListIterator operator[](const value_type index) {
+            // return *(iterNode_ + index);
+            // }
 
             ListIterator &operator++() { // сделать ссылкой
-                
-                // return iterNode_->pNext_;
-                // ListIterator it;
-                
-                    ListIterator it = iterNode_->pNext_;
-                    iterNode_ = iterNode_->pNext_;
+                ListIterator it = iterNode_->pNext_;
+                iterNode_ = iterNode_->pNext_;
                 // if (iterNode_ = zero_){
                 //    it = iterNode_->pPrev_;
                 // }
                 //  cout << "OPERATOR++ "<< *it << endl;
                 return *this;
-                
-                
-                
                 }; // префексная форма
 
 
             ListIterator operator++(int){ // кинуть исключения
-                //  cout << "OPERATOR++ " << endl;
                 ListIterator it = iterNode_;
-                // ListIterator tmp = iterNode_->pPrev_;
-                //  if (iterNode_->pNext_){ // равен заглушки
-                // ListIterator tmp  = it;
-                    // cout << "OPERATOR++ " << endl;
-                //    cout << "TMP " << *it << endl;
-                //    cout << "IT " << *it << endl;
                 iterNode_ = iterNode_->pNext_;
-                // if (*it == 3) {
-                // //    iterNode_ = iterNode_->pPrev_;
-                //     cout << "IFF " << *it << endl;
-                //     it = tmp;
-                //     cout << "IFF " << *it << endl;
-                // }
-
-                
-                // cout << "OPERATOR_++ "<< *it << endl;
-
-                // cout << endl;
-                //  }
                 return it;
 
 
@@ -114,7 +94,7 @@ class List {
 
 
             } // постфиксная форма
-            ListIterator operator--() { 
+            ListIterator &operator--() { 
                 // cout << iterNode_->pPrev_ << " > "  << endl;
                 ListIterator it = iterNode_->pPrev_;
                 // ListIterator it = iterNode_->pNext_;
@@ -125,7 +105,7 @@ class List {
                 //    it = iterNode_->pPrev_;
                 // }
                 //  cout << "OPERATOR++ "<< *it << endl;
-                return it;
+                return *this;
                 
                 
                /* return iterNode_->pPrev_;*/ }; // префексная форма
@@ -147,174 +127,90 @@ class List {
             bool operator==(const ListIterator &other) const {return iterNode_ == other.iterNode_;}; // проверяем указатели а не ноды
             bool operator!=(ListIterator &other) const {return iterNode_ != other.iterNode_;};
             bool operator!=(const ListIterator &other) const {return iterNode_ != other.iterNode_;};
-            // bool operator!=(const typename const_iterator &other) {return iterNode_ != other.iterNode_;};
+            
 
 
             // ListIterator operator->() {return iterNode_;}
 
-            // iterator1 == iterator2
-            // iterator1.operator==(const iterator2) const
-            // template <class T> ListIterator<T> &ListIterator<T>::operator+=(size_t num) 
-            // ListIterator<T> &ListIterator<T>::operator=(const ListIterator &other)
-        //         bool ListIterator<T>::operator==(
-        // const typename ListIterator<T>::const_iterator &other)
-        // template <class T> ListNode<T> *ListIterator<T>::getPtr()
+            private:
+            Node  *iterNode_;
+            friend class List<T>;
 
-  
-            // template <typename value_type>
-            // typename ListIterator::ListIterator()
-            // {
-            //     cout << "CREATE_ITERATOR "<< endl;
+    };
+
+    class ListConstIterator{
+
+        using value_type = T;
+        using size_type = size_t;
+        // using Node = typename List<T>::template Node/*<value_type>*/;
+        // using Node = typename List<T>::template Node/*<value_type>*/;
+        using reference = T&; // defines the type of the reference to an element
+        using const_reference = const T&;
+
+        public:
+            ListConstIterator() {iterNode_ = nullptr;} // было nullptrможет сделать  zero_
+            // ListConstIterator(int i){
+            //     iterator it = 
+            // }; 
+            ListConstIterator(ListConstIterator const &other) : iterNode_(other.iterNode_){};   // Конструктор копирования
+            ListConstIterator(ListConstIterator &&other){ 
+                if (*this != other) {
+                    iterNode_ = other.iterNode_;
+                    other.iterNode_ = nullptr;
+                }};
+            ListConstIterator(Node *current) : iterNode_(current) {};
+            // ~ListConstIterator(); // Деструктор
+            // ~ListConstIterator(int);
+            // ListConstIterator operator[](const value_type index) {
+            // return *(iterNode_ + index);
             // }
 
+            ListConstIterator &operator++() { // сделать ссылкой
+                ListConstIterator it = iterNode_->pNext_;
+                iterNode_ = iterNode_->pNext_;
+                // if (iterNode_ = zero_){
+                //    it = iterNode_->pPrev_;
+                // }
+                //  cout << "OPERATOR++ "<< *it << endl;
+                return *this;
+                }; // префексная форма
 
+
+            ListConstIterator operator++(int){ // кинуть исключения
+                ListConstIterator it = iterNode_;
+                iterNode_ = iterNode_->pNext_;
+                return it;
+            } // постфиксная форма
+
+            ListConstIterator &operator--() { 
+                ListConstIterator it = iterNode_->pPrev_;
+                    iterNode_ = iterNode_->pPrev_;
+                return *this;
+                
+                
+               /* return iterNode_->pPrev_;*/ }; // префексная форма
+
+            ListConstIterator operator--(int)
+            {
+                ListConstIterator it = iterNode_;
+                iterNode_ = iterNode_->pPrev_;
+                return it;
+
+                // ListConstIterator temp = *this;
+                // --(*this);
+                // return temp;
+
+            }; // постфиксная форма
+
+            // ListConstIterator operator--(int i); //тестовая
+            /*ListConstIterator**/reference operator*() {return iterNode_->value_;}
+            bool operator==(const ListConstIterator &other) const {return iterNode_ == other.iterNode_;}; // проверяем указатели а не ноды
+            // bool operator!=(ListConstIterator &other) const {return iterNode_ != other.iterNode_;};
+            bool operator!=(const ListConstIterator &other) const {return iterNode_ != other.iterNode_;};
             
-            // template<typename T>
-            // template <typename T>
-            // ListIterator List::ListIterator::ListIterator()  // Iterator(Node* node) : current(node) {}  нужен ли конструктор копирование и перемещение
-            // {
-            //     cout << "CREATE_ITERATOR "<< endl;
-            //     iterNode_ = nullptr;
-            // }
-
-            // template<typename T>
-            // inline ListIterator List<T>::ListIterator::operator++()
-            // {
-            //      return ListIterator();
-            // }
-
-                // template <typename T>
-                // inline ListIterator()
-                // {
-                //          cout << "CREATE_ITERATOR "<< endl;
-                // }
-
-            // template <typename T>
-            // inline List<T>::ListIterator::ListIterator(iterator const &iterNode_)
-            // {
-
-            // }
-
-            // template <typename value_type>
-            // inline ListIterator(int i)
-            // {   
-            //     ListIterator  tmp(this);
-            //     for(int z = 0; z != i; z++){
-            //         tmp = tmp->pNext_;
-            //     }
-            //     //  return *tmp;
-                
-            // }
-
-            // template <typename T>
-            // inline List<T>::ListIterator(ListIterator const &iterNode_)
-            // {
-            //     ListIterator *tmp;
-            //     tmp = iterNode_;                
-
-            // }
-
-            // template <typename value_type>
-            // inline ListIterator(ListIterator const &iterNode_)
-            // {
-                
-
-            //     // ~this;
-            //     this = iterNode_;
-            // }
-
-            //             ListIterator<int>::iterNode_ tmp_o (5);
-            // ListIterator<int>::iterNode_ tmp (tmp_o );
 
 
-                // inline ~ListIterator()
-                // {
-                //     int g = 7;
-                // }
-
-        
-            // template <typename value_type>
-            // /*inline*/~ListIterator()
-            // {   
-            //     int y = 0;
-            //     // delete iterNode_;
-            //     // iterNode_ = nullptr; //  проверть
-            // }
-            // ~ListIterator(){};
-            // template <typename value_type>
-            // ListIterator begin()
-            // {
-            //     ListIterator  tmp(this); // не будет работать
-            //     while(tmp->pPrev_){
-            //         tmp = tmp->pPrev_;
-            //     }
-            //      return tmp;
-            // }
-
-            // template <typename value_type>
-            // inline ListIterator operator++(int)
-            // {   
-            //     // ListIterator  tmp (*this);
-            //     // iterNode_ = iterNode_.pNext_;  //почему не через .
-            //     // return tmp;
-            //     // return iterNode_->pNext_;
-
-
-                
-            // }
-
-            // List<T>::List()
-            // template <typename T>
-            // inline List<T> List<T>::operator=(List const &l)
-
-            // template <typename value_type>
-            // inline ListIterator  List<T>::ListIterator::operator++()
-            // {
-            //     // return ListIterator(iterNode_->pNext_);
-            //     return iterNode_->pPrev_;
-            // }
-
-
-
-//    template <typename T>
-//     inline typename List<T>::iterator List<T>::end()
-//     {
-//         return typename List<T>::iterator(tail_);
-//     }
-
-            // template<typename alue_type>
-            // inline ListIterator List<T>::ListIterator::operator++()
-            // {
-            //     iterNode_ = iterNode_->pNext_;
-            //     return *this;
-            // }
-            // template <typename T>
-            // inline ListIterator List<T>::ListIterator::operator--(int i)
-            // {
-            //     return ListIterator();
-            // }
-            // template<typename value_type>
-            // inline typename List<value_type>::ListIterator List<value_type>::ListIterator::operator++()
-            // {
-            //     iterNode_ = iterNode_->pNext_;
-            //     return *this;
-            // }
-
-            // template <typename value_type>
-            // inline ListIterator operator--(int)
-            // {
-            //     ListIterator  tmp (*this);
-            //     iterNode_ = iterNode_->pPrev_;  //почему не через .
-            //     return tmp;
-            // }
-
-            // template <typename T>
-            // inline ListIterator<T>::ListIterator(ListIterator const &iterNode_)
-            // {
-            //     iterNode_ = iterNode_->pPrev_; 
-            // }
-
-            // bool operator
+            // ListConstIterator operator->() {return iterNode_;}
 
             private:
             Node  *iterNode_;
@@ -330,7 +226,7 @@ class List {
     using const_reference = const T&; // defines the type of the constant reference
     using iterator = ListIterator;// internal class ListIterator<T> defines the type for iterating through the container
     using size_type = std::size_t; // size_t defines the type of the container size (standard type is size_t)
-    using const_iterator = /*ListConstIterator<T>*/ListIterator;
+    using const_iterator = ListConstIterator;
     using allocator = class std::allocator<T>;
     using allocator_node = typename std::allocator_traits<allocator>::rebind_alloc<Node>;
 
@@ -349,11 +245,15 @@ class List {
 
         iterator begin();
         iterator end();
+        // iterator cbegin();
+        // iterator cend();
+        const_iterator cbegin();
+        const_iterator cend();
         
         bool empty();  // checks whether the container is empty
         size_type size() const noexcept {return size_;}; // returns the number of elements
-        // size_type max_size() const noexcept {return size_/*alloc_n.max_size()*/;};
-        size_type max_size() const noexcept {return size_;}; 
+        size_type max_size() const noexcept {return alloc_n.max_size();};
+        // size_type max_size() const noexcept {return size_;}; 
 
         void clear();  // clears the contents
         iterator insert(iterator pos, const_reference value); // inserts element into concrete pos and returns the iterator that points to the new element
@@ -663,7 +563,7 @@ class List {
 
         if (pos != iterator(zero_)) {
             cout << "FOR_0" << endl;
-        iterator it = begin();
+        // iterator it = begin();
         // Node * tmp = pos.iterNode_->pPrev_;
         // it.iterNode_->pNext_ = pos.iterNode_->pNext_;
     //     pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
@@ -786,13 +686,11 @@ class List {
     template <typename T>
     inline void List<T>::splice(const_iterator pos, List &other)
     {
-        iterator it1 = --end();
+        const_iterator it1 = --cend();
         // не обрабатывает, если передаешь begin
-        for(iterator it2 = pos; it2 != other.end(); it1++, it2++){
+        for(const_iterator it2 = pos; other.cend() != it2; it1++, it2++){
            Node *current = new Node (it2.iterNode_->value_, it1.iterNode_->pPrev_, it1.iterNode_);
         }
-
-
     }
 
     // template <typename T>
@@ -912,8 +810,8 @@ class List {
 
         // iterator it = begin();
         // Node * tmp = it.iterNode_;
-        for (iterator it1 = begin(); it1 != end(); it1++){
-            for (iterator it2 = begin(); it2 != --end(); it2++){  
+        for (const_iterator it1 = cbegin(); it1 != cend(); it1++){
+            for (const_iterator it2 = cbegin(); it2 != --cend(); it2++){  
                 // cout << " and " <<  endl;
                 // cout << it2.iterNode_->value_ << " and " << it2.iterNode_->pNext_->value_ << endl;
                 if(it2.iterNode_->value_ > it2.iterNode_-> pNext_->value_){
@@ -925,6 +823,11 @@ class List {
             
             }
         }
+
+
+        // for (const_iterator it1 = cbegin(); it1 != cend(); it1++){
+        //     cout << it1.iterNode_->value_ << " and " << it1.iterNode_->pNext_->value_ << endl;
+        // }
 
         // reverse();
         }
@@ -1083,6 +986,32 @@ class List {
     }
 
     // template <typename T>
+    // inline typename List<T>::iterator List<T>::cend()
+    // {
+    //     // return typename List<T>::iterator(tail_);
+    //     return typename List<T>::iterator(zero_);
+    // }
+
+    template <typename T>
+    inline typename List<T>::const_iterator List<T>::cbegin()
+    {
+        // ListIterator it (head_);
+        return typename List<T>::const_iterator(head_);
+        // return ListIterator<T>::this->begin();
+
+            // iterator begin() const noexcept { return iterator(fake_node_->pNext__); }
+        // return  it;
+    }
+
+    template <typename T>
+    inline typename List<T>::const_iterator List<T>::cend()
+    {
+        // return typename List<T>::iterator(tail_);
+        return typename List<T>::const_iterator(zero_);
+    }
+     
+
+    // template <typename T>
     // inline iterator List<T>::begin()
     // {
     //     return iterator(); 
@@ -1221,3 +1150,4 @@ class List {
     // }
 
 };
+#endif  // SRC_S21_CONTAINERS_OOP_H_

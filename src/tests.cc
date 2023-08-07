@@ -665,13 +665,13 @@ while (std_it != std_List.end()){
   // EXPECT_EQ(std_List.end(), s21_List.end());       
 }
 
-// TEST(List, Max_size) {
-//   s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-//   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-//   // EXPECT_EQ(s21_List.max_size(), std_List.max_size());
-//   cout << std_List.max_size() << endl;
-//   // cout << s21_List.max_size() << endl;
-// }
+TEST(List, Max_size) {
+  s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  EXPECT_EQ(s21_List.max_size(), std_List.max_size());
+  // cout << std_List.max_size() << endl;
+  // cout << s21_List.max_size() << endl;
+}
 
 
 // {
@@ -917,6 +917,16 @@ TEST(ListIteratorTest, Decrement) { // сделать исключение не�
   }
 }
 
+// TEST(ListIteratorTest, Index) {
+//   s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+//   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  
+//   s21::List<double>::iterator s21_it = s21_List.begin();
+//   std::list<double>::iterator std_it = std_List.begin();
+//   std_it++;
+//   s21_it[1];
+//   EXPECT_EQ(*std_it + 5, *s21_it + 5);
+// }
 
 // // TEST(ListIteratorTest, AssignmentOperator) {
 // //   s21::List<int> list;
