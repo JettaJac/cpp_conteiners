@@ -11,18 +11,18 @@ int main(){
     setlocale(LC_ALL, "ru");
     // const std::list<double> std_List = {1, 2, 4, 5, 5, 6, 7};
     
-    std::list<double> std_List_2 = {1, 5, 6, 8, 9};
-    s21::List<double> s21_List_2 = {1, 5, 6, 8, 9};
+    std::list<double> std_List_2 = {99, 5, 6, 8, 9};
+    s21::List<double> s21_List_2 = {99, 5, 6, 8, 9};
     // auto it = std_List.cbegin();
     // s21::List<double> s21_List2(5);
     // s21_List2.push_back(5);
     // s21_List2.show();
 // s21::List<double> s21_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
 // std::list<double> std_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
-s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-  std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
-  std_List.sort();
-  s21_List.sort();
+s21::List<double> s21_List {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+//   std_List.sort();
+//   s21_List.sort();
   
 // cout  << *s21_List.end() << endl;
 
@@ -238,11 +238,12 @@ s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 //     // s21_List.swap(s21_List_2);
 
     // std_List.merge(std_List_2);
-    // s21_it1++;
-    // std_it2++;
+    s21_it1--;
+    std_it1--;
     // std_it2++;
     s21_List.splice(s21_it1, s21_List_2);
     std_List.splice(std_it1, std_List_2);
+    cout << "std_size " << std_List_2.size() << endl;
     // s21_List.sort();
     // std_List.sort();
     // std_List.reverse();
@@ -369,6 +370,8 @@ s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
         
         cout << element << " x ";
     }
+    cout << endl;
+    cout << "SIZE " << std_List.size()  << endl;
     cout << endl;
 
     // cout << "SIZE s21: " << s21_List.size() << endl;

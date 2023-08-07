@@ -686,11 +686,83 @@ class List {
     template <typename T>
     inline void List<T>::splice(const_iterator pos, List &other)
     {
-        const_iterator it1 = --cend();
-        // не обрабатывает, если передаешь begin
-        for(const_iterator it2 = pos; other.cend() != it2; it1++, it2++){
-           Node *current = new Node (it2.iterNode_->value_, it1.iterNode_->pPrev_, it1.iterNode_);
-        }
+        // const_iterator it1 = --cend();
+        // // не обрабатывает, если передаешь begin
+        // for(const_iterator it2 = pos; it2 != other.cend(); it1++, it2++){
+        //    Node *current = new Node (it2.iterNode_->value_, it1.iterNode_->pPrev_, it1.iterNode_);
+        // }
+        // const_iterator it1 = cbegin();
+
+
+        // for(const_iterator it1 = cbegin(); it1 != cend(); it1++){
+        //     cout << "1111111 " << endl; 
+        //     if(pos == it1){
+        //         cout << "222222 " << endl;
+        //         Node *tmp = it1.iterNode_;
+        //         cout << tmp->value_ << endl;
+        //         for(const_iterator it2 = other.cbegin(); it2 != other.cend(); it2++){
+        //             // cout << "33333 " << endl;
+        //             // it1.iterNode_->value_  = it2.iterNode_->value_;
+        //             // it1.iterNode_ = it2.iterNode_;
+        //             it1.iterNode_->pPrev_ = new Node(*it2, it1.iterNode_->pPrev_, tmp->pPrev_);
+        //             size_++;
+        //             // const_iterator  it(it2);
+        //             // it2.iterNode_ = nullptr;
+        //             cout << *it1 << endl;
+        //             it1++;
+        //             // cout <<  endl;
+        //         }
+                
+        //         it1.iterNode_->pNext_ = tmp;
+        //         // it1++;
+        //         cout <<  endl;
+
+        //     }
+
+        // }
+
+    Node *tmp = pos.iterNode_;
+    iterator ith (other.head_);
+    iterator itt (other.tail_);
+    // iterator it_t2 (pos.iterNode_->pPrev_);
+    // it_t2.iterNode_->pNext_ = ith.iterNode_;
+
+    cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
+    // cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
+    pos.iterNode_->pPrev_->pNext_ = ith.iterNode_;
+    
+    cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
+    // pos.iterNode_->pPrev_ = itt.iterNode_;
+
+    cout << "ith.iterNode_->pPrev_ " << ith.iterNode_->pPrev_->value_ << endl;
+    ith.iterNode_->pPrev_ = pos.iterNode_->pPrev_;
+    
+    cout << "pos.iterNode_->pPrev_ " << pos.iterNode_->pPrev_->value_ << endl;
+    head_ = pos.iterNode_->pPrev_->pNext_;
+    // tail_ = pos.iterNode_->pPrev_->pNext_;
+    tmp->pPrev_ = ith.iterNode_;
+    itt.iterNode_->pNext_ = tmp;
+    
+    size_ += other.size_;
+
+
+
+    // cout << "ith_ " << *ith << endl;
+    // cout << "itt_ " << *itt << endl;
+    // cout << "it_t2_ " << *it_t2 << endl;
+    // cout << "pos.iterNode_->pPrev_ " << pos.iterNode_->pPrev_->value_ << endl;
+    // cout << "ith.iterNode_         " << ith.iterNode_->value_ << endl;
+    // tmp->pPrev_ = itt.iterNode_;
+    // cout << "tmp->pPrev_ " << tmp->pPrev_->value_ << endl;
+    cout << "tmp->pNext_ " << tmp->pNext_->value_ << endl;
+
+    // itt.iterNode_->pNext_ = tmp;
+
+    // pos.iterNode_->pPrev_->pNext_ = ith.iterNode_;
+    // cout << "tail_ " << tail_->value_ << endl;
+
+
+
     }
 
     // template <typename T>
@@ -1103,9 +1175,9 @@ class List {
             tmp = tmp->pNext_;
         }
         
-        cout << " end" << endl;
-        cout  << endl;
+        cout << " end" << endl;        
         cout << "SIZE " << size()  << endl;
+        cout  << endl;
     }
 
     // template <typename T>
