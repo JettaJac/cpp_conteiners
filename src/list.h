@@ -502,15 +502,34 @@ class List {
         // }
         // size_++;
 
-        cout << "yyyyy" << endl;
+        // cout << "yyyyy" << endl;
 
-        auto it = begin();
+        // auto it = begin();
 
-        while(pos != it){
-            it++;
-        }
+        // while(pos != it){
+        //     it++;
+        //     cout << "yyyyy" << endl;
+        // }
         
-        Node *current = new Node (value, it.iterNode_->pPrev_, it.iterNode_);
+    Node *tmp = pos.iterNode_;
+    Node *current = new Node (value, tmp->pPrev_, tmp);
+    pos.iterNode_->pPrev_->pNext_ = current;
+    // pos.iterNode_->pNext_ = current;
+    // pos.iterNode_ = current;
+    tmp->pPrev_ = current;
+    
+    // pos.iterNode_->pNext_ = tmp;
+    // pos.iterNode_->pPrev_ = tmp->pPrev_;
+/*
+        Node *current = new Node (value, pos.iterNode_->pPrev_, pos.iterNode_);
+        pos.iterNode_->pPrev_= current;
+*/
+
+
+
+        // pos.iterNode_ = current->pPrev_;
+        // pos.iterNode_->pPrev_->pNext_ = current;
+
         // Node *current = new Node (value);
         // cout << current->value_ << endl;
 
@@ -519,25 +538,30 @@ class List {
         // cout << endl;
         if(head_ == zero_){ // сюда теоретически не должен заходить / заходит
         // cout << "Value_ " << current->value_   << endl;
-        // cout << "Create NODE_1" << endl;
+        cout << "Create NODE_1" << endl;
         zero_->pNext_ = zero_->pPrev_ = current; // добавила
-        // cout << "Value_ " << current->value_   << endl;
+        cout << "Value_ " << current->value_   << endl;
         current->pNext_ = current->pPrev_ = zero_;
         }
         else if (pos == begin()) {
+            Node *tmp = head_;
             head_ = current;
+            cout << "BEGIN" << endl;
 
         } else if (pos == end()) {
             tail_ = current;
+            cout << "END" << endl;
         }
 
-        it.iterNode_->pPrev_->pNext_ = current;
-        it.iterNode_->pNext_->pPrev_ = current;
+
+        // cout << "BASE" << endl;
+        // pos.iterNode_->pPrev_->pNext_ = current;
+        // pos.iterNode_->pNext_->pPrev_ = current;
 
         // cout << current->value_ << endl;
-        // cout << it.iterNode_->pPrev_->value_ << endl;
-        // cout << current->pNext_->pNext_->pNext_->value_ << endl;
-        // cout << current->pPrev_->pNext_->value_ << endl;
+        cout << pos.iterNode_->pPrev_->value_ << endl;
+        cout << current->pNext_->pNext_->pNext_->value_ << endl;
+        cout << current->pPrev_->pNext_->value_ << endl;
 
         size_++;
         // push_front(value);
@@ -550,27 +574,29 @@ class List {
     template <typename T>
     inline void List<T>::erase(iterator pos)
     {   
+        // cout << "Erase" << endl;
         if (pos == end()) {
 
             return;
-        // } else if ( pos == begin()){
-        //     cout << "FOR" << endl;
-        //     pop_front();
-        //     cout << "FOR_99" << endl;
-        //     return;
+        } else if ( pos == begin()){
+            // cout << "FOR" << endl;
+            pop_front();
+            // head_->pPrev_ = zero_;
+            cout << head_->pPrev_->value_ << endl;
+            cout << "FOR_99" << endl;
+            return;
 
-        }
-
-        if (pos != iterator(zero_)) {
-            cout << "FOR_0" << endl;
+        } else /*if (pos != iterator(zero_)) */{
+            
+            // cout << "FOR_0" << endl;
         // iterator it = begin();
         // Node * tmp = pos.iterNode_->pPrev_;
         // it.iterNode_->pNext_ = pos.iterNode_->pNext_;
     //     pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
     //   pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_;
-     for(iterator it = begin(); it != end(); it++){
+        for(iterator it = begin(); it != end(); it++){
         // for(auto current = head_; current != tail_; current = current->pNext_){
-        cout << "FOR" << endl;
+        // cout << "FOR" << endl;
         if(it == pos) {   
         // Node *tmp = std::move(pos.iterNode_);
         // Node *tmp = it.iterNode_->pNext_;
@@ -582,7 +608,7 @@ class List {
     //          pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
     //   pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_;
         // if( it == pos) {          
-            // cout << "Erase_ " << it.iterNode_ << endl;  
+            // cout << "Erase_ " << it.iterNode_->value_ << endl;  
             // cout << "Erase_ " << *it << endl; 
             // cout << "Erase_ " << it.iterNode_->pPrev_ << endl;  
             // cout << "Erase_ " << it.iterNode_->pPrev_->pPrev_ << endl; 
@@ -590,13 +616,14 @@ class List {
             // cout << "Erase_ " << it.iterNode_->pNext_->pNext_ << endl; 
             // delete it.iterNode_;
             // delete tmp;
-
+            // cout << "FOR" << endl;
             size_--;
-        cout << "POS" << endl;
+            // cout << "FOR" << endl;
         }
      }
-        }
-         cout << "POS_i" << endl;
+    //  cout << "Size_ " << size() << endl;
+    }
+        //  cout << "POS_i" << endl;
 
 //   if (pos == this->begin()) {
 //     pop_front();
@@ -612,7 +639,7 @@ class List {
 //   }
 
 
-        cout << "Erase_0 " << endl;
+        // cout << "Erase_0 " << endl;
 
 
 
@@ -651,7 +678,12 @@ class List {
     {
         // cout << "Delete Node" << endl;
         Node/*<value_type>*/ *tmp = head_;
-        head_= head_->pNext_;    
+        // Node *tmp = head_;
+        head_= head_->pNext_; 
+        // head_->pPrev_ = zero_;
+
+
+        // zero_->pNext_ = head_;   
         // cout << "Delete Node _" << size_ << endl;
         // cout << head_ << " == "<< zero_ << endl;
         // cout << tail_ << " == "<< zero_ << endl;
@@ -727,24 +759,41 @@ class List {
     // iterator it_t2 (pos.iterNode_->pPrev_);
     // it_t2.iterNode_->pNext_ = ith.iterNode_;
 
-    cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
+    // cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
     // cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
     pos.iterNode_->pPrev_->pNext_ = ith.iterNode_;
     
-    cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
+    // cout << "pos.iterNode_->pPrev_->pNext_ " << pos.iterNode_->pPrev_->pNext_->value_ << endl;
     // pos.iterNode_->pPrev_ = itt.iterNode_;
 
-    cout << "ith.iterNode_->pPrev_ " << ith.iterNode_->pPrev_->value_ << endl;
+    // cout << "ith.iterNode_->pPrev_ " << ith.iterNode_->pPrev_->value_ << endl;
     ith.iterNode_->pPrev_ = pos.iterNode_->pPrev_;
+    // zero_ = tail_;
     
-    cout << "pos.iterNode_->pPrev_ " << pos.iterNode_->pPrev_->value_ << endl;
-    head_ = pos.iterNode_->pPrev_->pNext_;
+    // cout << "pos.iterNode_->pPrev_ " << pos.iterNode_->pPrev_->value_ << endl;
+      // head_ = pos.iterNode_->pPrev_->pNext_;
     // tail_ = pos.iterNode_->pPrev_->pNext_;
+    if(pos == cbegin()){
+        cout << "CBEGIN == POS "  << endl;
+        head_ = itt.iterNode_;
+        // zero_->pNext_  = 
+    }
+    if(pos == cend()){
+        cout << "CEND == POS "  << endl;
+        cout << zero_->pPrev_->value_ << " zero_->pPrev_ == --itt.iterNode_ " << itt.iterNode_->pPrev_->value_  << endl;
+        zero_ /*= tail_ */= itt.iterNode_->pNext_ ;
+    }
     tmp->pPrev_ = ith.iterNode_;
     itt.iterNode_->pNext_ = tmp;
     
     size_ += other.size_;
-
+    zero_->value_ = size_;
+     
+    other.size_ = 0;
+    // other.head_ = *other.tail_ = 0;
+    // other.zero_ = nullptr;
+    // other.erase(zero_);
+    // other.clear();
 
 
     // cout << "ith_ " << *ith << endl;
@@ -754,23 +803,31 @@ class List {
     // cout << "ith.iterNode_         " << ith.iterNode_->value_ << endl;
     // tmp->pPrev_ = itt.iterNode_;
     // cout << "tmp->pPrev_ " << tmp->pPrev_->value_ << endl;
-    cout << "tmp->pNext_ " << tmp->pNext_->value_ << endl;
+    // cout << "tmp->pNext_ " << tmp->pNext_->value_ << endl;
 
     // itt.iterNode_->pNext_ = tmp;
 
     // pos.iterNode_->pPrev_->pNext_ = ith.iterNode_;
-    // cout << "tail_ " << tail_->value_ << endl;
 
+
+
+    // // cout << "tail_ " << tail_->value_ << endl;
+    // iterator it2 (pos.iterNode_);
+    // for(iterator it = other.begin(); it != other.end(); it++){
+        
+    //     cout << "IT2_ " << *it2 << endl;
+    //     insert(it2, *it);
+    //     other.erase(it);
+    //     // other.head_ = other.tail_ = other.zero_;
+    //     // it2++;
+    // }
+
+    // // template <typename T>
+    // // inline void List<T>::reverse()
+    // // {
 
 
     }
-
-    // template <typename T>
-    // inline void List<T>::reverse()
-    // {
-
-
-    // }
 
     template <typename T>
     inline void List<T>::reverse()
@@ -1133,7 +1190,7 @@ class List {
     {
         removeAt(size_ - 1);
         tail_ = tail_->pPrev_;
-
+        // tail_->pNext_ = zero_;
     }
 
 
