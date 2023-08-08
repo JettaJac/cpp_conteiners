@@ -459,69 +459,108 @@ s21::List<double> s21_List {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 7.7};
 
 // ________________ERASE_______________
 
- std::list<double> std_List_in {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7};
-  s21::List<double> s21_List_in {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7};
-  std::list<double>::iterator std_it_2 = std_List_in.begin();
-  s21::List<double>::iterator s21_it_2 = s21_List_in.begin();
-  std_List_in.erase(std_it_2);
-  s21_List_in.erase(s21_it_2);
-  cout << "____________" << endl;
-
-//   std_it_2++, s21_it_2++;
-  std_List_in.erase(std_it_2);
-  s21_List_in.erase(s21_it_2);
+//  std::list<double> std_List_in {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7};
+//   s21::List<double> s21_List_in {1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7};
+//   std::list<double>::iterator std_it_2 = std_List_in.begin();
+//   s21::List<double>::iterator s21_it_2 = s21_List_in.begin();
+// //   std_List_in.erase(std_it_2);
+//   s21_List_in.erase(s21_it_2);
 //   cout << "____________" << endl;
-//   std_it_2++, s21_it_2++;
-//   cout << "____________" << endl;
-//   for (int i = 0; i < 5; i++){
-//     cout << "f____________" << endl;
-//     cout << *std_it_2 << " and "<< *s21_it_2 << endl;
-//     cout <<  endl;
 
-//     std_List_in.erase(std_it_2);
-//     s21_List_in.erase(s21_it_2);
-//     cout << "f____________" << endl;
-//     std_it_2++, s21_it_2++;
-//   }
-//     std::list<double>::iterator std_it_b = std_List.begin();
-//   while(std_it_b != std_List.end()) {
-// //   while(std_it_2 != std_List.end()) {
-//     cout << *std_it_2 << " and "<< *s21_it_2 << endl;
-//     // EXPECT_EQ(*std_List.begin(), *s21_List.begin());
-//     // EXPECT_EQ(*(--std_List.end()), *(--s21_List.end()));
-//    ++std_it_2, ++s21_it_2;
-//    ++std_it_b;
-//   }
-
-//   for (int i = 0;  i < std_List_in.size(); i++)
-//   {        
-//         cout << s21_List_in.front() << " and " <<  std_List_in.front() << endl;
-//         s21_List_in.pop_front();
-//         std_List_in.pop_front();        
-//   }
-
-//   for (int i = 0;  i < std_List_in.size(); i++)
-//   {
-//         cout << s21_List_in.back() << " and " << std_List_in.back() <<  endl;
-//         s21_List_in.pop_back();
-//         std_List_in.pop_back();        
-//   } 
+// //   std_it_2++;
+//   s21_it_2++;
+// //   std_List_in.erase(std_it_2);
+// //   std_it_2++;
+// //   std_List_in.erase(std_it_2);
+// //   std_List_in.erase(std_it_2);
 
 
-//   __________________________________________________
+//   s21_List_in.erase(s21_it_2);
+//   s21_it_2++;
+//   s21_List_in.erase(s21_it_2);
+// //   cout << "____________" << endl;
+// //   std_it_2++, s21_it_2++;
+// //   cout << "____________" << endl;
+// //   for (int i = 0; i < 5; i++){
+// //     cout << "f____________" << endl;
+// //     cout << *std_it_2 << " and "<< *s21_it_2 << endl;
+// //     cout <<  endl;
+
+// //     std_List_in.erase(std_it_2);
+// //     s21_List_in.erase(s21_it_2);
+// //     cout << "f____________" << endl;
+// //     std_it_2++, s21_it_2++;
+// //   }
+// //     std::list<double>::iterator std_it_b = std_List.begin();
+// //   while(std_it_b != std_List.end()) {
+// // //   while(std_it_2 != std_List.end()) {
+// //     cout << *std_it_2 << " and "<< *s21_it_2 << endl;
+// //     // EXPECT_EQ(*std_List.begin(), *s21_List.begin());
+// //     // EXPECT_EQ(*(--std_List.end()), *(--s21_List.end()));
+// //    ++std_it_2, ++s21_it_2;
+// //    ++std_it_b;
+// //   }
+
+// //   for (int i = 0;  i < std_List_in.size(); i++)
+// //   {        
+// //         cout << s21_List_in.front() << " and " <<  std_List_in.front() << endl;
+// //         s21_List_in.pop_front();
+// //         std_List_in.pop_front();        
+// //   }
+
+// //   for (int i = 0;  i < std_List_in.size(); i++)
+// //   {
+// //         cout << s21_List_in.back() << " and " << std_List_in.back() <<  endl;
+// //         s21_List_in.pop_back();
+// //         std_List_in.pop_back();        
+// //   } 
 
 
+// //   __________________________________________________
+
+cout << "_________________________SPLICE_____________________" << endl;
+
+
+  s21::List<double> s21_List_sp_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List_sp_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  s21::List<double> s21_List_sp_2 {9.9, 8.8, 5.5, 4.4, 3.3};
+  std::list<double> std_List_sp_2 {9.9, 8.8, 5.5, 4.4, 3.3};
+  auto std_it_sp = std_List_sp_1.cbegin();
+  auto s21_it_sp = s21_List_sp_1.cbegin();
+  s21_List_sp_1.splice(s21_it_sp, s21_List_sp_2);
+  std_List_sp_1.splice(std_it_sp, std_List_sp_2);
+
+  cout << s21_List_sp_1.size() << " and " << std_List_sp_1.size() << endl;
+  cout << s21_List_sp_2.size() << " and " << std_List_sp_2.size() << endl;
+  
+  auto std_it_b = std_List_sp_1.begin();
+  while(std_it_b != std_List_sp_1.end()) {
+//   while(std_it_sp != std_List_sp_1.end()) {
+    // cout << *std_it_sp << " and " << *s21_it_sp << endl;
+    // cout << std_List_sp_1.size() << " and " << s21_List_sp_1.size()<< endl;
+    // cout << *std_List_sp_1.begin() << " and " << *s21_List_sp_1.begin()<< endl;
+    // cout << *(--std_List_sp_1.end()) << " and " <<  *(--s21_List_sp_1.end())<< endl;
+
+    // cout << std_List_sp_2.size() << " and " <<  s21_List_sp_2.size()<< endl;
+    cout << *std_List_sp_2.begin() << " and " <<   *s21_List_sp_2.begin()<< endl;
+    cout << *(--std_List_sp_2.end()) << " and " <<   *(--s21_List_sp_2.end())<< endl;
+
+    ++std_it_sp, ++s21_it_sp;
+    std_it_b++;
+  }
+
+    // ___________________________________________
 
     cout << "show_Start_List" << endl;
-    s21_List_in.show();
+    s21_List_sp_1.show();
 
     cout << "std: show_Start_List_move" << endl;
-    for (const auto& element : std_List_in) {
+    for (const auto& element : std_List_sp_1) {
         
         cout << element << " x ";
     }
     cout << endl;
-    cout << "SIZE " << std_List_in.size()  << endl;
+    cout << "SIZE " << std_List_sp_1.size()  << endl;
     cout << endl;
 
     // cout << "SIZE s21: " << s21_List.size() << endl;
