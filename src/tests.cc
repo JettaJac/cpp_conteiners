@@ -613,23 +613,29 @@ TEST(List, Swap) { // Перепроверить тесты
   // ДОБАВИЬ ТЕСТЫ С циклом по итераторам. с бегин, енд и размерами
 }
 
-TEST(List, Splice) { // Перепроверить тесты
+
+
+TEST(List, Merge) { // Перепроверить тесты
   s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   s21::List<double> s21_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
   std::list<double> std_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
   auto std_it1 = std_List_1.cbegin();
   auto s21_it1 = s21_List_1.cbegin();
-  s21_List_1.splice(s21_it1, s21_List_2);
-  std_List_1.splice(std_it1, std_List_2);
+  std_List_1.sort();
+  std_List_2.sort();
+  s21_List_1.sort();
+  s21_List_2.sort();
+
+  s21_List_1.merge(s21_List_2);
+  std_List_1.merge(std_List_2);
 
   EXPECT_EQ(s21_List_1.size(), std_List_1.size());
   EXPECT_EQ(s21_List_2.size(), std_List_2.size());
   
   auto std_it_b = std_List_1.cbegin();
-  // while(std_it_b != std_List_1.end()) {
-  while(std_it1 != std_List_1.end()) {
-    // EXPECT_EQ(*std_it1, *s21_it1);
+  while(std_it_b != std_List_1.end()) {
+    EXPECT_EQ(*std_it1, *s21_it1);
     EXPECT_EQ(std_List_1.size(), s21_List_1.size());
     EXPECT_EQ(*std_List_1.begin(), *s21_List_1.begin());
     EXPECT_EQ(*(--std_List_1.end()), *(--s21_List_1.end()));
@@ -641,6 +647,37 @@ TEST(List, Splice) { // Перепроверить тесты
     ++std_it1, ++s21_it1;
     std_it_b++;
   }
+}
+
+TEST(List, Splice) { // Перепроверить тесты
+  s21::List<double> s21_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  std::list<double> std_List_1 {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+  s21::List<double> s21_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
+  std::list<double> std_List_2 {9.9, 8.8, 5.5, 4.4, 3.3};
+
+  auto std_it1 = std_List_1.cbegin();
+  auto s21_it1 = s21_List_1.cbegin();
+  s21_List_1.splice(s21_it1, s21_List_2);
+  std_List_1.splice(std_it1, std_List_2);
+
+  EXPECT_EQ(s21_List_1.size(), std_List_1.size());
+  EXPECT_EQ(s21_List_2.size(), std_List_2.size());
+  
+  auto std_it_b = std_List_1.cbegin();
+  // while(std_it_b != std_List_1.end()) {
+  while(std_it1 != std_List_1.end()) {
+    EXPECT_EQ(*std_it1, *s21_it1);
+    EXPECT_EQ(std_List_1.size(), s21_List_1.size());
+    EXPECT_EQ(*std_List_1.begin(), *s21_List_1.begin());
+    EXPECT_EQ(*(--std_List_1.end()), *(--s21_List_1.end()));
+
+    EXPECT_EQ(std_List_2.size(), s21_List_2.size());
+    EXPECT_EQ(*std_List_2.begin(), *s21_List_2.begin());
+    EXPECT_EQ(*(--std_List_2.end()), *(--s21_List_2.end()));
+
+    ++std_it1, ++s21_it1;
+    // std_it_b++;
+  }
 
 
 }
@@ -649,31 +686,17 @@ TEST(List, Reverse) {
   s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std_List.reverse();
-  s21_List.reverse();
-  
-  // for (int i = 0;  i < std_List.size(); i++)
-  // {        
-  //       EXPECT_EQ(s21_List.front(), std_List.front());
-  //       s21_List.pop_front();
-  //       std_List.pop_front();        
-  // }
-  // for (int i = 0;  i < std_List.size(); i++)
-  // {
-  //       EXPECT_EQ(s21_List.back(), std_List.back());
-  //       s21_List.pop_back();
-  //       std_List.pop_back();        
-  // } 
+  s21_List.reverse();  
 
-s21::List<double>::iterator s21_it = s21_List.begin();
-std::list<double>::iterator std_it = std_List.begin();
+  s21::List<double>::iterator s21_it = s21_List.begin();
+  std::list<double>::iterator std_it = std_List.begin();
   while (std_it != std_List.end()){
-        // cout << *s21_it_12<< " / " ;      
-        EXPECT_EQ(*s21_it, *std_it);
-        s21_it++;
-        std_it++;
-        }
-  EXPECT_EQ(*std_List.begin(), *s21_List.begin());
-  EXPECT_EQ(*std_List.end(), *s21_List.end());       
+    EXPECT_EQ(*s21_it, *std_it);
+    s21_it++;
+    std_it++;
+    EXPECT_EQ(*std_List.begin(), *s21_List.begin());
+    EXPECT_EQ(*(--std_List.end()), *(--s21_List.end())); 
+  }   
 }
 
 TEST(List, Unique) { // разбить на несколько тестов
@@ -685,7 +708,7 @@ TEST(List, Unique) { // разбить на несколько тестов
   std::list<string> std_List_3 {"str_1", "str_2", "str_3", "str_4", "str_5"};
   s21::List<string> s21_List_4 {"str_1", "str_1", "str_3", "str_4", "str_3", "str_1"};
   std::list<string> std_List_4 {"str_1", "str_1", "str_3", "str_4", "str_3", "str_1"};
- //  swap(std_List_1, std_List_2);  
+
   std_List_1.unique();
   s21_List_1.unique();
   std_List_2.unique();
@@ -694,10 +717,12 @@ TEST(List, Unique) { // разбить на несколько тестов
   s21_List_3.unique();
   std_List_4.unique();
   s21_List_4.unique();
+  
   EXPECT_EQ(s21_List_1.size(), std_List_1.size());
   EXPECT_EQ(s21_List_2.size(), std_List_2.size());
   EXPECT_EQ(s21_List_3.size(), std_List_3.size());
   EXPECT_EQ(s21_List_4.size(), std_List_4.size());
+
   std::list<double>::iterator std_it1 = std_List_1.begin();
   s21::List<double>::iterator s21_it1 = s21_List_1.begin();
   std::list<double>::iterator std_it2 = std_List_2.begin();
@@ -717,71 +742,41 @@ TEST(List, Unique) { // разбить на несколько тестов
         std_it3++, s21_it3++; 
         EXPECT_EQ(*std_it4, *s21_it4);
         std_it4++, s21_it4++; 
-        // EXPECT_EQ(s21_List_1.front(), std_List_1.front());
-        // s21_List_1.pop_front();
-        // std_List_1.pop_front();        
 
-        // EXPECT_EQ(s21_List_2.front(), std_List_2.front());
-        // s21_List_1.pop_front();
-        // std_List_1.pop_front();   
-
-        // EXPECT_EQ(s21_List_3.front(), std_List_3.front());
-        // s21_List_1.pop_front();
-        // std_List_1.pop_front();   
-
-        // EXPECT_EQ(s21_List_4.front(), std_List_4.front());
-        // s21_List_1.pop_front();
-        // std_List_1.pop_front();   
+        EXPECT_EQ(s21_List_1.size(), std_List_1.size());
         EXPECT_EQ(*std_List_1.begin(), *s21_List_1.begin());
-        EXPECT_EQ(*std_List_1.end(), *s21_List_1.end());     
-  }
-
-  // for (int i = 0;  i < std_List_2.size(); i++)
-  // {
-  //       EXPECT_EQ(s21_List_2.back(), std_List_2.back());
-  //       s21_List_2.pop_back();
-  //       std_List_2.pop_back();        
-  // }
+        EXPECT_EQ(*(--std_List_1.end()), *(--s21_List_1.end()));            
+  }  
 }
 
 
 TEST(List, Sort) {
   s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
+
   std_List.sort();
   s21_List.sort();
   
-  // for (int i = 0;  i < std_List.size(); i++)
-  // {        
-  //       EXPECT_EQ(s21_List.front(), std_List.front());
-  //       s21_List.pop_front();
-  //       std_List.pop_front();        
-  // }
-  // for (int i = 0;  i < std_List.size(); i++)
-  // {
-  //       EXPECT_EQ(s21_List.back(), std_List.back());
-  //       s21_List.pop_back();
-  //       std_List.pop_back();        
-  // } 
+  s21::List<double>::iterator s21_it = s21_List.begin();
+  std::list<double>::iterator std_it = std_List.begin();
 
-s21::List<double>::iterator s21_it = s21_List.begin();
-std::list<double>::iterator std_it = std_List.begin();
-while (std_it != std_List.end()){
-        // cout << *s21_it_12<< " / " ;      
-        EXPECT_EQ(*s21_it, *std_it);
-        s21_it++;
-        std_it++;
-        }
+  while (std_it != std_List.end()){        
+    EXPECT_EQ(*s21_it, *std_it);
+    s21_it++;
+    std_it++;
+    EXPECT_EQ(s21_List.size(), std_List.size());
+    EXPECT_EQ(*std_List.begin(), *s21_List.begin());
+    EXPECT_EQ(*(--std_List.end()), *(--s21_List.end())); 
+  }
+
   EXPECT_EQ(*std_List.begin(), *s21_List.begin());
-  EXPECT_EQ(*std_List.end(), *s21_List.end());       
+  EXPECT_EQ(*(--std_List.end()), *(--s21_List.end()));       
 }
 
 TEST(List, Max_size) {
   s21::List<double> s21_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   std::list<double> std_List {1.1, 2.2, 1.3, 1.4, 1.5, 1.6, 7.7};
   EXPECT_EQ(s21_List.max_size(), std_List.max_size());
-  // cout << std_List.max_size() << endl;
-  // cout << s21_List.max_size() << endl;
 }
 
 
@@ -791,50 +786,41 @@ TEST(List, Max_size) {
 //         EXPECT_EQ(s21_List.back(), std_List.back()); 
 // }
 
-
-// ----------------iterators----------------
-// TEST(Stack, Iterator_Constr) {
-//   s21::List<char> s21_stack_1 = {'f', 'o', 'x', 'y'};
-//   std::list<char> std_stack_1 = {'f', 'o', 'x', 'y'};
-//   s21::List<char> s21_stack_2 = s21_stack_1;
-
-//   EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
-
-//   std_stack_1.begin();
-
-
-
-//   for (auto i = 0; i < 4; i++) {
-//     EXPECT_EQ(s21_stack_1.back(), s21_stack_2.back());
-//     EXPECT_EQ(s21_stack_1.size(), s21_stack_2.size());
-//     s21_stack_1.pop_back(), s21_stack_2.pop_back();
-//   }
-// }
-
-
-
-TEST(ListIteratorTest, Begin) { // Переименновать тест ljgjkybnm dfhbfwbzvb
-  s21::List<int> s21_List;
-  
-  s21_List.push_back(1);
-  s21_List.push_back(2);
-  s21_List.push_back(3);
+TEST(List, Begin) { 
+  s21::List<int> s21_List;  
+  s21_List.push_front(1);
+  s21_List.push_front(2);
+  s21_List.push_front(3);
 
   std::list<int> std_List;
-  std_List.push_back(1);
-  std_List.push_back(2);
-  std_List.push_back(3);
+  std_List.push_front(1);
+  std_List.push_front(2);
+  std_List.push_front(3);
 
-  // auto it = s21_List.begin();
-  // s21::List<int>::ListIterator *it = s21_List.begin();
+  s21::List<int>::iterator s21_it = s21_List.begin();
+  std::list<int>::iterator std_it = std_List.begin();
+  int i = 1;
+
+  while (std_it != std_List.end()){   
+    s21_List.push_front(i);  
+    std_List.push_front(i);   
+
+    EXPECT_EQ(*s21_it, *std_it);
+    s21_it++;
+    std_it++;
+    EXPECT_EQ(*(--s21_List.end()), * (--std_List.end()));
+    EXPECT_EQ(s21_List.size(), std_List.size());
+  }
+
+  EXPECT_EQ(*s21_List.cbegin(), *std_List.cbegin());
   EXPECT_EQ(*s21_List.begin(), *std_List.begin());
   EXPECT_EQ(*s21_List.end(), *std_List.end());
-  // EXPECT_EQ(1, 1);
 }
 
-TEST(ListIteratorTest, End) { // Переименновать тест +add
+TEST(List, End) { 
   s21::List<int> s21_List;
   std::list<int> std_List;
+
   s21_List.push_back(1);
   s21_List.push_back(2);
   s21_List.push_back(3);
@@ -843,11 +829,29 @@ TEST(ListIteratorTest, End) { // Переименновать тест +add
   std_List.push_back(2);
   std_List.push_back(3);
 
-  // auto it = s21_List.end();
   EXPECT_EQ(*s21_List.begin(), *std_List.begin());
   EXPECT_EQ(*s21_List.end(), *std_List.end());
 
-  // EXPECT_EQ(1, 1);
+  s21::List<int>::iterator s21_it = s21_List.end();
+  std::list<int>::iterator std_it = std_List.end();
+  int i = 1;
+
+  while (std_it != std_List.begin()){   
+    s21_List.push_back(i);  
+    std_List.push_back(i);   
+
+    EXPECT_EQ(*s21_it, *std_it);
+    s21_it--;
+    std_it--;
+    EXPECT_EQ(*(--s21_List.end()), * (--std_List.end()));
+    EXPECT_EQ(s21_List.size(), std_List.size());
+  }
+
+  EXPECT_EQ(*s21_List.cbegin(), *std_List.cbegin());
+  EXPECT_EQ(*s21_List.begin(), *std_List.begin());
+  EXPECT_EQ(*s21_List.end(), *std_List.end());
+  EXPECT_EQ(*s21_List.cend(), *std_List.cend());
+
 }
 
 // // TEST(ListIteratorTest, Increment) {
@@ -928,7 +932,6 @@ TEST(ListIteratorTest, CopyConstructor) {  //trow создаем 0, пытаем
   ++s21_it1;
   EXPECT_NE(*s21_it1, *s21_it2); 
 
-
   std::list<int> std_List;
   std_List.push_back(1);
   std_List.push_back(2);
@@ -944,15 +947,8 @@ TEST(ListIteratorTest, CopyConstructor) {  //trow создаем 0, пытаем
   ++std_it2;
   EXPECT_EQ(*std_it1, *std_it2);
   EXPECT_EQ(2, *std_it2);
-
-
-EXPECT_EQ(*std_it1, *std_it2);
-
-
+  EXPECT_EQ(*std_it1, *std_it2);
 }
-
-
-
 
 TEST(ListIteratorTest, Increment) { // сделать исключение
   s21::List<int> s21_List;
@@ -975,19 +971,25 @@ TEST(ListIteratorTest, Increment) { // сделать исключение
   s21::List<int>::iterator s21_it_1 = s21_List.begin();
   std::list<int>::iterator std_it_1 = std_List.begin();
   for (int i = 0; i < s21_List.size() + 10; i++){
-        // cout << *s21_it_12<< " / " ;      
-        EXPECT_EQ(*s21_it_1, *std_it_1);
-        ++s21_it_1;
-        ++std_it_1;
+    // cout << *s21_it_12<< " / " ;      
+    EXPECT_EQ(*s21_it_1, *std_it_1);
+    ++s21_it_1;
+    ++std_it_1;
+    EXPECT_EQ(*s21_List.cbegin(), *std_List.cbegin());
+    EXPECT_EQ(*s21_List.begin(), *std_List.begin());
+    EXPECT_EQ(*s21_List.end(), *std_List.end());
   }
 
   s21::List<int>::iterator s21_it_2 = s21_List.end();
   std::list<int>::iterator std_it_2 = std_List.end();
   for (int i = 0; i < s21_List.size() + 10; i++){
-        // cout << *s21_it_22<< " / " ;      
-        EXPECT_EQ(*s21_it_2, *std_it_2);
-        s21_it_2++;
-        std_it_2++;
+    // cout << *s21_it_22<< " / " ;      
+    EXPECT_EQ(*s21_it_2, *std_it_2);
+    s21_it_2++;
+    std_it_2++;
+    EXPECT_EQ(*s21_List.cbegin(), *std_List.cbegin());
+    EXPECT_EQ(*s21_List.begin(), *std_List.begin());
+    EXPECT_EQ(*s21_List.end(), *std_List.end());
   }
 }
 
@@ -1013,19 +1015,25 @@ TEST(ListIteratorTest, Decrement) { // сделать исключение не�
   std::list<int>::iterator std_it_1 = std_List.begin();
   for (int i = 0; i < s21_List.size() + 10; i++){
         // cout << *s21_it_12<< " / " ;      
-        EXPECT_EQ(*s21_it_1, *std_it_1);
-        --s21_it_1;
-        --std_it_1;
+    EXPECT_EQ(*s21_it_1, *std_it_1);
+    --s21_it_1;
+    --std_it_1;
+    EXPECT_EQ(*s21_List.cbegin(), *std_List.cbegin());
+    EXPECT_EQ(*s21_List.begin(), *std_List.begin());
+    EXPECT_EQ(*s21_List.end(), *std_List.end());
   }
 
   s21::List<int>::iterator s21_it_2 = s21_List.end();
   std::list<int>::iterator std_it_2 = std_List.end();
   for (int i = 0; i < s21_List.size() + 10; i++){
         // cout << *s21_it_22<< " / " ;      
-        EXPECT_EQ(*s21_it_2, *std_it_2);
-        s21_it_2--;
-        std_it_2--;
-  }
+    EXPECT_EQ(*s21_it_2, *std_it_2);
+    s21_it_2--;
+    std_it_2--;
+    EXPECT_EQ(*s21_List.cbegin(), *std_List.cbegin());
+    EXPECT_EQ(*s21_List.begin(), *std_List.begin());
+    EXPECT_EQ(*s21_List.end(), *std_List.end());
+  }  
 }
 
 // TEST(ListIteratorTest, Index) {

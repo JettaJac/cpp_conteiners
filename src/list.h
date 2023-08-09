@@ -265,6 +265,7 @@ class List {
         void push_front(const_reference value_); // adds an element to the head
         void pop_front(); // removes the first element
         void swap(List& other);
+        void merge(List& other);
         void splice(const_iterator pos, List& other); // возможно надо сделать перегрузку
         
         void reverse(); // reverses the order of the elements
@@ -732,6 +733,37 @@ class List {
     }
 
     template <typename T>
+    inline void List<T>::merge(List &other)
+    {
+//         При вызове merge, итераторы обоих списков сравниваются. Если текущий элемент первого списка меньше или равен элементу во втором списке, итератор первого списка перемещается к следующему элементу. В противном случае элемент из второго списка перемещается перед элементом первого списка.
+
+// Процесс продолжается до тех пор, пока все элементы второго списка не будут перемещены и включены в первый список. В результате, первый список становится отсортированным списком, содержащим все элементы исходных списков, а второй список становится пустым.
+    auto it = begin();
+    for (iterator it2 = other.begin(); it2 != other.end(); ){
+        if (*it <= *it2){
+            // cout << "IT1 < IT2__  " << *it  << " and " << *it2 << endl;
+            it++;
+        } else {
+            // cout << "IT1 > IT2__  " << *it  << " and " << *it2 << endl;
+            insert(it, *it2);
+            other.erase(it2);
+            it2++;
+            zero_->value_ = size_;
+            // cout << "IT1 > IT2_2_ " << *it  << " and " << *it2 << endl;
+        }
+        // it2++;
+        other.zero_->value_ = value_type ();
+        other.head_ = other.tail_ = other.zero_;
+        other.zero_->pNext_ = other.head_;
+        other.zero_->pPrev_ = other.tail_;
+
+
+    
+    }
+
+    }
+
+    template <typename T>
     inline void List<T>::splice(const_iterator pos, List &other)
     {
     //     // const_iterator it1 = --cend();
@@ -845,7 +877,7 @@ class List {
     }
         // other.size_ = 0;
         // other.head_ = nullptr;
-        other.tail_ = nullptr;
+        // other.tail_ = nullptr;
         // other.clear();
 
         other.zero_->value_ = value_type ();
@@ -863,43 +895,47 @@ class List {
     template <typename T>
     inline void List<T>::reverse()
     { 
+        Node *tmp = head_;
+        for (auto it = begin(); it != end(); it--){
+            cout << "IT " << *it /* " Next " << it.iterNode_->pNext_ << " Prev " << it.iterNode_->pPrev_ */<< endl;
+            std::swap(it.iterNode_->pNext_ , it.iterNode_->pPrev_);
+            // it.ptr_->pNext_
+            // it.iterNode_->pNext_ = 5;
+        }
+
+        std::swap(zero_->pNext_ , zero_->pPrev_);
+        head_ = tail_;
+        tail_ = tmp;
         
-        // for (auto it = begin(); it != end(); it++){
-        //     cout << "IT " << *it /* " Next " << it.iterNode_->pNext_ << " Prev " << it.iterNode_->pPrev_ */<< endl;
-        //     std::swap(it.iterNode_->pNext_ , it.iterNode_->pPrev_);
-        //     // it.ptr_->pNext_
-        //     // it.iterNode_->pNext_ = 5;
-        // }
-        // std::swap(zero_->pNext_ , zero_->pPrev_);
 
-        //// Попробовать сделать через итераторы, без доп листа
+        // Попробовать сделать через итераторы, без доп листа
 
 
 
 
-        // if (first_ != nullptr) {
+    //     if (first_ != nullptr) {
     // show();        
 
 
 
 // ______________
-    List <T> tmp_l (*this);
-    // tmp.show();  
+    // List <T> tmp_l (*this);
+    // // tmp.show();  
+    // // clear();
+    // // show(); 
+    // Node /*<value_type> */*tmp = tmp_l.head_;
     // clear();
-    // show(); 
-    Node /*<value_type> */*tmp = tmp_l.head_;
-    clear();
-    for (int i = 0; i < tmp_l.size_; i++){
-        // head_= tmp.head_;
-        // this.pNext_ = tmp.pPrev_;
-        // pPrev_ = tmp.pNext_;
-    // tmp->pNext_ = new Node<T>(this-> , tmp);  
-        // cout << "Value_ "  << endl;
-        push_front(tmp->value_);
-        tmp = tmp->pNext_;
-    // tmp.
+    // for (int i = 0; i < tmp_l.size_; i++){
+    //     // head_= tmp.head_;
+    //     // this.pNext_ = tmp.pPrev_;
+    //     // pPrev_ = tmp.pNext_;
+    // // tmp->pNext_ = new Node<T>(this-> , tmp);  
+    //     // cout << "Value_ "  << endl;
+    //     push_front(tmp->value_);
+    //     tmp = tmp->pNext_;
+    // // tmp.
 
-    }
+    // }
 
 // __________
 
