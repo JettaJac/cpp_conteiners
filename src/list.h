@@ -514,6 +514,9 @@ class List {
             // cout << head_->pPrev_->value_ << endl;
             // cout << "FOR_99" << endl;
             return;
+        // } else if (pos == --end()){
+            // tail_->pPrev_->pNext_ = zero_; // убрать, когда erase , будет удалять последний элемент, правильно)
+            // tail_ = tail_->pPrev_; 
 
         } else /*if (pos != iterator(zero_)) */{
             
@@ -546,6 +549,13 @@ class List {
             // delete it.iterNode_;
             // delete tmp;
             // cout << "FOR" << endl;
+            // if (pos == --end()){
+            //     cout << "FOR" << endl;
+                
+            //     tail_->pPrev_->pNext_ = zero_; // убрать, когда erase , будет удалять последний элемент, правильно)
+            //     tail_ = tail_->pPrev_; 
+            // }
+
             size_--;
             // cout << "FOR" << endl;
     //     }
@@ -901,19 +911,6 @@ class List {
             prev->value_ = *it;
             // it++;
         }
-
-
-    //     List<T> tmp (this);
-    //     clear;
-    //      Node<T> *node_cur = head_;
-    //      Node<T> *node_prev = pPrev_;
-    //     for(int i = 0; i < size_ && i < size_; i++){
-    //         if( value == node_prev){
-
-    // }
-
-        // }
-
     }
 
 
@@ -1148,21 +1145,22 @@ class List {
             {
                 tmp = tmp->pNext_;                
             }   
-        Node/*<value_type>*/ *tmpDel = tmp;
-        tmp->pNext_ = tmpDel->pPrev_;    
-        tmp->pPrev_ = tmpDel->pNext_; 
-        delete tmpDel;
-        size_--;
-    }  
+            Node/*<value_type>*/ *tmpDel = tmp;
+            tmp->pNext_ = tmpDel->pPrev_;    
+            tmp->pPrev_ = tmpDel->pNext_; 
+            delete tmpDel;
+            size_--;
+        }  
     }
 
 
     template <typename T>
     void List<T>::pop_back()
     {
-        removeAt(size_ - 1);
-        tail_->pPrev_->pNext_ = zero_;
-        tail_ = tail_->pPrev_;        
+        // removeAt(size_ - 1);               
+        erase(--end());
+        tail_->pPrev_->pNext_ = zero_; // убрать, когда erase , будет удалять последний элемент, правильно)
+        tail_ = tail_->pPrev_; 
     }
 
 
