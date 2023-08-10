@@ -11,18 +11,20 @@ int main(){
     setlocale(LC_ALL, "ru");
     // const std::list<double> std_List = {1, 2, 4, 5, 5, 6, 7};
     
-    std::list<double> std_List_2 = {1, 5, 6, 8, 9};
-    s21::List<double> s21_List_2 = {1, 5, 6, 8, 9};
+    // std::list<double> std_List_2 = {1, 5, 6, 8, 9};
+    // s21::List<double> s21_List_2 = {1, 5, 6, 8, 9};
     // auto it = std_List.cbegin();
-    // s21::List<double> s21_List2(5);
+    std::list<double> std_List2;
+    s21::List<double> s21_List2(3);
+
     // s21_List2.push_back(5);
     // s21_List2.show();
 // s21::List<double> s21_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
 // std::list<double> std_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
-s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
-  std::list<double> std_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
-  std_List.sort();
-  s21_List.sort();
+// s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
+//   std::list<double> std_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
+//   std_List.sort();
+//   s21_List.sort();
   
 // cout  << *s21_List.end() << endl;
 
@@ -90,7 +92,7 @@ s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
     
     
     // // s21_List.push_front(4);
-    s21::List<double>::iterator s21_it1 = s21_List.begin();
+    // s21::List<double>::iterator s21_it1 = s21_List.begin();
     // s21::List<double>::const_iterator s21_it1 = s21_List.cbegin();
     // s21::List<double>::iterator s21_it1 = s21_List.end();
     // s21::List<double>::iterator s21_it2 = s21_List.begin();
@@ -118,10 +120,10 @@ s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
 
     // // std::list<double>::iterator std_it1 = std_List.end();
 
-    // std::list<double>::iterator std_it1 = std_List.end();
-    std::list<double>::iterator std_it1 = std_List.begin();
-    std::list<double>::const_iterator std_it2 = std_List_2.cbegin();
-    s21::List<double>::const_iterator s21_it2 = s21_List_2.cbegin();
+    // // std::list<double>::iterator std_it1 = std_List.end();
+    // std::list<double>::iterator std_it1 = std_List.begin();
+    // std::list<double>::const_iterator std_it2 = std_List_2.cbegin();
+    // s21::List<double>::const_iterator s21_it2 = s21_List_2.cbegin();
     
     // cout << " std_Iterators_s0 : " << *std_it1 << " and " << *s21_it1 << endl;
     
@@ -256,27 +258,27 @@ s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
     // cout << "s21_size_l2 " << s21_List_2.size() << endl;
     // cout << "std_begin_l2 " << *std_List_2.begin() << endl;
     // cout << "s21_begin_L2 " << *s21_List_2.begin() << endl;
-    cout << "std_begin_L " << *(std_List.begin()) << endl;
-    cout << "s21_begin_L " << *(s21_List.begin()) << endl;
-    cout << endl;
+    // cout << "std_begin_L " << *(std_List.begin()) << endl;
+    // cout << "s21_begin_L " << *(s21_List.begin()) << endl;
+    // cout << endl;
     // cout << "std_end_l2 " << *std_List_2.end() << endl;
     // cout << "s21_end_L2 " << *s21_List_2.end() << endl;
-    cout << "std_end_L " << *(--std_List.end()) << endl;
-    cout << "s21_end_L " << *(--s21_List.end()) << endl;
-    std_List.merge(std_List_2);
-    s21_List.merge(s21_List_2);
+    // cout << "std_end_L " << *(--std_List.end()) << endl;
+    // cout << "s21_end_L " << *(--s21_List.end()) << endl;
+    // std_List.merge(std_List_2);
+    // s21_List.merge(s21_List_2);
     // std_List.splice(std_it1, std_List_2);
     // s21_List.splice(s21_it1, s21_List_2);
     // s21_List.sort();
     // std_List.sort();
     // std_List.reverse();
     // s21_List.reverse();
-    std_List.unique();
-    s21_List.unique();
-    cout << "std_begin_L " << *(std_List.begin()) << endl;
-    cout << "s21_begin_L " << *(s21_List.begin()) << endl;
-    cout << "std_end_L " << *(--std_List.end()) << endl;
-    cout << "s21_end_L " << *(--s21_List.end()) << endl;
+    // std_List.unique();
+    // s21_List.unique();
+    // cout << "std_begin_L " << *(std_List.begin()) << endl;
+    // cout << "s21_begin_L " << *(s21_List.begin()) << endl;
+    // cout << "std_end_L " << *(--std_List.end()) << endl;
+    // cout << "s21_end_L " << *(--s21_List.end()) << endl;
 
     // s21_it1++;
     // std_it1++;
@@ -560,15 +562,15 @@ s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
     // ___________________________________________
 
     cout << "show_Start_List" << endl;
-    s21_List.show();
+    s21_List2.show();
 
     cout << "std: show_Start_List_move" << endl;
-    for (const auto& element : std_List) {
+    for (const auto& element : std_List2) {
         
         cout << element << " x ";
     }
     cout << endl;
-    cout << "SIZE " << std_List.size()  << endl;
+    cout << "SIZE " << std_List2.size()  << endl;
     cout << endl;
 
     // cout << "SIZE s21: " << s21_List.size() << endl;

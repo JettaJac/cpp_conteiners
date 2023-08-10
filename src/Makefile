@@ -1,4 +1,4 @@
-CCF=g++ #-lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
+CCF=g++ #-g -fsanitize=address #-lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
 GCOV_FLAGS=-fprofile-arcs -ftest-coverage -lgcov
 CHECK_FLAGS= -lgtest -lgtest_main -lpthread
 # -lcheck -lm -lpthread
@@ -29,6 +29,7 @@ list.a: objs
 test: $(OBJS)
 	$(CCF) $(CHECK_FLAGS) $(OBJS) -o list
 	./list
+# CK_FORK=no leaks -exclude -list --atExit -- ./list  | grep LEAK:
 
 main: $(OBJS)
 	$(CCF) $(CHECK_FLAGS) $(OBJS_m) -o list
