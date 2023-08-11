@@ -210,9 +210,9 @@ class List {
     };
 
         size_t size_;
-        Node/*<value_type> */*head_;
-        Node/*<value_type>*/ *tail_;
-        Node/*<value_type>*/ *zero_;
+        Node *head_;
+        Node *tail_;
+        Node *zero_;
         allocator_node alloc_n;
     };
 
@@ -221,7 +221,7 @@ class List {
     {   
         // cout << "List_00" << endl;
         // zero_ = new Node(value_type (), nullptr, nullptr);
-        zero_ = new Node(value_type (), zero_, zero_);
+        zero_ = new Node(value_type(), zero_, zero_);
         head_= tail_ = zero_;
         size_ = 0;
         
@@ -263,26 +263,38 @@ class List {
 
     template <typename T>
     List<T>::List(const List &l) : List()
-    {
+    {   clear();
+
+        Node *zero_= new Node (value_type(), nullptr, nullptr);
+        // zero_->value_ = zero_->value_;
+
         // cout << "Copy function " << this << endl;
-        // List<value_type>::List(std::initializer_list<value_type> const &List):List()
-        // int s;
-        // s = size;
-        clear();
+       // List<value_type>::List(std::initializer_list<value_type> const &List):List()
+       // int s;
+       // s = size;
+        
         // List<T> tmp();
         Node/*<value_type>*/ *current = l.head_;
+        zero_->pNext_ = current;
+        zero_->pPrev_ = current;
+        current->pPrev_ = zero_;
         // new Node/*<value_type>*/(*head_);
-        // current->pNext_ = nullptr;
+        
         for(int i = 0; i < l.size_; i++)
         {
             push_back(current->value_);
             current = current->pNext_;
             // tmp->size_ = 7;
         }
+
+        // std::swap(*this, l);
+        // l.clear();
+
+
     }
 
     template <typename T>
-    List<T>::List(List &&l) /*: List()*/ : head_(l.head_), tail_(l.tail_), size_(l.size_)// : fake_node_(l.fake_node_), size_(l.size_) {
+    List<T>::List(List &&l) /*: List()*/ : head_(l.head_), tail_(l.tail_), size_(l.size_), zero_(l.zero_)// : fake_node_(l.fake_node_), size_(l.size_) {
     {   
         // cout << "Move function" << endl; 
     
@@ -326,7 +338,7 @@ class List {
         clear();
         // cout <<  " h "<< endl;
         // List<T> tmp();
-        Node/*<value_type> */*current = l.head_;
+        Node *current = l.head_;
         // new Node/*<value_type>*/(*head_);
         // current->pNext_ = nullptr;
         // head_= l.head_;
@@ -644,7 +656,8 @@ class List {
         Node/*<value_type>*/ *tmp = head_;
         // Node *tmp = head_;
         head_= head_->pNext_; 
-        // head_->pPrev_ = zero_;
+        head_->pPrev_ = zero_;
+        zero_->pNext_ = head_;
 
 
         // zero_->pNext_ = head_;   
@@ -659,28 +672,49 @@ class List {
     template <typename T>
     void List<T>::swap(List &other)
     {
-        // std::swap(head, l.head_);
-        // std::swap(tail_, l.tail_);
-        // std::swap(size_, l.size_);
+        // std::swap(head_, other.head_);
+        // std::swap(tail_, other.tail_);
+        // std::swap(size_, other.size_);
+        // std::swap(zero_, other.zero_);
 
         // cout << "SWAP " << endl;
-        Node/*<value_type> */*cur_head_= new Node/*<value_type>*/(1);
-        Node/*<value_type>*/ *cur_tail_ = new Node/*<value_type>*/(1);
-        cur_head_= head_;
-        cur_tail_ = tail_;
-        size_t t = size_;
+        Node*cur_zero_= new Node (value_type(), tail_, head_);
+        cur_zero_->value_ = zero_->value_;
 
         head_= other.head_;
         tail_ = other.tail_;
         size_ = other.size_;
+        zero_ = other.zero_;
         zero_->value_ = other.zero_->value_; // добавила 
 
-        other.head_= cur_head_;
-        other.tail_ = cur_tail_;
-        other.size_ = t;
-        other.zero_->value_ = value_type ();
+        other.head_= cur_zero_->pNext_;
+        other.tail_ = cur_zero_->pPrev_;
+        other.size_ = cur_zero_->value_;
+        other.zero_ = cur_zero_;
+        other.zero_->value_ = cur_zero_->value_;
 
+
+        // Node *cur_head_= new Node (value_type());
+        // Node *cur_tail_ = new Node (value_type());
+        // Node *cur_zero_ = new Node (value_type());
+        // cur_head_= head_;
+        // cur_tail_ = tail_;
+        // cur_zero_ = zero_;
+        // size_t t = size_;
+
+        // head_= other.head_;
+        // tail_ = other.tail_;
+        // size_ = other.size_;
+        // zero_ = other.zero_;
+        // zero_->value_ = other.zero_->value_; // добавила 
+
+        // other.head_= cur_head_;
+        // other.tail_ = cur_tail_;
+        // other.size_ = t;
+        // other.zero_ = cur_zero_;
+        // other.zero_->value_ = value_type ();
     }
+
 
     template <typename T>
     inline void List<T>::merge(List &other)
@@ -871,7 +905,7 @@ class List {
     // // tmp.show();  
     // // clear();
     // // show(); 
-    // Node /*<value_type> */*tmp = tmp_l.head_;
+    // Node *tmp = tmp_l.head_;
     // clear();
     // for (int i = 0; i < tmp_l.size_; i++){
     //     // head_= tmp.head_;
@@ -1192,7 +1226,7 @@ class List {
     template <typename T>
     void List<T>::show()
     {
-        Node /*<value_type> */*tmp = head_;
+        Node *tmp = head_;
         for(int i = 0; i < size_; i++){ // for
             cout << tmp->value_ << " x ";
             tmp = tmp->pNext_;
