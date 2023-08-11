@@ -12,4 +12,5 @@ then
     # cat "$(date +"%Y.%m.%d_%H:%M")"
 else 
     echo "Введите коммит"
+    
 fi
