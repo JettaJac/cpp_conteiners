@@ -513,14 +513,17 @@ class List {
             // head_->pPrev_ = zero_;
             // cout << head_->pPrev_->value_ << endl;
             // cout << "FOR_99" << endl;
-            return;
+            // return;
         // } else if (pos == --end()){
-            // tail_->pPrev_->pNext_ = zero_; // убрать, когда erase , будет удалять последний элемент, правильно)
-            // tail_ = tail_->pPrev_; 
+        //      cout << "FOR_1" << endl;
+        //     pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
+        //     pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_;
+        //     tail_->pPrev_->pNext_ = zero_; // убрать, когда erase , будет удалять последний элемент, правильно)
+        //     tail_ = tail_->pPrev_; 
 
         } else /*if (pos != iterator(zero_)) */{
             
-            // cout << "FOR_0" << endl;
+            cout << "FOR_0" << endl;
         // iterator it = begin();
         // Node * tmp = pos.iterNode_->pPrev_;
         // it.iterNode_->pNext_ = pos.iterNode_->pNext_;
@@ -531,7 +534,7 @@ class List {
         // // cout << "FOR" << endl;
         // if(it == pos) {   
         // Node *tmp = std::move(pos.iterNode_);
-        // Node *tmp = it.iterNode_->pNext_;
+        // Node *tmp = pos.iterNode_;
          //  it.iterNode_->pNext_ = pos.iterNode_->pNext_;
 
         // Обновление указателей для предыдущего и следующего узла
@@ -546,7 +549,7 @@ class List {
             // cout << "Erase_ " << it.iterNode_->pPrev_->pPrev_ << endl; 
             // cout << "Erase_ " << it.iterNode_->pNext_ << endl;  
             // cout << "Erase_ " << it.iterNode_->pNext_->pNext_ << endl; 
-            // delete it.iterNode_;
+            // delete pos.iterNode_;
             // delete tmp;
             // cout << "FOR" << endl;
             // if (pos == --end()){
@@ -561,7 +564,24 @@ class List {
     //     }
     //  }
 
+    //  Node/*<value_type>*/ *tmp = head_;
+    //         for (iterator it = 0; it != end() && it != pos; it++)
+    //         {
+    //             tmp = tmp->pNext_;                
+    //         }   
+    //         tmp = tmp->pNext_;
+    //         Node/*<value_type>*/ *tmpDel = tmp;
 
+    //         // pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
+    //         // pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_;
+
+
+    //         tmp->pNext_ = tmpDel->pPrev_;    
+    //         tmp->pPrev_ = tmpDel->pNext_; 
+            
+    //         delete tmpDel;
+    //         size_--;
+        
 
 
 
@@ -1161,6 +1181,7 @@ class List {
         erase(--end());
         tail_->pPrev_->pNext_ = zero_; // убрать, когда erase , будет удалять последний элемент, правильно)
         tail_ = tail_->pPrev_; 
+        zero_->pPrev_ = tail_;
     }
 
 
