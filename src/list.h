@@ -101,14 +101,7 @@ class List {
         // ~ListIterator(); // Деструктор
         // ~ListIterator(int);
 
-        // reference  operator[](const value_type index) {
-        //     iterator it = begin();
-        //     int i = 0;
-        //     while(it != end()){
-        //             it++;
-        //     }
-        //     return *it;
-        // }
+  
 
         // ListIterator operator=(ListIterator const &other) : iterNode_(other.iterNode_){};/*{
         //     iterator it = other
@@ -145,6 +138,32 @@ class List {
         bool operator!=(ListIterator &other) const {return iterNode_ != other.iterNode_;};
         bool operator!=(const ListIterator &other) const {return iterNode_ != other.iterNode_;};
         // ListIterator operator->() {return iterNode_;}
+        // reference operator[](int index) {
+        //     // auto it (head_);
+
+        //     // size_t t = size_;
+        // //    if (index >= size_){
+            
+        //     cout << "UUU error" << endl;
+        // //    }
+
+        //     for (int i = 0; i < index; i++){
+        //         iterNode_ = iterNode_-> pNext_;
+        //     }
+        //     return iterNode_->value_;
+        //     // return *it;
+           
+        //     // return *(iterNode_ + index);
+        // }
+
+        // reference  operator[](const value_type index) {
+        //     iterator it = begin();
+        //     int i = 0;
+        //     while(it != end()){
+        //             it++;
+        //     }
+        //     return *it;
+        // }
 
         private:
         Node  *iterNode_;
@@ -265,7 +284,7 @@ class List {
     List<T>::List(const List &l) : List()
     {   clear();
 
-        Node *zero_= new Node (value_type(), nullptr, nullptr);
+        // Node *zero_= new Node (value_type(), nullptr, nullptr);
         // zero_->value_ = zero_->value_;
 
         // cout << "Copy function " << this << endl;
@@ -273,19 +292,26 @@ class List {
        // int s;
        // s = size;
         
-        // List<T> tmp();
-        Node/*<value_type>*/ *current = l.head_;
-        zero_->pNext_ = current;
-        zero_->pPrev_ = current;
+        // List<T>();
+        // zero_ = l.zero_;
+        // Node *z = l.head_;
+        Node *current = l.head_;
+        // Node *current = new Node (*head_, zero_, zero_);
+        zero_->pNext_ =  current;
+        zero_->pPrev_ =  current;
         current->pPrev_ = zero_;
+        // current->pNext_ = zero_;
+        // head_ = current;
         // new Node/*<value_type>*/(*head_);
         
         for(int i = 0; i < l.size_; i++)
         {
             push_back(current->value_);
             current = current->pNext_;
-            // tmp->size_ = 7;
         }
+        // tail_ = current;
+        current->pNext_ = zero_;
+        
 
         // std::swap(*this, l);
         // l.clear();
@@ -309,6 +335,7 @@ class List {
 
         // l.clear();
         l.head_= l.tail_ = l.zero_; // А не будет ли утчки?
+        l.zero_->value_ = value_type();
         // l.tail_ = l.zero_;
         // zero_->pNext_ = head_;
         // zero_->pPrev_ = tail_;
@@ -478,7 +505,7 @@ class List {
         else if (pos == begin()) {
             // Node *tmp = head_;
             // head_ = current;
-            // cout << "BEGIN" << endl;
+            cout << "BEGIN" << endl;
             // Node *tmp = head_;
             current->pNext_ = head_;
             head_->pPrev_ = current;
@@ -723,9 +750,13 @@ class List {
 
 // Процесс продолжается до тех пор, пока все элементы второго списка не будут перемещены и включены в первый список. В результате, первый список становится отсортированным списком, содержащим все элементы исходных списков, а второй список становится пустым.
     auto it = begin();
+    Node * tmp = zero_;
     for (iterator it2 = other.begin(); it2 != other.end(); ){
+        
         if (*it <= *it2){
             // cout << "IT1 < IT2__  " << *it  << " and " << *it2 << endl;
+            // it->pPrev_ = 
+            it.iterNode_->pPrev_ = tmp; // надо попробовать  сделать возврат на старый элемент
             it++;
         } else {
             // cout << "IT1 > IT2__  " << *it  << " and " << *it2 << endl;
@@ -735,6 +766,8 @@ class List {
             zero_->value_ = size_;
             // cout << "IT1 > IT2_2_ " << *it  << " and " << *it2 << endl;
         }
+        tmp = it.iterNode_;
+
         // it2++;
         other.zero_->value_ = value_type ();
         other.head_ = other.tail_ = other.zero_;
@@ -1146,6 +1179,7 @@ class List {
     {
         // ListIterator it (head_);
         return typename List<T>::iterator(head_);
+        // return typename List<T>::iterator(zero_->pNext_); // почему то выдает утечку
         // return ListIterator<T>::this->begin();
 
             // iterator begin() const noexcept { return iterator(fake_node_->pNext__); }
@@ -1172,7 +1206,7 @@ class List {
     inline typename List<T>::const_iterator List<T>::cbegin()
     {
         // ListIterator it (head_);
-        return typename List<T>::const_iterator(head_);
+        return typename List<T>::const_iterator(zero_->pNext_);
         // return ListIterator<T>::this->begin();
 
             // iterator begin() const noexcept { return iterator(fake_node_->pNext__); }
@@ -1230,7 +1264,8 @@ class List {
         for(int i = 0; i < size_; i++){ // for
             cout << tmp->value_ << " x ";
             tmp = tmp->pNext_;
-        }  
+        } 
+        cout  << endl; 
         cout << "SIZE " << size()  << endl;
         cout  << endl;
     }
@@ -1239,7 +1274,7 @@ class List {
     T &List<T>::operator[](const int index)
     // обработать обращение за пределы, на несуществующий элемент
     {
-        // cout << "operator[]" << endl;
+        cout << "operator[]" << endl;
         int counter = 0;
         Node/*<value_type>*/ *current = this->head_;
         T value_{0};
