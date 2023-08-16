@@ -23,8 +23,8 @@ s21::List<double> s21_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
 std::list<double> std_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
 // s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
 //   std::list<double> std_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
-  std_List.sort();
-  s21_List.sort();
+//   std_List.sort();
+//   s21_List.sort();
   
 // cout  << *s21_List.end() << endl;
 
@@ -54,15 +54,17 @@ std::list<double> std_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
 // s21_List_2.show();
 // cout << s21_List_2.max_size() <<   endl;
 
-//       list<double> std_copy  = std::move (std_List);
+   
+    std::list<double> std_copy = move(std_List);
     s21::List<double> s21_copy = move(s21_List);
-    // s21_copy.show();
+    s21_copy.show();
+    s21_List.show();
     // s21::List<double> s21_List;
     // s21::List<double> s21_List{1, 2, 3, 4, 5, 6, 7};
     // s21::List<double> s21_List_2{5, 6, 7, 8};
     // s21::List<double> s21_List2(-1);
     // list<double> std_List2(-1);
-    // cout <<  std_List2.front() << endl;
+    cout <<  s21_copy.front() << endl;
     // list<double> std_copy(std_List);
     //      list<double> std_copy();
     // s21::List<double> s21_copy();
@@ -73,8 +75,8 @@ std::list<double> std_List {2.2, 1.2, 2.1, 1.4, 2.2, 1.7, 1.7};
 
     // // END
     // cout << " s21_Iterators :" << "*s21_it1" << " and " << " " << endl;
-    // cout << "END " << *s21_List.end() << endl;
-    // cout << "END " << *std_List.end() << endl;
+    cout << "END " << *(s21_copy.end()) << endl;
+    cout << "END " << *(std_copy.end()) << endl;
 
 // ______________________
     // // Increment

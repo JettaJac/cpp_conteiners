@@ -320,7 +320,7 @@ class List {
     }
 
     template <typename T>
-    List<T>::List(List &&l) /*: List()*/ : head_(l.head_), tail_(l.tail_), size_(l.size_), zero_(l.zero_)  // : fake_node_(l.fake_node_), size_(l.size_) {
+    List<T>::List(List &&l) : List()/* : head_(l.head_), tail_(l.tail_), size_(l.size_), zero_(l.zero_)  // : fake_node_(l.fake_node_), size_(l.size_) {
     {   
         cout << "Move function" << endl; 
         // l.clear();
@@ -337,18 +337,22 @@ class List {
         // size_ = l.size_;
         // zero_ = l.zero_;
         cout << head_ << " =!!= "<< l.head_ << endl;
-        cout << zero_ << " =!!= "<< l.zero_ << endl;
+        
         // l.clear();
-        // Node *tmp;
-        // l.zero_ = tmp;
-        l.head_= l.tail_ = l.zero_; // А не будет ли утчки?
-        l.zero_->value_ = value_type();
+        Node *tmp = new Node (value_type(), nullptr, nullptr);
+        l.zero_ = tmp;
+        
+        l.head_= l.tail_ = l.zero_; 
+        l.zero_->pNext_ = l.zero_->pPrev_ = l.zero_;
+        // cout << zero_ << " =!!= "<< l.zero_ << endl;
+        // l.zero_->value_ = value_type();
+        // cout << zero_ << " =!!= "<< l.zero_ << endl;
 
         // l.head_ = nullptr; // А не будет ли утчки?
          
         // l.tail_ = nullptr;
         // cout << tail_ << " =!!= "<< zero_ << endl;
-        l.zero_ = nullptr;
+        // l.zero_ = nullptr;
         // l.zero_->value_ = value_type();
         // cout << tail_ << " =!!= "<< zero_ << endl;
 
@@ -357,7 +361,15 @@ class List {
         // zero_->pPrev_ = tail_;
         l.size_ = 0;
         // delete l.zero_;
-        // cout << tail_ << " =!!= "<< zero_ << endl;
+        // cout << tail_ << " =!!= "<< zero_ << endl;*/
+       {
+        List();
+        std::swap(head_, l.head_);
+        std::swap(tail_, l.tail_);
+        std::swap(size_, l.size_);
+        std::swap(zero_, l.zero_);
+        // std::swap(*this, l);
+        // l.clear();
         
     }
 
@@ -408,15 +420,21 @@ class List {
     List<T> List<T>::operator=(List &&l)
     {
         // cout << "Operator Move " << this << endl;
-        clear();
-        head_= l.head_;
-        tail_ = l.tail_;
-        size_ = l.size_;
+        // clear();
+        // head_= l.head_;
+        // tail_ = l.tail_;
+        // size_ = l.size_;
         // zero_ = l.zero_;
 
         // l.head_= NULL;
         // l.tail_ = NULL;
         // l.size_ = 0;
+        // std::this.swap(&l);
+        std::swap(head_, l.head_);
+        std::swap(tail_, l.tail_);
+        std::swap(size_, l.size_);
+        std::swap(zero_, l.zero_);
+        
 
         l.clear();// добавила вместо трех строчек выше
    
@@ -719,7 +737,7 @@ class List {
         // std::swap(zero_, other.zero_);
 
         // cout << "SWAP " << endl;
-        Node*cur_zero_= new Node (value_type(), tail_, head_);
+        Node *cur_zero_= new Node (value_type(), tail_, head_);
         cur_zero_->value_ = zero_->value_;
 
         head_= other.head_;
