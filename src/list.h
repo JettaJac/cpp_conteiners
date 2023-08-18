@@ -82,6 +82,8 @@ class List {
                 pNext_ = pNext;
                 pPrev_ = pPrev;
             }
+            // bool operator==(const ListIterator &other) const {return iterNode_ == other.iterNode_;}; // проверяем указатели а не ноды
+        
     };  
 
     class ListIterator{
@@ -251,7 +253,7 @@ class List {
     {   
         // cout << "List_00" << endl;
         // zero_ = new Node(value_type (), nullptr, nullptr);
-        zero_ = new Node(value_type(), zero_, zero_);
+        zero_ = new Node(value_type(), zero_, zero_); // А разве хдесь не надо перед zero_ Node?
         head_= tail_ = zero_;
         size_ = 0;
         
@@ -447,7 +449,7 @@ class List {
         // l.tail_ = NULL;
         // l.size_ = 0;
         // std::this.swap(&l);
-        std::swap(head_, l.head_);
+        std::swap(head_, l.head_); // Заменить  на мой свап
         std::swap(tail_, l.tail_);
         std::swap(size_, l.size_);
         std::swap(zero_, l.zero_);
@@ -559,23 +561,23 @@ class List {
     }
 
     template <typename T>
-    inline void List<T>::erase(iterator pos)
+    void List<T>::erase(iterator pos)
     {   
-        cout << "Erase" << endl;
+        // cout << "Erase" << endl;
         Node/*<value_type>*/ *tmp = pos.iterNode_;
         pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
         pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_; 
         // cout << "0!!! " << tail_->value_ << endl; 
         if (tmp == zero_) {
-            cout << "e!!! " << tail_->value_ << endl;
+            // cout << "e!!! " << tail_->value_ << endl;
             return;
         } else if (tmp->pPrev_ == zero_ && tmp->pNext_ == zero_){
-            cout << "zero_!!! " << *pos << endl;
-            cout << "zero_h!!! " << head_->value_ << endl;
+            // cout << "zero_!!! " << *pos << endl;
+            // cout << "zero_h!!! " << head_->value_ << endl;
             head_ = tail_ = zero_;
             zero_->pNext_ = zero_;
             zero_->pPrev_ = zero_;
-            cout << "zero_h!!! " << head_->value_ << endl;
+            // cout << "zero_h!!! " << head_->value_ << endl;
             // zero_->value_ = value_type ();
         // } else if (pos == --end()){
 
@@ -583,8 +585,8 @@ class List {
             // } else if ( pos == begin()){
             // head_= head_->pNext_; 
             // tmp = head_;
-            cout << "head_!!! " << head_->value_ << endl;
-            cout << "head_!!! " << head_ << endl;
+            // cout << "head_!!! " << head_->value_ << endl;
+            // cout << "head_!!! " << head_ << endl;
             head_ = pos.iterNode_->pNext_;
             // head_= head_->pNext_;
             head_->pPrev_ = zero_;
@@ -594,7 +596,7 @@ class List {
             // pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
             // pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_; 
             tail_ = pos.iterNode_->pPrev_;
-            cout << "--end_!!! " << tail_->value_ << endl;
+            // cout << "--end_!!! " << tail_->value_ << endl;
             // tail_->value_ = pos.iterNode_->pPrev_->value_;
             // tail_ = tail_->pPrev_;
             tail_->pNext_ = zero_;
@@ -606,20 +608,39 @@ class List {
         //     pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
         //     pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_; 
         }
-        
-        pos++;
-        cout << "TMP " << tmp << endl;
+        // cout << "else_!!! " << pos.iterNode_->value_ << endl;
+        // cout << "else_!!! " << pos.iterNode_->pNext_->value_ << endl;
+        // cout  << endl;
+        pos = pos++;
+        // pos++;
+        // cout << "else_!!! " << pos.iterNode_->value_ << endl;
+        // cout << "else_!!! " << pos.iterNode_->pNext_->value_ << endl;
+        // cout << "else_!!! " << pos.iterNode_->pPrev_->value_ << endl;
+        // cout << "else_!!! " << tmp->value_ << endl;
+        // cout  << endl;
+        // cout << "TMP " << tmp << endl;
+        // cout << "TMP++ " << pos.iterNode_->pNext_ << endl;
+        // cout << "TMP-- " << pos.iterNode_->pPrev_ << endl;
         if (--pos != end() )  {
             delete tmp;
+            // delete pos.iterNode_->pPrev_;
         }
-        cout << "Last_t " << tail_->value_ << endl;
-        cout << "Last_h!!! " << head_->value_ << endl;
-        cout << "Last_z!!! " << zero_->value_ << endl;
-        cout << "Last_t " << tail_ << endl;
-        cout << "Last_h!!! " << head_ << endl;
-        cout << "Last_z!!! " << zero_ << endl;
+        // pos++;
+        // cout << "else_!!!_y " << pos.iterNode_->value_ << endl;
+        // cout << "else_!!!_y " << pos.iterNode_->pNext_->value_ << endl;
+        // cout << "else_!!!_y " << pos.iterNode_->pPrev_->value_ << endl;
+        // cout << "else_!!!_y " << tmp->value_ << endl;
+        // cout  << endl;
+      
         size_--;
         zero_->value_ = size_;
+        // cout << "Delete POS" << endl;
+        //   cout << "Last_t " << tail_->value_ << endl;
+        // cout << "Last_h!!! " << head_->value_ << endl;
+        // cout << "Last_z!!! " << zero_->value_ << endl;
+        // cout << "Last_t " << tail_ << endl;
+        // cout << "Last_h!!! " << head_ << endl;
+        // cout << "Last_z!!! " << zero_ << endl;
         
         /*
 // ____
@@ -738,7 +759,7 @@ class List {
     // // delete pos.iterNode_;
     // size_--;
 
-    // // cout << "Delete POS" << endl;
+    
 
 
 
@@ -839,7 +860,7 @@ class List {
     auto it_e = end();
     // Node * tmp = zero_;
     // int i = 0;
-    for (iterator it2 = other.begin(); it2 != other.end(); ){
+    for (iterator it2 = other.begin(); it2 != other.end(); it2++){
         
         if (*it <= *it2){
             // cout << "8IT1 < IT2__  " << *it  << " and " << *it2 << endl;
@@ -858,7 +879,7 @@ class List {
             // }
             
             // if (it2.iterNode_->pNext_ != *it_e ) {it2++;};
-            it2++;
+            
             // zero_->value_ = size_;
             // cout << "IT1 > IT2_2_ " << *it  << " and " << *it2 << endl;
         }
@@ -1097,28 +1118,48 @@ class List {
         // cout << "Unique" << endl;
 
         iterator it = begin();
-        Node *prev = it.iterNode_->pPrev_;
-        // cout<< "Test " << prev->value_ << endl;
+        Node *prev  = new Node(it.iterNode_->value_, nullptr, nullptr);
+        // Node *prev = it.iterNode_; // current
+        cout << "Test " << prev->value_ << " and_2 " << it.iterNode_->value_ << endl;
+        it++;
+        // Node *prev = it.iterNode_->pPrev_;
+         cout<< "Test " << prev->value_ << " and_1 " << *it << endl;
         // int i = 0;
         for (; it != end(); it++){
-            // cout<< "Test " << prev->value_ << " and " << *it << endl;
+            cout<< "Test_0 " << prev->value_ << " and " << *it << endl;
             // cout << "  !!!    " << endl;
             // cout << *s21_it_12<< " / " ;   
-        cout<< "Test0 " << prev << " and " << it.iterNode_ << endl;   
-         cout<< "Test0 " << prev->pNext_ << " and_Next " << it.iterNode_->pNext_ << endl; 
-         cout<< "Test0 " << prev->pPrev_ << " and " << it.iterNode_->pPrev_ << endl; 
+        // cout<< "Test0 " << prev << " and " << it.iterNode_ << endl;   
+        //  cout<< "Test0 " << prev->pNext_ << " and_Next " << it.iterNode_->pNext_ << endl; 
+        //  cout<< "Test0 " << prev->pPrev_ << " and " << it.iterNode_->pPrev_ << endl; 
+      
             if (prev->value_ == *it /*&& i < 2*/){
                 cout << "Unique== " << endl;
                 // it++;
+                // cout << "Unique==++ " << endl;
                 erase (it);
-                
-            }
-        // cout<< "Test " << prev->value_ << " and " << *it << endl;
+                cout<< "Test " << prev->value_ << " and_gg " << *(++it) << endl;
+                // prev->value_ = *it;
+                cout << "Unique_f " << endl;
+                // it++;
+            // }
+            } else {
+        // cout << "Last_t_u " << tail_ << endl;
+        // cout << "Last_t_u " << head_ << endl;
+        // cout << "Last_t_u " << zero_ << endl;
+        cout<< "Test " << prev->value_ << " and) " << *it << endl;
+        
             // prev = *it;
             prev->value_ = *it;
             // it++;
             // i++;
+            }  
+            // cout<< "Test " << prev->value_ << " and_h " << head_->value_ << endl;
+            cout << "____________f " << endl;
+            // it++;
+            cout << "U___________0 " << endl;
         }
+        
     }
 
 
@@ -1382,7 +1423,7 @@ class List {
 
     template <typename T>
     void List<T>::show()
-    {
+    {   cout << "Last_t_u " << head_ << endl;
         Node *tmp = head_;
         for(int i = 0; i < size_; i++){ // for
             cout << tmp->value_ << " x ";

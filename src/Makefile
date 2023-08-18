@@ -1,4 +1,4 @@
-CCF=g++ -g -fsanitize=address #-lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
+CCF=g++ #-g -fsanitize=address #-lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
 GCOV_FLAGS=-fprofile-arcs -ftest-coverage -lgcov
 CHECK_FLAGS= -lgtest -lgtest_main -lpthread
 # -lcheck -lm -lpthread

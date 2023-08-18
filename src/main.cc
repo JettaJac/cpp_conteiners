@@ -23,8 +23,8 @@ int main(){
 
     // s21_List2.push_back(5);
     // s21_List2.show();
-s21::List<double> s21_List {2.2, 2.2, 1.2, 2.1, 1.4, 1.6, 10, 10};
-std::list<double> std_List {2.2, 2.2, 1.2, 2.1, 1.4, 1.6, 10, 10};
+s21::List<double> s21_List {10, 11, 11,  2.2, 1.2, 2.1, 2.1, 2.1, 1.4, 1.6, 10, 10, 5, 8};
+std::list<double> std_List {10, 11, 11,  2.2, 1.2, 2.1, 2.1, 2.1, 1.4, 1.6, 10, 10, 5, 8};
 // s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
 //   std::list<double> std_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
 //   std_List.sort();
@@ -279,8 +279,8 @@ std::list<double> std_List {2.2, 2.2, 1.2, 2.1, 1.4, 1.6, 10, 10};
     // std_List.sort();
     // std_List.reverse();
     // s21_List.reverse();
-    std_List.unique();
-    s21_List.unique();
+    // std_List.unique();
+    // s21_List.unique();
     // cout << "std_begin_L " << *(std_List.begin()) << endl;
     // cout << "s21_begin_L " << *(s21_List.begin()) << endl;
     // cout << "std_end_L " << *(--std_List.end()) << endl;
@@ -524,6 +524,30 @@ auto std_it_b1 = std_List.cbegin();
 auto std_it_1 = std_List.cbegin();
 auto s21_it_1 = s21_List.cbegin();
 
+  std::list<double>::iterator std_it_5 = --std_List.end();
+  s21::List<double>::iterator s21_it_5 = --s21_List.end();
+
+  std::list<double>::iterator std_it_5_e = --std_List.end();
+  for(; std_it_5_e != std_List.begin() /*&& std_it_5_e != ++std_List.begin()*/; --std_it_5, --s21_it_5) {
+    cout << *std_it_5 << " and_ " << *std_it_5 << endl;
+    std_List.erase(std_it_5);
+    s21_List.erase(s21_it_5);
+    cout << *std_it_5 << " and_1 " << *std_it_5 << endl;
+
+    // std_List.erase(std_it_5);
+    // s21_List.erase(s21_it_5);
+    // cout << *std_it_5 << " and " << *std_it_5 << endl;
+
+    // cout << *std_List.begin() << " and " << *s21_List.begin() << endl;
+    // cout << *(--std_List.end()) << " and " << *(--s21_List.end()) << endl;
+    // cout << std_List.size() << " and " << s21_List.size() << endl;  
+//    --std_it_5, --s21_it_5;
+   --std_it_5_e;
+  }
+
+
+
+
 // cout << std_List.size()<< " _and_s " <<  s21_List.size() << endl;
 // cout << std_List_2.size()<< " _and_s " <<  s21_List_2.size() << endl;
 
@@ -746,17 +770,6 @@ cout << endl;
     // endl;
 
     return 0;
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
