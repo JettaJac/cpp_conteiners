@@ -1126,14 +1126,16 @@ class List {
         iterator tmp;
         Node *prev  = new Node(it.iterNode_->value_, nullptr, nullptr);
         // Node *prev = it.iterNode_; // current
+        cout << "Last_t_h " << head_ << " and " << it.iterNode_ <<  endl;
         cout << "Test " << prev->value_ << " and_2 " << it.iterNode_->value_ << endl;
         it++;
+        cout << "Last_t_++ " << head_ << " and " << it.iterNode_ <<  endl;
         // Node *prev = it.iterNode_->pPrev_;
-        cout<< "Test " << prev->value_ << " and_1 " << *it << endl;
+        // cout<< "Test " << prev->value_ << " and_1 " << *it << endl;
         // int i = 0;
         for (; it != end(); it++){
-            cout<< "Test_0 " << prev->value_ << " and " << *it << endl;
-            cout<< "Test_0 " << prev->value_ << " and " << *(it++) << endl;
+            cout<< "Test_0 " << prev << " and " << it.iterNode_ << endl;
+            cout<< "Test_++ " << prev->value_ << " and " << *(it++) << endl;
             // cout << "  !!!    " << endl;
             // cout << *s21_it_12<< " / " ;   
         // cout<< "Test0 " << prev << " and " << it.iterNode_ << endl;   
@@ -1142,13 +1144,21 @@ class List {
       
             if (prev->value_ == *it /*&& i < 2*/){
                 cout << "Unique== " << endl;
+                cout << "Last_t_h " << head_ << endl;
+                cout << "Last_t_it " << it.iterNode_ << endl;
+                // cout << "Last_t_it-> P " << it.iterNode_->pPrev_->value_ << endl;
+                // cout << "Last_t_it-> P " << (--it).iterNode_->value_ << endl;
+                cout << "Last_t_it-> N " << it.iterNode_->pNext_ << endl;
                 // it++;
                 // cout << "Unique==++ " << endl;
                 erase (--it);
+                cout << "Last_t_it " << it.iterNode_ << endl;
                 // cout<< "Test " << prev->value_ << " and_gg " << *(++it) << endl;
                 // prev->value_ = *it;
                 // cout << "Unique_f " << endl;
                 // it++;
+                 cout << "Last_t_u " << head_ << endl;
+                 cout << "Last_t_u " << head_->value_ << endl;
             // }
             } else {
         // cout << "Last_t_u " << tail_ << endl;
@@ -1163,11 +1173,11 @@ class List {
             // i++;
             }  
             // cout<< "Test " << prev->value_ << " and_h " << head_->value_ << endl;
-            cout << "____________f " << endl;
-            // it++;
-            cout << "U___________0 " << endl;
+            // cout << "____________f " << endl;
+            // // it++;
+            // cout << "U___________0 " << endl;
         }
-        cout << "U___________1 " << endl;
+        // cout << "U___________1 " << endl;
         delete prev;
         cout << "U___________2 " << endl;
         // prev = nullptr;
