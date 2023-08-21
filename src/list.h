@@ -35,7 +35,12 @@ class List {
         List<T> operator=(List &&l); 
 
         const_reference front() const noexcept {return head_->value_;}; //access the first element
-        const_reference back() const noexcept {return tail_->value_;};  // access the last element
+        const_reference back() const noexcept {
+            // if (size_ < 1){
+                // throw invalid_argument("Empty list");
+            // }
+            return tail_->value_;
+        };  // access the last element
         // const_reference back() const noexcept {return zero_->pPrev_->value_;};  // access the last element
         // где-то не работает tail_
 
@@ -122,7 +127,7 @@ class List {
         }; // желательно сделать 
 
         ListIterator &operator++() { 
-            ListIterator it = iterNode_->pNext_;
+            // ListIterator it = iterNode_->pNext_;
             iterNode_ = iterNode_->pNext_;    
             return *this;
         }; // префексная форма
@@ -146,7 +151,12 @@ class List {
             return it;
         }; // постфиксная форма
 
-        reference operator*() {return iterNode_->value_;}
+        reference operator*() {
+            if ( iterNode_ == nullptr) {
+                throw invalid_argument("No value");
+            }
+            return iterNode_->value_;
+        }
         bool operator==(const ListIterator &other) const {return iterNode_ == other.iterNode_;}; // проверяем указатели а не ноды
         bool operator!=(ListIterator &other) const {return iterNode_ != other.iterNode_;};
         bool operator!=(const ListIterator &other) const {return iterNode_ != other.iterNode_;};
@@ -563,12 +573,14 @@ class List {
     template <typename T>
     void List<T>::erase(iterator pos)
     {   
-        cout << "Erase" << endl;
-        Node/*<value_type>*/ *tmp = pos.iterNode_;
+        // cout << "Erase" << endl;
+        // Node/*<value_type>*/ *tmp = pos.iterNode_;
+        auto *tmp = pos.iterNode_;
         // cout << "0!!!_5 " << tmp->value_ << endl; 
         pos.iterNode_->pPrev_->pNext_ = pos.iterNode_->pNext_;
         pos.iterNode_->pNext_->pPrev_ = pos.iterNode_->pPrev_; 
-        // cout << "0!!! " << tail_->value_ << endl; 
+        // cout << "0!!! " << tail_->value_ << endl; /
+            //  pos++;
         
         if (tmp == zero_) {
             cout << "e!!! " << tail_->value_ << endl;
@@ -587,7 +599,7 @@ class List {
             // } else if ( pos == begin()){
             // head_= head_->pNext_; 
             // tmp = head_;
-            cout << "head_!!! " << head_->value_ << endl;
+            // cout << "head_!!! " << head_->value_ << endl;
             // cout << "head_!!! " << head_ << endl;
             head_ = pos.iterNode_->pNext_;
             // head_= head_->pNext_;
@@ -635,7 +647,7 @@ class List {
         // cout << "else_!!!_y " << tmp->value_ << endl;
         // cout << "else_!!!_t " << tail_->value_ << endl;
         // cout  << endl;
-      
+        
         size_--;
         zero_->value_ = size_;
         // cout << "Delete POS" << endl;
@@ -781,6 +793,7 @@ class List {
     template <typename T>
     void List<T>::pop_front()
     {
+        if (size_ > 0) {
         erase(zero_->pNext_);
         // cout << "Delete Node" << endl;
         // Node/*<value_type>*/ *tmp = head_;
@@ -789,7 +802,9 @@ class List {
         // head_->pPrev_ = zero_;
         // zero_->pNext_ = head_;
         // // delete tmp; // было  с этой строчкой
-
+        } else {
+            throw invalid_argument("Empty list");
+        }
         // // zero_->pNext_ = head_;   
         // // cout << "Delete Node _" << size_ << endl;
         // // cout << head_ << " == "<< zero_ << endl;
@@ -1003,7 +1018,7 @@ class List {
     iterator it = other.begin();
     for(; it != other.end(); it++){
         
-        cout << "IT1_ " << *it << endl;
+        // cout << "IT1_ " << *it << endl;
         // if (it2 == begin
         insert(it2, *it);
         // cout << "IT2_ " << *it << endl;
@@ -1031,9 +1046,9 @@ class List {
         // other.size_ = 0;
         // other.head_ = nullptr;
         // other.tail_ = nullptr;
-        cout << "splice _ finish" << endl;
+        // cout << "splice _ finish" << endl;
         // other.clear();
-        cout << "tttt _" << endl;
+        // cout << "tttt _" << endl;
 
 // возможгл  сдуфк уже все это делает
         // other.zero_->value_ = value_type (); 
@@ -1122,53 +1137,75 @@ class List {
     {
         // cout << "Unique" << endl;
 
-        iterator it = begin();
+        // iterator it = begin();
         iterator tmp;
-        Node *prev  = new Node(it.iterNode_->value_, nullptr, nullptr);
+        Node *prev  = new Node(head_->value_, nullptr, nullptr);
+        // Node *prev;
+        // prev->value_ = head_->value_;
+        Node *temp = head_->pNext_; 
         // Node *prev = it.iterNode_; // current
-        cout << "Last_t_h " << head_ << " and " << it.iterNode_ <<  endl;
-        cout << "Test " << prev->value_ << " and_2 " << it.iterNode_->value_ << endl;
-        it++;
-        cout << "Last_t_++ " << head_ << " and " << it.iterNode_ <<  endl;
+        // cout << "Last_t_h " << head_ << " and " << it.iterNode_ <<  endl;
+        // cout << "Test " << prev->value_ << " and_2 " << it.iterNode_->value_ << endl;
+        // it++;
+        // cout << "Last_t_++ " << head_ << " and " << it.iterNode_ <<  endl;
         // Node *prev = it.iterNode_->pPrev_;
         // cout<< "Test " << prev->value_ << " and_1 " << *it << endl;
         // int i = 0;
-        for (; it != end(); it++){
-            cout<< "Test_0 " << prev << " and " << it.iterNode_ << endl;
-            cout<< "Test_++ " << prev->value_ << " and " << *(it++) << endl;
+        // for (; it != end(); /*++it*/){
+            for(;temp != tail_->pNext_; temp = temp->pNext_){
+            // for(int i = 0; i < 3; i++){
+                // cout << "  !!!    " << endl;
+            // cout<< "Test_0 " << prev->value_<< " and " << temp->value_ << endl;
+            // cout<< "Test_++ " << prev->value_ << " and " << *(it++) << endl;
             // cout << "  !!!    " << endl;
             // cout << *s21_it_12<< " / " ;   
         // cout<< "Test0 " << prev << " and " << it.iterNode_ << endl;   
         //  cout<< "Test0 " << prev->pNext_ << " and_Next " << it.iterNode_->pNext_ << endl; 
         //  cout<< "Test0 " << prev->pPrev_ << " and " << it.iterNode_->pPrev_ << endl; 
       
-            if (prev->value_ == *it /*&& i < 2*/){
-                cout << "Unique== " << endl;
-                cout << "Last_t_h " << head_ << endl;
-                cout << "Last_t_it " << it.iterNode_ << endl;
+            // if (prev->value_ == *it /*&& i < 2*/){
+                if (prev->value_ == temp->value_ /*&& i < 2*/){
+                // cout << "Unique== " << endl;
+                // cout << "Last_t_h " << head_ << endl;
+                // cout << "Last_t_it " << it.iterNode_ << endl;
                 // cout << "Last_t_it-> P " << it.iterNode_->pPrev_->value_ << endl;
                 // cout << "Last_t_it-> P " << (--it).iterNode_->value_ << endl;
-                cout << "Last_t_it-> N " << it.iterNode_->pNext_ << endl;
+                // cout << "Last_t_it-> N " << it.iterNode_->pNext_ << endl;
                 // it++;
                 // cout << "Unique==++ " << endl;
-                erase (--it);
-                cout << "Last_t_it " << it.iterNode_ << endl;
+                // cout << "Last_t_it " << it.iterNode_ << endl;
+                
+                iterator it = temp->pPrev_;
+                
+                erase (it);
+                // temp = temp->pNext_;
+                // temp = temp->pNext_;
+                // iterator it = temp->pPrev_;
+                
+                // erase (it);
+                // ++it;
+                // it.iterNode_ = it.iterNode_->pNext_;
+                // cout << "Last_t_it " << it.iterNode_ << endl;
                 // cout<< "Test " << prev->value_ << " and_gg " << *(++it) << endl;
                 // prev->value_ = *it;
                 // cout << "Unique_f " << endl;
                 // it++;
-                 cout << "Last_t_u " << head_ << endl;
-                 cout << "Last_t_u " << head_->value_ << endl;
-            // }
+            //      cout << "Last_t_u " << head_ << endl;
+            //      cout << "Last_t_u " << head_->value_ << endl;
+            // // }
             } else {
+                cout << "NO_Unique== " << endl;
         // cout << "Last_t_u " << tail_ << endl;
-        // cout << "Last_t_u " << head_ << endl;
+        // cout << "Last_t_h " << head_->value_ << endl;
         // cout << "Last_t_u " << zero_ << endl;
        
         
             // prev = *it;
-            prev->value_ = *it;
-            cout<< "Test " << prev->value_ << " and) " << *it << endl;
+            // cout<< "Test " << prev->value_ << " and) " << temp->value_ << endl;
+            prev->value_ = temp->value_;
+            // cout<< "Test " << prev->value_ << " and) " << temp->value_ << endl;
+            // temp = temp->pNext_;
+            // cout<< "Test " << prev->value_ << " and) " << temp->value_ << endl;
             // it++;
             // i++;
             }  
@@ -1177,12 +1214,21 @@ class List {
             // // it++;
             // cout << "U___________0 " << endl;
         }
-        // cout << "U___________1 " << endl;
+        cout << "U___________1 " << endl;
         delete prev;
         cout << "U___________2 " << endl;
         // prev = nullptr;
+
+
+        //   for (auto it = this->begin(); it != this->end();) {
+        //     if (*it == *(++it)) {
+        //     this->erase(it);
+            // }
+          
+    
+//   }
         
-    }
+}
 
 
     template <typename T>
@@ -1429,13 +1475,17 @@ class List {
 
     template <typename T>
     void List<T>::pop_back()
-    {
+    {   
+        if (size_ > 0){
         // removeAt(size_ - 1);               
         erase(zero_->pPrev_);
         // erase(tail_);
         // tail_->pPrev_->pNext_ = zero_; // убрать, когда erase , будет удалять последний элемент, правильно)
         // tail_ = tail_->pPrev_; 
         // zero_->pPrev_ = tail_;
+        } else {
+            throw invalid_argument("Empty list");
+        }
     }
 
 

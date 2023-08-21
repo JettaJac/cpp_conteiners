@@ -33,7 +33,7 @@ std::list<double> std_List {2.1,  2.1, 2.1, 2.1, 1.4, 1.6};
 //   std_List.sort();
 //   s21_List.sort();
   
-// cout  << *s21_List.end() << endl;
+cout  << *s21_List.end() << endl;
 
 //   for (int i = 0;  i < s21_List.size(); i++)
 //   {
@@ -284,8 +284,8 @@ std::list<double> std_List {2.1,  2.1, 2.1, 2.1, 1.4, 1.6};
     // s21_List.reverse();
     // std_List.unique();
     // s21_List.unique();
-    std_List_2.unique();
-    s21_List_2.unique();
+    // std_List_2.unique();
+    // s21_List_2.unique();
     // cout << "std_begin_L " << *(std_List.begin()) << endl;
     // cout << "s21_begin_L " << *(s21_List.begin()) << endl;
     // cout << "std_end_L " << *(--std_List.end()) << endl;
@@ -505,8 +505,8 @@ std::list<double> std_List {2.1,  2.1, 2.1, 2.1, 1.4, 1.6};
 //   cout << std_List.back()<< " 0_and_bc " <<  s21_List.back() << endl; 
 //   cout << *(--std_List.end())<< " 0_and_e " <<  *(--s21_List.end()) << endl; 
 
-//   std_List.erase(std_it);
-//   s21_List.erase(s21_it);
+  std_List_2.erase(std_it_e);
+  s21_List_2.erase(s21_it_e);
 //   // std_it++;
 //   // s21_it++;
 //   std_List.erase(--std_it_e);
