@@ -35,22 +35,14 @@ class List {
         List<T> operator=(List &&l); 
 
         const_reference front() const noexcept {return head_->value_;}; //access the first element
-        const_reference back() const noexcept {
-            // if (size_ < 1){
-                // throw invalid_argument("Empty list");
-            // }
-            return tail_->value_;
-        };  // access the last element
-        // const_reference back() const noexcept {return zero_->pPrev_->value_;};  // access the last element
-        // где-то не работает tail_
-
-
-        iterator begin(){return /*typename List<T>::*/iterator(head_);}; // returns an iterator to the beginning
-        iterator end(){return /*typename List<T>::*/iterator(zero_);}; // returns an iterator to the end
-        // iterator end(){return /*typename List<T>::*/iterator(tail_->pNext_);}; // returns an iterator to the end
+        const_reference back() const noexcept {return tail_->value_;};  // access the last element
+  
+        iterator begin() const noexcept {return iterator(head_);}; // returns an iterator to the beginning
+        iterator end() const noexcept {return iterator(zero_);}; // returns an iterator to the end
+        // iterator end(){return iterator(tail_->pNext_);}; // returns an iterator to the end
         
-        const_iterator cbegin(){return /*typename List<T>::*/const_iterator(zero_->pNext_);}; // returns an const_iterator to the beginning
-        const_iterator cend(){return /*typename List<T>::*/const_iterator(zero_);}; // returns an iterator to the end
+        const_iterator cbegin() const noexcept {return const_iterator(zero_->pNext_);}; // returns an const_iterator to the beginning
+        const_iterator cend() const noexcept {return const_iterator(zero_);}; // returns an iterator to the end
         
         bool empty();  // checks whether the container is empty
         size_type size() const noexcept {return size_;}; // returns the number of elements
@@ -58,7 +50,7 @@ class List {
 
         void clear();  // clears the contents
         iterator insert(iterator pos, const_reference value); // inserts element into concrete pos and returns the iterator that points to the new element
-        void erase(iterator pos); // erases element at pos
+        void erase(iterator pos) ; // erases element at pos
 
         void push_back(const_reference value_); // adds an element to the end
         void pop_back(); // removes the last element 
@@ -72,7 +64,7 @@ class List {
         void sort();  // sorts the elements
 
         T& operator[](const int index);
-        void removeAt(int index);
+        // void removeAt(int index);
         void  show();     
         
  private:
@@ -87,8 +79,7 @@ class List {
                 pNext_ = pNext;
                 pPrev_ = pPrev;
             }
-            // bool operator==(const ListIterator &other) const {return iterNode_ == other.iterNode_;}; // проверяем указатели а не ноды
-        
+            
     };  
 
     class ListIterator{
@@ -110,24 +101,13 @@ class List {
         };
 
         ListIterator(Node *current) : iterNode_(current) {};
-        // ~ListIterator(); // Деструктор
-        // ~ListIterator(int);
-
-  
-
-        // ListIterator operator=(ListIterator const &other) : iterNode_(other.iterNode_){};/*{
-        //     iterator it = other
-        //     return *it;
-        // };*/
-
+       
         ListIterator operator=(ListIterator const &other) /*: iterNode_(other.iterNode_){};*/{
             iterator it = other;
             return it;
-            // return *other.iterNode_;
-        }; // желательно сделать 
+        }; 
 
         ListIterator &operator++() { 
-            // ListIterator it = iterNode_->pNext_;
             iterNode_ = iterNode_->pNext_;    
             return *this;
         }; // префексная форма
@@ -160,33 +140,7 @@ class List {
         bool operator==(const ListIterator &other) const {return iterNode_ == other.iterNode_;}; // проверяем указатели а не ноды
         bool operator!=(ListIterator &other) const {return iterNode_ != other.iterNode_;};
         bool operator!=(const ListIterator &other) const {return iterNode_ != other.iterNode_;};
-        // ListIterator operator->() {return iterNode_;}
-        // reference operator[](int index) {
-        //     // auto it (head_);
-
-        //     // size_t t = size_;
-        // //    if (index >= size_){
-            
-        //     cout << "UUU error" << endl;
-        // //    }
-
-        //     for (int i = 0; i < index; i++){
-        //         iterNode_ = iterNode_-> pNext_;
-        //     }
-        //     return iterNode_->value_;
-        //     // return *it;
-           
-        //     // return *(iterNode_ + index);
-        // }
-
-        // reference  operator[](const value_type index) {
-        //     iterator it = begin();
-        //     int i = 0;
-        //     while(it != end()){
-        //             it++;
-        //     }
-        //     return *it;
-        // }
+        // ListIterator operator->() {return iterNode_;
 
         private:
         Node  *iterNode_;
@@ -879,9 +833,10 @@ class List {
     auto it_e = end();
     // Node * tmp = zero_;
     // int i = 0;
+    if (size_ > 0) {
     for (iterator it2 = other.begin(); it2 != other.end(); ){
         
-        if (*it <= *it2 ){
+        if (*it <= *it2){
             // cout << "8IT1 < IT2__  " << *it  << " and " << *it2 << endl;
             // it->pPrev_ = 
             // it.iterNode_->pPrev_ = tmp; // вообще не надо, обрабатыываеться в inserte; надо попробовать  сделать возврат на старый элемент
@@ -902,7 +857,7 @@ class List {
             
             // zero_->value_ = size_;
             // cout << "IT1 > IT2_2_ " << *it  << " and " << *it2 << endl;
-        }
+       
         // tmp = it.iterNode_; // вообще не надо, обрабатыываеться в inserte;
 
         // it2++;
@@ -913,7 +868,10 @@ class List {
     //    other.zero_->pNext_ = other.head_;
     //    other.zero_->pPrev_ = other.tail_; 
     //    other.clear();
-
+    }
+    } else {
+        swap(other);
+    }
     }
 
     template <typename T>
@@ -1453,24 +1411,24 @@ class List {
     // }
 
 
-    template <typename T>
-    void List<T>::removeAt(int index)
-    {
-        if(index == 0){
-            pop_front();
-        } else {
-            Node/*<value_type>*/ *tmp = head_;
-            for (int i = 0; i < size_ && i < index; i++)
-            {
-                tmp = tmp->pNext_;                
-            }   
-            Node/*<value_type>*/ *tmpDel = tmp;
-            tmp->pNext_ = tmpDel->pPrev_;    
-            tmp->pPrev_ = tmpDel->pNext_; 
-            delete tmpDel;
-            size_--;
-        }  
-    }
+    // template <typename T>
+    // void List<T>::removeAt(int index)
+    // {
+    //     if(index == 0){
+    //         pop_front();
+    //     } else {
+    //         Node/*<value_type>*/ *tmp = head_;
+    //         for (int i = 0; i < size_ && i < index; i++)
+    //         {
+    //             tmp = tmp->pNext_;                
+    //         }   
+    //         Node/*<value_type>*/ *tmpDel = tmp;
+    //         tmp->pNext_ = tmpDel->pPrev_;    
+    //         tmp->pPrev_ = tmpDel->pNext_; 
+    //         delete tmpDel;
+    //         size_--;
+    //     }  
+    // }
 
 
     template <typename T>

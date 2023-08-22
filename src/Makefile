@@ -1,4 +1,4 @@
-CCF=g++ #-g -fsanitize=address #-lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
+CCF=g++ -g -fsanitize=address #-lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
 GCOV_FLAGS=-fprofile-arcs -ftest-coverage -lgcov
 CHECK_FLAGS= -lgtest -lgtest_main -lpthread
 # -lcheck -lm -lpthread
@@ -17,24 +17,20 @@ NAME = list
 
 REPORT_NAME = report
 
-all: objs list.a test
+all: test
 
 objs: $(SRCS)
 	$(CCF) $(CFLAGS)  $(SRCS) -c 
 
-list.a: objs
-	ar rc list.a  list.o 
-	ranlib list.a
-
 test: $(OBJS)
 	$(CCF) $(CHECK_FLAGS) $(OBJS) -o list
 	./list
-# CK_FORK=no leaks -exclude -list --atExit -- ./list  | grep LEAK:
+ CK_FORK=no leaks -exclude -list --atExit -- ./list  | grep LEAK:
 
 main: $(OBJS)
 	$(CCF) $(CHECK_FLAGS) $(OBJS_m) -o list
 	./list
-#	 CK_FORK=no leaks -exclude -list --atExit -- ./list  | grep LEAK:
+    CK_FORK=no leaks -exclude -list --atExit -- ./list  | grep LEAK:
 
 test_t: $(OBJS_T)
 	$(CCF) $(CHECK_FLAGS) $(OBJS_T) -o list
