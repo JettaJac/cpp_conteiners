@@ -445,13 +445,6 @@ class List {
         } else {
             throw invalid_argument("Empty list");
         }
-        // // zero_->pNext_ = head_;   
-        // // cout << "Delete Node _" << size_ << endl;
-        // // cout << head_ << " == "<< zero_ << endl;
-        // // cout << tail_ << " == "<< zero_ << endl;
-        
-        // // cout << tail_ << " =!= "<< zero_ << endl;
-        // size_--;
     }
 
     template <typename T>
@@ -461,18 +454,13 @@ class List {
         // std::swap(tail_, other.tail_);
         // std::swap(size_, other.size_);
         // std::swap(zero_, other.zero_);
-
-        // cout << "SWAP " << endl;
         Node *cur_zero_= new Node (value_type(), zero_->pPrev_, zero_->pNext_);
-        // Node *cur_zero_= new Node (value_type(), tail_, head_);
         cur_zero_->value_ = zero_->value_;
-       
-
         head_= other.head_;
         tail_ = other.tail_;
         size_ = other.size_;
         zero_ = other.zero_;
-        zero_->value_ = other.zero_->value_; // добавила 
+        zero_->value_ = other.zero_->value_; 
 
         other.head_= cur_zero_->pNext_;
         other.tail_ = cur_zero_->pPrev_;
@@ -484,76 +472,23 @@ class List {
         other.zero_->pNext_ = other.head_;
         other.tail_->pNext_ = other.zero_;
         other.head_->pPrev_ = other.zero_;
-
-
-
-        // Node *cur_head_= new Node (value_type());
-        // Node *cur_tail_ = new Node (value_type());
-        // Node *cur_zero_ = new Node (value_type());
-        // cur_head_= head_;
-        // cur_tail_ = tail_;
-        // cur_zero_ = zero_;
-        // size_t t = size_;
-
-        // head_= other.head_;
-        // tail_ = other.tail_;
-        // size_ = other.size_;
-        // zero_ = other.zero_;
-        // zero_->value_ = other.zero_->value_; // добавила 
-
-        // other.head_= cur_head_;
-        // other.tail_ = cur_tail_;
-        // other.size_ = t;
-        // other.zero_ = cur_zero_;
-        // other.zero_->value_ = value_type ();
     }
 
 
     template <typename T>
     inline void List<T>::merge(List &other)
     {
-//         При вызове merge, итераторы обоих списков сравниваются. Если текущий элемент первого списка меньше или равен элементу во втором списке, итератор первого списка перемещается к следующему элементу. В противном случае элемент из второго списка перемещается перед элементом первого списка.
-
-// Процесс продолжается до тех пор, пока все элементы второго списка не будут перемещены и включены в первый список. В результате, первый список становится отсортированным списком, содержащим все элементы исходных списков, а второй список становится пустым.
-    auto it = begin();
-    // auto it_e = end();
-    // Node * tmp = zero_;
-    // int i = 0;
+        auto it = begin();
+  
     if (size_ > 0) {
     for (iterator it2 = other.begin(); it2 != other.end(); ){
-        
-        if (*it <= *it2){
-            // cout << "8IT1 < IT2__  " << *it  << " and " << *it2 << endl;
-            // it->pPrev_ = 
-            // it.iterNode_->pPrev_ = tmp; // вообще не надо, обрабатыываеться в inserte; надо попробовать  сделать возврат на старый элемент
-            // if (it++ != end()) {it++;};
+        if (*it <= *it2){            
             it++;
         } else {
-            // cout << "IT1 > IT2__  " << *it  << " and " << *it2 << endl;
             insert(it, *it2);
-            // cout << "IT1 > IT2__  " << *other.begin()  << " and " << *(it2) << endl;
-
-            // if (i > 1) {
             other.erase(it2);
             it2++;
-                // i++;
-            // }
-            
-            // if (it2.iterNode_->pNext_ != *it_e ) {it2++;};
-            
-            // zero_->value_ = size_;
-            // cout << "IT1 > IT2_2_ " << *it  << " and " << *it2 << endl;
-       
-        // tmp = it.iterNode_; // вообще не надо, обрабатыываеться в inserte;
-
-        // it2++;
-        
     }
-    //    other.zero_->value_ = value_type ();
-    //    other.head_ = other.tail_ = other.zero_;
-    //    other.zero_->pNext_ = other.head_;
-    //    other.zero_->pPrev_ = other.tail_; 
-    //    other.clear();
     }
     } else {
         swap(other);
