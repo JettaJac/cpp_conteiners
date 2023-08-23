@@ -505,8 +505,8 @@ cout  << *s21_List.end() << endl;
 //   cout << std_List.back()<< " 0_and_bc " <<  s21_List.back() << endl; 
 //   cout << *(--std_List.end())<< " 0_and_e " <<  *(--s21_List.end()) << endl; 
 
-  std_List_2.erase(std_it_e);
-  s21_List_2.erase(s21_it_e);
+//   std_List_2.erase(std_it_e);
+//   s21_List_2.erase(s21_it_e);
 //   // std_it++;
 //   // s21_it++;
 //   std_List.erase(--std_it_e);
