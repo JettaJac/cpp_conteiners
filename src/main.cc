@@ -675,14 +675,14 @@ int main() {
   std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
   s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
   
-  s21_List.insert_many(s21_List.cbegin(), 91, 81, 71, 61, 51, 41);
+  // s21_List.insert_many_back(/*s21_List.cbegin(),*/ 91, 81, 71, 61, 51, 41);
 
-  std_List.emplace(std_List.cbegin(), 41);
-  std_List.emplace(std_List.cbegin(), 51);
-  std_List.emplace(std_List.cbegin(), 61);
-  std_List.emplace(std_List.cbegin(), 71);
-  std_List.emplace(std_List.cbegin(), 81);
-  std_List.emplace(std_List.cbegin(), 91);
+  // std_List.emplace_back(/*std_List.cbegin(),*/ 41);
+  // std_List.emplace_back(/*std_List.cbegin(),*/ 51);
+  // std_List.emplace_back(/*std_List.cbegin(),*/ 61);
+  // std_List.emplace_back(/*std_List.cbegin(),*/ 71);
+  // std_List.emplace_back(/*std_List.cbegin(),*/ 81);
+  // std_List.emplace_back(/*std_List.cbegin(),*/ 91);
 
   // s21_List.emplace(s21_List.cbegin(), 91);
   // s21_List.emplace(s21_List.cbegin(), 81);
@@ -690,6 +690,34 @@ int main() {
   // s21_List.emplace(s21_List.cbegin(), 61);
   // s21_List.emplace(s21_List.cbegin(), 51);
   // s21_List.emplace(s21_List.cbegin(), 41);
+
+// s21_List.insert_many(s21_List.cbegin(), 91, 81, 71, 61, 51, 41);
+
+//   std_List.emplace(std_List.cbegin(), 41);
+//   std_List.emplace(std_List.cbegin(), 51);
+//   std_List.emplace(std_List.cbegin(), 61);
+//   std_List.emplace(std_List.cbegin(), 71);
+//   std_List.emplace(std_List.cbegin(), 81);
+//   std_List.emplace(std_List.cbegin(), 91);
+
+
+
+
+
+  std_List.emplace_back(91);
+  std_List.emplace_back(81);
+  std_List.emplace_back(71);
+  std_List.emplace_back(61);
+  std_List.emplace_back(51);
+  std_List.emplace_back(41);
+
+  s21_List.insert_many_back(91);
+  s21_List.insert_many_back(81);
+  s21_List.insert_many_back(71);
+  s21_List.insert_many_back(61);
+  s21_List.insert_many_back(51);
+  s21_List.insert_many_back(41);
+
 
 
 

@@ -1528,90 +1528,6 @@ TEST(ListIteratorTest, Decrement) {
 }
 
 
-// TEST_F(s21_List_test, insert_many_back) {
-//   std::list<int> std_List;
-//   s21::List<int> s21_List;
-
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(2);
-//   s21_List.insert_many_back(3);
-//   s21_List.insert_many_back(4);
-//   s21_List.insert_many_back(5);
-
-//   std_List.emplace_back(1);
-//   std_List.emplace_back(1);
-//   std_List.emplace_back(2);
-//   std_List.emplace_back(3);
-//   std_List.emplace_back(4);
-//   std_List.emplace_back(5);
-
-//   auto j = std_List.begin();
-//   for (auto i = s21_List.begin(); i != s21_List.end(); ++i) {
-//     EXPECT_EQ(*i, *j);
-//     j++;
-//   }
-// }
-
-// TEST_F(s21_List_test, insert_many_back2) {
-//   s21::List<int> s21_List;
-//   std::list<int> std_List;
-
-//   s21_List.insert_many_back(1, 1, 2, 3, 4, 5);
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(2);
-//   s21_List.insert_many_back(3);
-//   s21_List.insert_many_back(4);
-//   s21_List.insert_many_back(5);
-//   EXPECT_EQ(s21_List.size(), s21_List.size());
-//   auto j = s21_List.begin();
-//   for (auto i = s21_List.begin(); i != s21_List.end(); ++i) {
-//     EXPECT_EQ(*i, *j);
-//     j++;
-//   }
-// }
-
-// TEST_F(s21_List_test, insert_many_back3) {
-//   s21::List<int> s21_List(0);
-//   std::list<int> std_List(0);
-
-//   s21_List.insert_many_back(1, 1, 2, 3, 4, 5);
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(2);
-//   s21_List.insert_many_back(3);
-//   s21_List.insert_many_back(4);
-//   s21_List.insert_many_back(5);
-
-//   EXPECT_EQ(s21_List.size(), s21_List.size());
-//   auto j = s21_List.begin();
-//   for (auto i = s21_List.begin(); i != s21_List.end(); ++i) {
-//     EXPECT_EQ(*i, *j);
-//     j++;
-//   }
-// }
-
-// TEST_F(s21_List_test, insert_many_back4) {
-//   s21::List<int> s21_List {1, 2, 3, 4, 5, 6, 6};
-//   std::list<int> b{1, 2, 3, 4, 5, 6, 6};
-
-//   s21_List.insert_many_back(1, 1, 2, 3, 4, 5);
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(1);
-//   s21_List.insert_many_back(2);
-//   s21_List.insert_many_back(3);
-//   s21_List.insert_many_back(4);
-//   s21_List.insert_many_back(5);
-
-//   EXPECT_EQ(s21_List.size(), s21_List.size());
-//   auto j = s21_List.begin();
-//   for (auto i = s21_List.begin(); i != s21_List.end(); ++i) {
-//     EXPECT_EQ(*i, *j);
-//     j++;
-//   }
-// }
-
 TEST(s21_List_test, insert_many_0) {
   std::list<int> std_List;
   s21::List<int> s21_List;
@@ -1620,6 +1536,8 @@ TEST(s21_List_test, insert_many_0) {
   s21_List.insert_many(++s21_List.cbegin(), 1);
   
   EXPECT_EQ(std_List.size(), s21_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ) {
     EXPECT_EQ(*std_it, *s21_it);
@@ -1641,14 +1559,9 @@ TEST(s21_List_test, insert_many_1) {
   std_List.emplace(std_List.cbegin(), 5);
   std_List.emplace(std_List.cbegin(), 4);
 
-  // std_List.emplace(std_List.cbegin(), 1);
-  // std_List.emplace(std_List.cbegin(), 1);
-  // std_List.emplace(std_List.cbegin(), 2);
-  // std_List.emplace(std_List.cbegin(), 3);
-  // std_List.emplace(std_List.cbegin(), 4);
-  // std_List.emplace(std_List.cbegin(), 5);
-
-   EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
      EXPECT_EQ(*std_it, *s21_it);
@@ -1670,6 +1583,8 @@ TEST(s21_List_test, insert_many_2) {
   std_List.emplace(++std_List.cbegin(), 4);
 
   EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
     EXPECT_EQ(*std_it, *s21_it);
@@ -1696,6 +1611,8 @@ TEST(s21_List_test, insert_many_3) {
   s21_List.insert_many(++s21_List.cbegin(), 41);
 
   EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
     EXPECT_EQ(*std_it, *s21_it);
@@ -1707,10 +1624,12 @@ TEST(s21_List_test, insert_many_front_0) {
   std::list<int> std_List;
   s21::List<int> s21_List;
   
-  std_List.emplace(std_List.cbegin(), 1);
-  s21_List.insert_many_front(s21_List.cbegin(), 1);
+  std_List.emplace_front(1);
+  s21_List.insert_many_front(1);
   
   EXPECT_EQ(std_List.size(), s21_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ) {
     EXPECT_EQ(*std_it, *s21_it);
@@ -1723,23 +1642,18 @@ TEST(s21_List_test, insert_many_front_1) {
   std::list<int> std_List;
   s21::List<int> s21_List;
   
-  s21_List.insert_many_front(s21_List.cbegin(), 4, 5, 6, 7, 8, 9);
+  s21_List.insert_many_front(4, 5, 6, 7, 8, 9);
 
-  std_List.emplace(std_List.cbegin(), 9);
-  std_List.emplace(std_List.cbegin(), 8);
-  std_List.emplace(std_List.cbegin(), 7);
-  std_List.emplace(std_List.cbegin(), 6);
-  std_List.emplace(std_List.cbegin(), 5);
-  std_List.emplace(std_List.cbegin(), 4);
+  std_List.emplace_front(9);
+  std_List.emplace_front(8);
+  std_List.emplace_front(7);
+  std_List.emplace_front(6);
+  std_List.emplace_front(5);
+  std_List.emplace_front(4);
 
-  // std_List.emplace(std_List.cbegin(), 1);
-  // std_List.emplace(std_List.cbegin(), 1);
-  // std_List.emplace(std_List.cbegin(), 2);
-  // std_List.emplace(std_List.cbegin(), 3);
-  // std_List.emplace(std_List.cbegin(), 4);
-  // std_List.emplace(std_List.cbegin(), 5);
-
-   EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
     EXPECT_EQ(*std_it, *s21_it);
@@ -1751,16 +1665,18 @@ TEST(s21_List_test, insert_many_front_2) {
   std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
   s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
   
-  s21_List.insert_many_front(s21_List.cbegin(), 4, 5, 6, 7, 8, 9);
+  s21_List.insert_many_front(4, 5, 6, 7, 8, 9);
 
-  std_List.emplace(std_List.cbegin(), 9);
-  std_List.emplace(std_List.cbegin(), 8);
-  std_List.emplace(std_List.cbegin(), 7);
-  std_List.emplace(std_List.cbegin(), 6);
-  std_List.emplace(std_List.cbegin(), 5);
-  std_List.emplace(std_List.cbegin(), 4);
+  std_List.emplace_front(9);
+  std_List.emplace_front(8);
+  std_List.emplace_front(7);
+  std_List.emplace_front(6);
+  std_List.emplace_front(5);
+  std_List.emplace_front(4);
 
   EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
     EXPECT_EQ(*std_it, *s21_it);
@@ -1771,21 +1687,115 @@ TEST(s21_List_test, insert_many_front_3) {
   std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
   s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
   // Output:   41 x 51 x 61 x 71 x 81 x 91 x 1 x 2 x 3 x 4 x 5 x 6 x 7 x 8 x 
-  std_List.emplace(std_List.cbegin(), 91);
-  std_List.emplace(std_List.cbegin(), 81);
-  std_List.emplace(std_List.cbegin(), 71);
-  std_List.emplace(std_List.cbegin(), 61);
-  std_List.emplace(std_List.cbegin(), 51);
-  std_List.emplace(std_List.cbegin(), 41);
+  std_List.emplace_front(91);
+  std_List.emplace_front(81);
+  std_List.emplace_front(71);
+  std_List.emplace_front(61);
+  std_List.emplace_front(51);
+  std_List.emplace_front(41);
 
-  s21_List.insert_many_front(s21_List.cbegin(), 91);
-  s21_List.insert_many_front(s21_List.cbegin(), 81);
-  s21_List.insert_many_front(s21_List.cbegin(), 71);
-  s21_List.insert_many_front(s21_List.cbegin(), 61);
-  s21_List.insert_many_front(s21_List.cbegin(), 51);
-  s21_List.insert_many_front(s21_List.cbegin(), 41);
+  s21_List.insert_many_front(91);
+  s21_List.insert_many_front(81);
+  s21_List.insert_many_front(71);
+  s21_List.insert_many_front(61);
+  s21_List.insert_many_front(51);
+  s21_List.insert_many_front(41);
 
   EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
+  auto s21_it = s21_List.begin();
+  for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
+    EXPECT_EQ(*std_it, *s21_it);
+  }
+}
+
+
+
+TEST(s21_List_test, insert_many_back_0) {
+  std::list<int> std_List;
+  s21::List<int> s21_List;
+  
+  std_List.emplace_back(1);
+  s21_List.insert_many_back(1);
+  
+  EXPECT_EQ(std_List.size(), s21_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
+  auto s21_it = s21_List.begin();
+  for (auto std_it = std_List.begin(); std_it != std_List.end(); ) {
+    EXPECT_EQ(*std_it, *s21_it);
+    ++std_it, ++s21_it;  
+  }
+}
+
+
+TEST(s21_List_test, insert_many_back_1) {
+  std::list<int> std_List;
+  s21::List<int> s21_List;
+  
+  s21_List.insert_many_back(4, 5, 6, 7, 8, 9);
+
+  std_List.emplace_back(4);
+  std_List.emplace_back(5);
+  std_List.emplace_back(6);
+  std_List.emplace_back(7);
+  std_List.emplace_back(8);
+  std_List.emplace_back(9);
+
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
+  auto s21_it = s21_List.begin();
+  for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
+    EXPECT_EQ(*std_it, *s21_it);
+  }
+}
+
+
+TEST(s21_List_test, insert_many_back_2) {
+  std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
+  s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
+  
+  s21_List.insert_many_back(4, 5, 6, 7, 8, 9);
+
+  std_List.emplace_back(4);
+  std_List.emplace_back(5);
+  std_List.emplace_back(6);
+  std_List.emplace_back(7);
+  std_List.emplace_back(8);
+  std_List.emplace_back(9);
+
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
+  auto s21_it = s21_List.begin();
+  for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
+    EXPECT_EQ(*std_it, *s21_it);
+  }
+}
+
+TEST(s21_List_test, insert_many_back_3) {
+  std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
+  s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
+
+  std_List.emplace_back(91);
+  std_List.emplace_back(81);
+  std_List.emplace_back(71);
+  std_List.emplace_back(61);
+  std_List.emplace_back(51);
+  std_List.emplace_back(41);
+
+  s21_List.insert_many_back(91);
+  s21_List.insert_many_back(81);
+  s21_List.insert_many_back(71);
+  s21_List.insert_many_back(61);
+  s21_List.insert_many_back(51);
+  s21_List.insert_many_back(41);
+
+  EXPECT_EQ(s21_List.size(), std_List.size());
+  EXPECT_EQ(std_List.front(), s21_List.front());
+  EXPECT_EQ(std_List.back(), s21_List.back());
   auto s21_it = s21_List.begin();
   for (auto std_it = std_List.begin(); std_it != std_List.end(); ++std_it, ++s21_it) {
     EXPECT_EQ(*std_it, *s21_it);

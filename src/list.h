@@ -66,7 +66,7 @@ class List {
 
         template <class... Args> iterator insert_many(const_iterator pos, Args&&... args);  // inserts new elements into the container directly before pos 
         template <class... Args> void insert_many_front(Args&&... args); // appends new elements to the top of the container
-        // void insert_many_back(Args&&... args);  // appends new elements to the end of the container
+        template <class... Args>void insert_many_back(Args&&... args);  // appends new elements to the end of the container
         
  private:
     class Node 
@@ -591,7 +591,7 @@ class List {
     {
         iterator it (pos.iterNode_);
         for (auto value : {std::forward<Args>(args)...}) {
-        insert(it, value);
+            insert(it, value);
         }
 
         return it;
@@ -601,40 +601,24 @@ class List {
     template <class... Args>
     inline void List<T>::insert_many_front(Args&&...args)
     {
-        // insert_many(cbegin(), std::forward<Args>(args)...);
+        insert_many(cbegin(), std::forward<Args>(args)...);
 
-        iterator it (head_);
-        for (auto value : {std::forward<Args>(args)...}) {
-            insert(it, value);
-        }
+        // iterator it (head_);
+        // for (auto value : {std::forward<Args>(args)...}) {
+        //     insert(it, value);
+        // }
     }
 
-    
+    template <typename T>
+    template <class... Args>
+    inline void List<T>::insert_many_back(Args&&...args)
+    {
+        insert_many(cend(), std::forward<Args>(args)...);
 
-    // template <typename T>
-    // template <class... Args>
-    // typename List<T>::iterator List<T>::insert_many_front(const_iterator pos, Args &&...args)
-    // {
-
-
-    // }
-
-//     template <class... Args>
-//     void emplace_back(Args &&...args) {
-//     if (capacity_ == size_) {
-//       reserve(capacity_ + sizeof...(args));
-//     }
-//     for (auto value : {std::forward<Args>(args)...}) {
-//       insert(values_ + size_, value);
-//     }
-//   }
-
-    // template <typename T>
-    // template <class... Args>
-    // inline iterator List<T>::emplace(const_iterator pos, Args &&...args)
-    // {
-    //     return iterator();
-    // }
-
+        // iterator it (tail_->pNext_);
+        // for (auto value : {std::forward<Args>(args)...}) {
+        //     insert(it, value);
+        // }
+    } 
 };
 #endif  // SRC_S21_CONTAINERS_S21_LIST_H_
