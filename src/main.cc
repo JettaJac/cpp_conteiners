@@ -26,14 +26,14 @@ int main() {
 
   // s21_List2.push_back(5);
   // s21_List2.show();
-  s21::List<double> s21_List{2.1, 2.1, 2.1, 2.1, 1.4, 1.6};
-  std::list<double> std_List{2.1, 2.1, 2.1, 2.1, 1.4, 1.6};
+  // s21::List<double> s21_List{2.1, 2.1, 2.1, 2.1, 1.4, 1.6};
+  // std::list<double> std_List{2.1, 2.1, 2.1, 2.1, 1.4, 1.6};
   // s21::List<double> s21_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
   //   std::list<double> std_List {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7};
   //   std_List.sort();
   //   s21_List.sort();
 
-  cout << *s21_List.end() << endl;
+  // cout << *s21_List.end() << endl;
 
   //   for (int i = 0;  i < s21_List.size(); i++)
   //   {
@@ -473,12 +473,12 @@ int main() {
 
   //   std::list<double>::iterator std_it_b = std_List.begin();
   //   s21::List<double>::iterator s21_it_b = s21_List.begin();
-  std::list<double>::iterator std_it_e =
-      std_List.end(); // если end то не работает
-  s21::List<double>::iterator s21_it_e = s21_List.end();
-  std::list<double>::iterator std_it = std_List.begin();
-  //   s21::List<double>::iterator s21_it = s21_List.begin();
-  s21::List<double>::const_iterator s21_it = s21_List.cend();
+  // std::list<double>::iterator std_it_e =
+  //     std_List.end(); // если end то не работает
+  // s21::List<double>::iterator s21_it_e = s21_List.end();
+  // std::list<double>::iterator std_it = std_List.begin();
+  // //   s21::List<double>::iterator s21_it = s21_List.begin();
+  // s21::List<double>::const_iterator s21_it = s21_List.cend();
 
   //   cout << std_List.size()<< " 0_and_s " <<  s21_List.size() << endl;
   //   cout << std_List.front()<< " 0_and_f " <<  s21_List.front() << endl;
@@ -670,6 +670,30 @@ int main() {
 
   // ___________________________________________
 
+
+
+  std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
+  s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
+  
+  s21_List.insert_many(s21_List.cbegin(), 91, 81, 71, 61, 51, 41);
+
+  std_List.emplace(std_List.cbegin(), 41);
+  std_List.emplace(std_List.cbegin(), 51);
+  std_List.emplace(std_List.cbegin(), 61);
+  std_List.emplace(std_List.cbegin(), 71);
+  std_List.emplace(std_List.cbegin(), 81);
+  std_List.emplace(std_List.cbegin(), 91);
+
+  // s21_List.emplace(s21_List.cbegin(), 91);
+  // s21_List.emplace(s21_List.cbegin(), 81);
+  // s21_List.emplace(s21_List.cbegin(), 71);
+  // s21_List.emplace(s21_List.cbegin(), 61);
+  // s21_List.emplace(s21_List.cbegin(), 51);
+  // s21_List.emplace(s21_List.cbegin(), 41);
+
+
+
+
   //   std::list<char> std_List_1 = {'f', 'o', 'x', 'y'};
   //   std::list<char> std_List_2 = move(std_List_1);
   //   cout << "std: end_: " << *(std_List_2.end()) << endl;
@@ -702,12 +726,20 @@ int main() {
   // cout << endl;
 
   cout << "show_"
-       << "s21_List_2" << endl;
-  s21_List_2.show();
+       << "s21_List" << endl;
+  s21_List.show();
 
   cout << "std: show_"
-       << "std_List_2" << endl;
-  for (const auto &element : std_List_2) {
+       << "std_List" << endl;
+  for (const auto &element : std_List) {
+
+    cout << element << " x ";
+  }
+  cout << endl;
+
+  cout << "s21: show_"
+       << "s21_List" << endl;
+  for (const auto &element : s21_List) {
 
     cout << element << " x ";
   }

@@ -1,5 +1,5 @@
-#ifndef SRC_S21_CONTAINERS_OOP_H_
-#define SRC_S21_CONTAINERS_OOP_H_
+#ifndef SRC_S21_CONTAINERS_S21_LIST_H_
+#define SRC_S21_CONTAINERS_S21_LIST_H_
 
 #include <iostream>
 #include <memory>
@@ -62,7 +62,11 @@ class List {
         void sort();  // sorts the elements
 
         T& operator[](const int index) const;
-        void  show() noexcept;     
+        void  show() noexcept; 
+
+        template <class... Args> iterator insert_many(const_iterator pos, Args&&... args);  // inserts new elements into the container directly before pos 
+        template <class... Args> void insert_many_front(Args&&... args); // appends new elements to the top of the container
+        // void insert_many_back(Args&&... args);  // appends new elements to the end of the container
         
  private:
     class Node 
@@ -135,7 +139,7 @@ class List {
         bool operator!=(ListIterator &other) const noexcept {return iterNode_ != other.iterNode_;};
         bool operator!=(const ListIterator &other) const noexcept {return iterNode_ != other.iterNode_;};
         // ListIterator operator->() {return iterNode_;
-
+        
     private:
         Node  *iterNode_;
         friend class List<T>;
@@ -571,17 +575,52 @@ class List {
     }
 
 
-        template <typename T>
+    template <typename T>
     inline void List<T>::show() noexcept {   
         Node *tmp = head_;
         for(int i = 0; i < size_; i++){ 
             tmp = tmp->pNext_;
         } 
+        cout << "SIZE s21: " << size() << endl;
     }
 
+    // BONUSE
+    template <typename T>
+    template <class... Args>
+    typename List<T>::iterator List<T>::insert_many(const_iterator pos, Args&&...args)
+    {
+        iterator it (pos.iterNode_);
+        for (auto value : {std::forward<Args>(args)...}) {
+        insert(it, value);
+        }
+
+        return it;
+    }
+
+    template <typename T>
+    template <class... Args>
+    inline void List<T>::insert_many_front(Args&&...args)
+    {
+        // insert_many(cbegin(), std::forward<Args>(args)...);
+
+        iterator it (head_);
+        for (auto value : {std::forward<Args>(args)...}) {
+            insert(it, value);
+        }
+    }
+
+    
+
+    // template <typename T>
+    // template <class... Args>
+    // typename List<T>::iterator List<T>::insert_many_front(const_iterator pos, Args &&...args)
+    // {
+
+
+    // }
 
 //     template <class... Args>
-//   void emplace_back(Args &&...args) {
+//     void emplace_back(Args &&...args) {
 //     if (capacity_ == size_) {
 //       reserve(capacity_ + sizeof...(args));
 //     }
@@ -590,20 +629,12 @@ class List {
 //     }
 //   }
 
-// template <class... Args>
-//   iterator emplace(const_iterator pos, Args &&...args) {
-//     int index = pos - cbegin();
-//     if (capacity_ == size_) {
-//       reserve(capacity_ + sizeof...(args));
-//     }
-
-//     auto it = const_cast<iterator>(pos);
-//     for (auto value : {std::forward<Args>(args)...}) {
-//       it = insert(begin() + index, value);
-//     }
-//     return it;
-//   }
-
+    // template <typename T>
+    // template <class... Args>
+    // inline iterator List<T>::emplace(const_iterator pos, Args &&...args)
+    // {
+    //     return iterator();
+    // }
 
 };
-#endif  // SRC_S21_CONTAINERS_OOP_H_
+#endif  // SRC_S21_CONTAINERS_S21_LIST_H_
