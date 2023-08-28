@@ -1,12 +1,14 @@
-CCF=g++ -g -fsanitize=address -lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
+CCF=g++ #-g -fsanitize=address -lstdc++ -std=c++17 -Wextra -Wall -Werror #-g -fsanitize=address 
 GCOV_FLAGS=-fprofile-arcs -ftest-coverage -lgcov
 CHECK_FLAGS= -lgtest -lgtest_main -lpthread
 # -lcheck -lm -lpthread
 ALL_FLAGS=$(CFLAGS) $(GCOV_FLAGS) $(CHECK_FLAGS)
 
 SRCS = list.h
+SRCS_q = queue.h
 
 OBJS = $(SRCS:.c=.o) tests.cc 
+OBJS_q = $(SRCS_q:.c=.o) tests_q.cc 
 OBJS_m = $(SRCS:.c=.o) main.cc 
 # OBJS_T = $(SRCS:.c=.o) tests_t.cc 
 # OBJS2 = $(SRCS:.c=.o) s21_matrix_test.cc
@@ -17,13 +19,18 @@ NAME = list
 
 REPORT_NAME = report
 
-all: test
+all: test_q
 
 objs: $(SRCS)
 	$(CCF) $(CFLAGS)  $(SRCS) -c 
 
 test: $(OBJS)
 	$(CCF) $(CHECK_FLAGS) $(OBJS) -o list
+	./list
+ CK_FORK=no leaks -exclude -list --atExit -- ./list  | grep LEAK:
+
+ test_q: $(OBJS_q)
+	$(CCF) $(CHECK_FLAGS) $(OBJS_q) -o list
 	./list
  CK_FORK=no leaks -exclude -list --atExit -- ./list  | grep LEAK:
 
