@@ -1,5 +1,7 @@
 #include "list.h"
+#include "queue.h"
 #include <List>
+#include <Queue>
 
 int main() {
   // g++ List.cc && ./a.out
@@ -11,11 +13,11 @@ int main() {
   setlocale(LC_ALL, "ru");
   // const std::list<double> std_List = {1, 2, 4, 5, 5, 6, 7};
 
-  std::list<string> std_List_3(0);
-  s21::List<string> s21_List_3(0);
+  // std::list<string> std_List_3(0);
+  // s21::List<string> s21_List_3(0);
 
-  std::list<double> std_List_2 = {1, 1, 1, 5, 6, 6, 6, 8, 9, 9, 9};
-  s21::List<double> s21_List_2 = {1, 1, 1, 5, 6, 6, 6, 8, 9, 9, 9};
+  std::list<double> std_List = {1, 1, 1, 5, 6, 6, 6, 8, 9, 9, 9};
+  s21::List<double> s21_List = {1, 1, 1, 5, 6, 6, 6, 8, 9, 9, 9};
   //  cout << s21_List_2.front() << " and_2 " <<  std_List_2.front() << endl;
   //     s21_List_2.pop_front();
   //     std_List_2.pop_front();
@@ -60,11 +62,27 @@ int main() {
   //   ++std_it_2, ++s21_it_2;
   // }
   // s21_List_2.show();
-  // cout << s21_List_2.max_size() <<   endl;
+  cout << s21_List.max_size() <<   endl;
+
+  s21::Queue<double> s21_Queue;
+  std::queue<double> std_Queue;
+  std_Queue.push(1.2);
+  std_Queue.push(1.1);
+  std_Queue.push(3.1);
+  s21_Queue.push(1.2);
+  s21_Queue.push(1.1);
+  s21_Queue.push(3.1);
+
+  cout << "Queue_ " << std_Queue.front() << endl;
+  cout << "Queue_ " << s21_Queue.front() << endl;
 
   // std::list<double> std_copy = move(std_List);
-  // s21::List<double> s21_copy = move(s21_List);
+  // s21::List<double> s21_copy;
+  // s21_copy = s21_List;
+  cout << " Copy :" << "*s21_it1" << " and " << " " << endl;
   // s21_copy.show();
+  s21_Queue.show();
+  cout << " Copy :" << "*s21_it1" << " and " << " " << endl;
   // s21_List.show();
   // s21::List<double> s21_List;
   // s21::List<double> s21_List{1, 2, 3, 4, 5, 6, 7};
@@ -672,8 +690,8 @@ int main() {
 
 
 
-  std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
-  s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
+  // std::list<int> std_List{1, 2, 3, 4, 5, 6, 7, 8};
+  // s21::List<int> s21_List{1, 2, 3, 4, 5, 6, 7, 8};
   
   // s21_List.insert_many_back(/*s21_List.cbegin(),*/ 91, 81, 71, 61, 51, 41);
 

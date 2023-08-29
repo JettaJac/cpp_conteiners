@@ -451,8 +451,6 @@ TEST(List, Move_list) {
   std::list<double> std_move = std::move(std_List);
   s21::List<double> s21_move = move(s21_List);
 
-  EXPECT_EQ(s21_List.size(), 0);
-  EXPECT_EQ(s21_move.size(), 7);
   EXPECT_EQ(s21_List.size(), std_List.size());
   EXPECT_EQ(s21_move.size(), std_move.size());
   EXPECT_EQ(s21_List.empty(), true);

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <memory>
+
 using namespace std;
 
 namespace s21{  
@@ -29,8 +30,8 @@ class List {
         List(const List &l); // copy constructor
         List(List &&l) noexcept;      // move constructor
         ~List();             // destructor
-        List<T> operator=(List const &l);  // assignment operator overload for moving object
-        List<T> operator=(List &&l) noexcept; 
+        List<T> &operator=(List const &l);  // assignment operator overload for moving object
+        List<T> &operator=(List &&l) noexcept; 
 
         const_reference front() const noexcept {return head_->value_;}; //access the first element
         const_reference back() const noexcept {return tail_->value_;};  // access the last element
@@ -64,9 +65,14 @@ class List {
         T& operator[](const int index) const;
         void  show() noexcept; 
 
-        template <class... Args> iterator insert_many(const_iterator pos, Args&&... args);  // inserts new elements into the container directly before pos 
-        template <class... Args> void insert_many_front(Args&&... args); // appends new elements to the top of the container
-        template <class... Args>void insert_many_back(Args&&... args);  // appends new elements to the end of the container
+        template <class... Args> 
+        iterator insert_many(const_iterator pos, Args&&... args);  // inserts new elements into the container directly before pos 
+        
+        template <class... Args> 
+        void insert_many_front(Args&&... args); // appends new elements to the top of the container
+        
+        template <class... Args>
+        void insert_many_back(Args&&... args);  // appends new elements to the end of the container
         
  private:
     class Node 
@@ -216,7 +222,7 @@ class List {
 
     template <typename T>
     List<T>::List(size_type n) : List() 
-    {     
+    {    
         for(size_type i = 0; i < n; i++){
             push_back(value_type ());
         }       
@@ -234,13 +240,17 @@ class List {
     template <typename T>
     List<T>::List(const List &l) : List()
     {   
+        // cout << "RJGB" << endl;
+        // cout << "RJGB_x0 " << l.head_->value_ << endl;
         clear();
+        
         Node *current = l.head_;       
         for(size_t i = 0; i < l.size_; i++)
         {
             push_back(current->value_);
             current = current->pNext_;
         }  
+        //operator=(l);
     }
 
     template <typename T>
@@ -260,21 +270,25 @@ class List {
     }
 
     template <typename T>
-    List<T> List<T>::operator=(List const &l)
+    List<T> &List<T>::operator=(List const &l)
     {
+        
         clear();
+        // cout << "RJGB_o" << endl;
         Node *current = l.head_;
         for(size_t i = 0; i < l.size_; i++)
         {
             push_back(current->value_);
             current = current->pNext_;
-     
         }
+        // cout << "RJGB_x " << l.head_->value_ << endl;
+        // (l);
+
         return *this;
     }
 
     template <typename T>
-    inline List<T> List<T>::operator=(List &&l) noexcept
+    inline List<T> &List<T>::operator=(List &&l) noexcept
     {
         std::swap(head_, l.head_); 
         std::swap(tail_, l.tail_);
@@ -372,7 +386,7 @@ class List {
     }
 
     template <typename T>
-    void List<T>::swap(List &other) // !noexcept? new
+    void List<T>::swap(List &other) 
     {
         // std::swap(head_, other.head_);
         // std::swap(tail_, other.tail_);
@@ -579,7 +593,9 @@ class List {
     inline void List<T>::show() noexcept {   
         Node *tmp = head_;
         for(int i = 0; i < size_; i++){ 
+            cout  << tmp->value_ << " x ";
             tmp = tmp->pNext_;
+            
         } 
         cout << "SIZE s21: " << size() << endl;
     }
