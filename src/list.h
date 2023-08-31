@@ -30,8 +30,8 @@ class List {
         List(const List &l); // copy constructor
         List(List &&l) noexcept;      // move constructor
         ~List();             // destructor
-        List<T> &operator=(List const &l);  // assignment operator overload for moving object
-        List<T> &operator=(List &&l) noexcept; 
+        List &operator=(List const &l);  // assignment operator overload for moving object
+        List  &operator=(List &&l) noexcept; 
 
         const_reference front() const noexcept {return head_->value_;}; //access the first element
         const_reference back() const noexcept {return tail_->value_;};  // access the last element
